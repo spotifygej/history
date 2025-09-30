@@ -149,9 +149,9 @@
         </div>
 
         <!-- PÁGINA DA LETRA (com layout fixo) -->
-        <div id="lyrics-page" class="absolute inset-0 page bg-[#B45309] hidden flex flex-col">
+        <div id="lyrics-page" class="absolute inset-0 page bg-[#B45309] hidden grid grid-rows-[auto_1fr_auto]">
             <!-- Cabeçalho da página de letra -->
-            <header class="flex justify-between items-center p-4 flex-shrink-0 z-10">
+            <header class="flex justify-between items-center p-4 z-10">
                 <button id="back-to-main-btn">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                 </button>
@@ -160,7 +160,7 @@
             </header>
 
             <!-- Conteúdo da Letra (com rolagem) -->
-            <div id="lyrics-content" class="flex-grow min-h-0 overflow-y-auto px-6 pt-8 pb-8">
+            <div id="lyrics-content" class="overflow-y-auto px-6 pt-8 pb-8">
                 <div class="text-white text-2xl font-bold space-y-4 text-center">
                      <p>Tudo começou com um simples "oi"...</p>
                      <p>Lembro como se fosse hoje, o dia em que nossos caminhos se cruzaram. O mundo parecia diferente, mais colorido.</p>
@@ -181,7 +181,7 @@
             </div>
 
             <!-- Mini Player Fixo -->
-            <footer class="p-4 bg-[#B45309] flex-shrink-0">
+            <footer class="p-4 bg-[#B45309]">
                 <div id="lyrics-progress-bar" class="bg-white/30 rounded-full h-1 w-full mb-1 cursor-pointer"><div id="lyrics-progress" class="bg-white rounded-full h-1" style="width: 0%;"></div></div>
                 <div class="flex justify-between text-xs text-white/80"><span id="lyrics-current-time">0:00</span><span id="lyrics-total-time">0:00</span></div>
                 <div class="flex justify-center items-center mt-4">
@@ -372,14 +372,17 @@
             const lyricsContent = document.getElementById('lyrics-content');
 
             lyricsCard.addEventListener('click', () => {
+                lyricsPage.style.transform = ''; // Reseta a transformação antes de mostrar
                 lyricsPage.classList.remove('hidden');
                 mainPage.classList.add('hidden');
             });
 
-            backToMainBtn.addEventListener('click', () => {
+            function closeLyricsPage() {
                 mainPage.classList.remove('hidden');
                 lyricsPage.classList.add('hidden');
-            });
+            }
+
+            backToMainBtn.addEventListener('click', closeLyricsPage);
 
             storiesData.forEach((story) => {
                 const storyElement = document.createElement('div');
@@ -465,6 +468,7 @@
             let isLyricsDragging = false;
 
             lyricsPage.addEventListener('touchstart', (e) => {
+                // Inicia o arraste apenas se o conteúdo do texto estiver no topo
                 if (lyricsContent.scrollTop === 0) {
                     isLyricsDragging = true;
                     lyricsTouchStartY = e.touches[0].clientY;
@@ -479,7 +483,7 @@
                 if (!isLyricsDragging) return;
                 lyricsCurrentY = e.touches[0].clientY;
                 const diffY = lyricsCurrentY - lyricsTouchStartY;
-                if (diffY > 0) {
+                if (diffY > 0) { // Apenas permite arrastar para baixo
                     lyricsPage.style.transform = `translateY(${diffY}px)`;
                 }
             });
@@ -491,7 +495,7 @@
                 const closeThreshold = window.innerHeight / 4;
                 lyricsPage.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
                 if (diffY > closeThreshold) {
-                    backToMainBtn.click(); // Dispara a animação de volta
+                    closeLyricsPage();
                 } else {
                     lyricsPage.style.transform = ''; // Volta à posição original
                 }
