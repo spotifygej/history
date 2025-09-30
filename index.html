@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nossa Trilha Sonora</title>
+    <!-- Favicon (ícone da aba) -->
+    <link id="favicon" rel="icon" href="#">
     <!-- Tailwind CSS para estilização rápida e responsiva -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts - Poppins para uma aparência moderna -->
@@ -213,261 +215,273 @@
 
 
     <script>
-        // --- CONFIGURAÇÃO DOS DADOS ---
-        const storiesData = [
-            { thumbnail: 'https://placehold.co/150x150/777/FFF?text=In%C3%ADcio', image: 'https://placehold.co/600x800/111/FFF?text=Onde+Tudo+Come%C3%A7ou', title: 'O Início', text: 'O dia em que nossas vidas mudaram para sempre.' },
-            { thumbnail: 'https://placehold.co/150x150/777/FFF?text=Viagem', image: 'https://placehold.co/600x800/222/FFF?text=Nossa+Primeira+Viagem', title: '1ª Viagem', text: 'Descobrindo o mundo, e um ao outro.' },
-            { thumbnail: 'https://placehold.co/150x150/777/FFF?text=Data', image: 'https://placehold.co/600x800/333/FFF?text=Uma+Data+Especial', title: 'Data Especial', text: 'Celebrando um momento só nosso.' },
-            { thumbnail: 'https://placehold.co/150x150/777/FFF?text=Bobeira', image: 'https://placehold.co/600x800/444/FFF?text=Nossas+Bobeiras', title: 'Risadas', text: 'Os momentos mais simples são os melhores.' },
-        ];
-        const retrospectiveStoryData = { thumbnail: 'https://placehold.co/150x150/1DB954/FFF?text=2024', image: 'https://placehold.co/600x800/191414/FFF?text=Nossa+Retrospectiva', title: 'Retrospectiva 2024', text: 'Relembre os melhores momentos do nosso ano.' };
-        
-        // --- PLAYLIST DE MÚSICAS ---
-        // !!! SUBSTITUA ESTES LINKS PELOS LINKS DIRETOS DAS SUAS MÚSICAS (MP3, M4A, etc.) !!!
-        const musicPlaylist = [
-            'https://storage.googleapis.com/spec-host-backup/mio-design%2Fassets%2F1S04mxhs0v_21-sound.mp3', // Música 1 (Exemplo)
-            'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', // Música 2 (Exemplo)
-            'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', // Música 3 (Exemplo)
-            'COLE_SEU_LINK_AQUI_4', // Música 4
-            'COLE_SEU_LINK_AQUI_5', // Música 5
-            'COLE_SEU_LINK_AQUI_6', // Música 6
-            'COLE_SEU_LINK_AQUI_7', // Música 7
-            'COLE_SEU_LINK_AQUI_8', // Música 8
-            'COLE_SEU_LINK_AQUI_9', // Música 9
-            'COLE_SEU_LINK_AQUI_10', // Música 10
-        ];
+        document.addEventListener("DOMContentLoaded", function() {
+            // Lógica para definir o favicon dinamicamente
+            const faviconLink = document.getElementById('favicon');
+            const imgPng = new Image();
+            imgPng.src = 'favicon.png';
+            imgPng.onload = function() {
+                faviconLink.href = 'favicon.png';
+            };
+            imgPng.onerror = function() {
+                // Se o .png falhar, tenta carregar o .jpg
+                faviconLink.href = 'favicon.jpg';
+            };
 
-        let currentTrackIndex = 0;
+            // --- CONFIGURAÇÃO DOS DADOS ---
+            const storiesData = [
+                { thumbnail: 'https://placehold.co/150x150/777/FFF?text=In%C3%ADcio', image: 'https://placehold.co/600x800/111/FFF?text=Onde+Tudo+Come%C3%A7ou', title: 'O Início', text: 'O dia em que nossas vidas mudaram para sempre.' },
+                { thumbnail: 'https://placehold.co/150x150/777/FFF?text=Viagem', image: 'https://placehold.co/600x800/222/FFF?text=Nossa+Primeira+Viagem', title: '1ª Viagem', text: 'Descobrindo o mundo, e um ao outro.' },
+                { thumbnail: 'https://placehold.co/150x150/777/FFF?text=Data', image: 'https://placehold.co/600x800/333/FFF?text=Uma+Data+Especial', title: 'Data Especial', text: 'Celebrando um momento só nosso.' },
+                { thumbnail: 'https://placehold.co/150x150/777/FFF?text=Bobeira', image: 'https://placehold.co/600x800/444/FFF?text=Nossas+Bobeiras', title: 'Risadas', text: 'Os momentos mais simples são os melhores.' },
+            ];
+            const retrospectiveStoryData = { thumbnail: 'https://placehold.co/150x150/1DB954/FFF?text=2024', image: 'https://placehold.co/600x800/191414/FFF?text=Nossa+Retrospectiva', title: 'Retrospectiva 2024', text: 'Relembre os melhores momentos do nosso ano.' };
+            
+            // --- PLAYLIST DE MÚSICAS ---
+            // !!! SUBSTITUA ESTES LINKS PELOS LINKS DIRETOS DAS SUAS MÚSICAS (MP3, M4A, etc.) !!!
+            const musicPlaylist = [
+                'https://storage.googleapis.com/spec-host-backup/mio-design%2Fassets%2F1S04mxhs0v_21-sound.mp3', // Música 1 (Exemplo)
+                'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', // Música 2 (Exemplo)
+                'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', // Música 3 (Exemplo)
+                'COLE_SEU_LINK_AQUI_4', // Música 4
+                'COLE_SEU_LINK_AQUI_5', // Música 5
+                'COLE_SEU_LINK_AQUI_6', // Música 6
+                'COLE_SEU_LINK_AQUI_7', // Música 7
+                'COLE_SEU_LINK_AQUI_8', // Música 8
+                'COLE_SEU_LINK_AQUI_9', // Música 9
+                'COLE_SEU_LINK_AQUI_10', // Música 10
+            ];
 
-        // --- LÓGICA DO SITE ---
+            let currentTrackIndex = 0;
 
-        // Elementos do Player de Audio
-        const audio = document.getElementById('audio-player');
-        const albumArtImg = document.getElementById('album-art-img');
+            // --- LÓGICA DO SITE ---
 
-        // Elementos dos players (Principal e Letra)
-        const mainPlayBtn = document.getElementById('main-play-btn');
-        const lyricsPlayBtn = document.getElementById('lyrics-play-btn');
-        const mainNextBtn = document.getElementById('main-next-btn');
-        const mainPrevBtn = document.getElementById('main-prev-btn');
-        const mainProgressBar = document.getElementById('main-progress-bar');
-        const lyricsProgressBar = document.getElementById('lyrics-progress-bar');
-        const mainProgress = document.getElementById('main-progress');
-        const lyricsProgress = document.getElementById('lyrics-progress');
-        const mainCurrentTime = document.getElementById('main-current-time');
-        const lyricsCurrentTime = document.getElementById('lyrics-current-time');
-        const mainTotalTime = document.getElementById('main-total-time');
-        const lyricsTotalTime = document.getElementById('lyrics-total-time');
+            // Elementos do Player de Audio
+            const audio = document.getElementById('audio-player');
+            const albumArtImg = document.getElementById('album-art-img');
 
-        const playIconSvg = `<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>`;
-        const pauseIconSvg = `<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 011-1h1a1 1 0 110 2H8a1 1 0 01-1-1zm5 0a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>`;
-        
-        function loadTrack(trackIndex) {
-            // Tenta carregar a imagem .jpg primeiro. O 'onerror' no HTML cuidará do fallback para .png
-            const imageName = `nossafoto${trackIndex + 1}.jpg`; 
-            albumArtImg.src = imageName;
+            // Elementos dos players (Principal e Letra)
+            const mainPlayBtn = document.getElementById('main-play-btn');
+            const lyricsPlayBtn = document.getElementById('lyrics-play-btn');
+            const mainNextBtn = document.getElementById('main-next-btn');
+            const mainPrevBtn = document.getElementById('main-prev-btn');
+            const mainProgressBar = document.getElementById('main-progress-bar');
+            const lyricsProgressBar = document.getElementById('lyrics-progress-bar');
+            const mainProgress = document.getElementById('main-progress');
+            const lyricsProgress = document.getElementById('lyrics-progress');
+            const mainCurrentTime = document.getElementById('main-current-time');
+            const lyricsCurrentTime = document.getElementById('lyrics-current-time');
+            const mainTotalTime = document.getElementById('main-total-time');
+            const lyricsTotalTime = document.getElementById('lyrics-total-time');
 
-            audio.src = musicPlaylist[trackIndex];
-            audio.load();
-            // Para evitar erro de autoplay bloqueado pelo navegador, esperamos a interação do usuário.
-            // O play será chamado no togglePlayPause ou loadTrack após next/prev
-        }
+            const playIconSvg = `<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>`;
+            const pauseIconSvg = `<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 011-1h1a1 1 0 110 2H8a1 1 0 01-1-1zm5 0a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>`;
+            
+            function loadTrack(trackIndex) {
+                // Tenta carregar a imagem .jpg primeiro. O 'onerror' no HTML cuidará do fallback para .png
+                const imageName = `nossafoto${trackIndex + 1}.jpg`; 
+                albumArtImg.src = imageName;
 
-        function playMusic() {
-            audio.play().catch(error => {
-                console.log("Autoplay foi impedido pelo navegador. O usuário precisa interagir com a página primeiro.", error);
-            });
-            mainPlayBtn.innerHTML = pauseIconSvg;
-            lyricsPlayBtn.innerHTML = pauseIconSvg;
-        }
-
-        function pauseMusic() {
-            audio.pause();
-            mainPlayBtn.innerHTML = playIconSvg;
-            lyricsPlayBtn.innerHTML = playIconSvg;
-        }
-
-        function playNext() {
-            currentTrackIndex++;
-            if (currentTrackIndex >= musicPlaylist.length) {
-                currentTrackIndex = 0; // Volta para a primeira música
+                audio.src = musicPlaylist[trackIndex];
+                audio.load();
             }
-            loadTrack(currentTrackIndex);
-            playMusic();
-        }
 
-        function playPrevious() {
-            currentTrackIndex--;
-            if (currentTrackIndex < 0) {
-                currentTrackIndex = musicPlaylist.length - 1; // Vai para a última música
+            function playMusic() {
+                audio.play().catch(error => {
+                    console.log("Autoplay foi impedido pelo navegador. O usuário precisa interagir com a página primeiro.", error);
+                });
+                mainPlayBtn.innerHTML = pauseIconSvg;
+                lyricsPlayBtn.innerHTML = pauseIconSvg;
             }
-            loadTrack(currentTrackIndex);
-            playMusic();
-        }
 
-        function togglePlayPause() {
-            if (audio.src && audio.paused) {
+            function pauseMusic() {
+                audio.pause();
+                mainPlayBtn.innerHTML = playIconSvg;
+                lyricsPlayBtn.innerHTML = playIconSvg;
+            }
+
+            function playNext() {
+                currentTrackIndex++;
+                if (currentTrackIndex >= musicPlaylist.length) {
+                    currentTrackIndex = 0; // Volta para a primeira música
+                }
+                loadTrack(currentTrackIndex);
                 playMusic();
-            } else {
-                pauseMusic();
             }
-        }
-        
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-        }
 
-        function updateProgress() {
-            if (audio.duration) {
-                const progressPercent = (audio.currentTime / audio.duration) * 100;
-                mainProgress.style.width = `${progressPercent}%`;
-                lyricsProgress.style.width = `${progressPercent}%`;
-                mainCurrentTime.textContent = formatTime(audio.currentTime);
-                lyricsCurrentTime.textContent = formatTime(audio.currentTime);
+            function playPrevious() {
+                currentTrackIndex--;
+                if (currentTrackIndex < 0) {
+                    currentTrackIndex = musicPlaylist.length - 1; // Vai para a última música
+                }
+                loadTrack(currentTrackIndex);
+                playMusic();
             }
-        }
-        
-        function setProgress(e, progressBar) {
-            const width = progressBar.clientWidth;
-            const clickX = e.offsetX;
-            const duration = audio.duration;
-            if (duration) {
-                audio.currentTime = (clickX / width) * duration;
-            }
-        }
 
-        // Event Listeners do Player
-        mainPlayBtn.addEventListener('click', togglePlayPause);
-        lyricsPlayBtn.addEventListener('click', togglePlayPause);
-        mainNextBtn.addEventListener('click', playNext);
-        mainPrevBtn.addEventListener('click', playPrevious);
-        audio.addEventListener('timeupdate', updateProgress);
-        audio.addEventListener('loadedmetadata', () => {
-            mainTotalTime.textContent = formatTime(audio.duration);
-            lyricsTotalTime.textContent = formatTime(audio.duration);
-            updateProgress();
-        });
-        audio.addEventListener('ended', playNext); // Toca a próxima ao terminar
-        mainProgressBar.addEventListener('click', (e) => setProgress(e, mainProgressBar));
-        lyricsProgressBar.addEventListener('click', (e) => setProgress(e, lyricsProgressBar));
-
-        // Inicia o player com a primeira música e foto da lista
-        loadTrack(currentTrackIndex);
-        pauseMusic(); // Começa pausado
-
-        // Elementos das páginas
-        const mainPage = document.getElementById('main-page');
-        const lyricsPage = document.getElementById('lyrics-page');
-        const lyricsCard = document.getElementById('lyrics-card');
-        const backToMainBtn = document.getElementById('back-to-main-btn');
-
-        // Elementos dos stories
-        const storiesContainer = document.getElementById('stories-container');
-        const storyModal = document.getElementById('story-modal');
-        const closeStoryBtn = document.getElementById('close-story-btn');
-        const retrospectiveCard = document.getElementById('retrospective-card');
-
-        // Navegação entre páginas
-        lyricsCard.addEventListener('click', () => {
-            lyricsPage.classList.remove('hidden');
-            mainPage.classList.add('hidden');
-        });
-
-        backToMainBtn.addEventListener('click', () => {
-            mainPage.classList.remove('hidden');
-            lyricsPage.classList.add('hidden');
-        });
-
-
-        // Lógica dos Stories
-        storiesData.forEach((story) => {
-            const storyElement = document.createElement('div');
-            storyElement.className = 'flex flex-col items-center flex-shrink-0 w-20';
-            storyElement.innerHTML = `
-                <div class="w-16 h-16 rounded-full p-0.5 bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500">
-                    <img src="${story.thumbnail}" class="w-full h-full rounded-full object-cover border-2 border-black">
-                </div>
-                <span class="text-xs mt-2 text-center text-gray-300">${story.title}</span>`;
-            storyElement.addEventListener('click', () => openStory(story));
-            storiesContainer.appendChild(storyElement);
-        });
-        
-        retrospectiveCard.addEventListener('click', () => openStory(retrospectiveStoryData));
-
-        function openStory(storyData) {
-            document.getElementById('story-modal-avatar').src = storyData.thumbnail;
-            document.getElementById('story-modal-title').innerText = storyData.title;
-            document.getElementById('story-modal-image').src = storyData.image;
-            document.getElementById('story-modal-text').innerText = storyData.text;
-            
-            const progressBar = document.getElementById('story-progress');
-            progressBar.classList.remove('story-progress-bar');
-            void progressBar.offsetWidth;
-            progressBar.classList.add('story-progress-bar');
-            
-            storyModal.style.transform = '';
-            storyModal.style.opacity = '';
-            storyModal.classList.remove('hidden');
-            storyModal.classList.add('flex');
-        }
-
-        function closeStory() {
-            storyModal.style.transform = '';
-            storyModal.style.opacity = '';
-            storyModal.classList.add('hidden');
-            storyModal.classList.remove('flex');
-        }
-
-        closeStoryBtn.addEventListener('click', closeStory);
-
-        // --- Lógica de arrastar para fechar o Story ---
-        let touchStartY = 0;
-        let currentY = 0;
-        let isDragging = false;
-
-        storyModal.addEventListener('touchstart', (e) => {
-            isDragging = true;
-            touchStartY = e.touches[0].clientY;
-            currentY = touchStartY;
-            storyModal.style.transition = 'none';
-        });
-
-        storyModal.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            currentY = e.touches[0].clientY;
-            const diffY = currentY - touchStartY;
-
-            if (diffY > 0) { // Apenas permite arrastar para baixo
-                storyModal.style.transform = `translateY(${diffY}px)`;
-                storyModal.style.opacity = 1 - (diffY / (window.innerHeight / 1.5));
-            }
-        });
-
-        storyModal.addEventListener('touchend', () => {
-            if (!isDragging) return;
-            isDragging = false;
-            const diffY = currentY - touchStartY;
-            const closeThreshold = window.innerHeight / 4; // Fecha se arrastar 25% da tela
-
-            storyModal.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-
-            if (diffY > closeThreshold) {
-                // Anima para fora da tela e depois fecha
-                storyModal.style.transform = 'translateY(100%)';
-                storyModal.style.opacity = '0';
-                setTimeout(() => {
-                    closeStory();
-                }, 300); // Duração da transição
-            } else {
-                // Anima de volta para a posição original
-                storyModal.style.transform = 'translateY(0)';
-                storyModal.style.opacity = '1';
+            function togglePlayPause() {
+                if (audio.src && audio.paused) {
+                    playMusic();
+                } else {
+                    pauseMusic();
+                }
             }
             
-            touchStartY = 0;
-            currentY = 0;
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+
+            function updateProgress() {
+                if (audio.duration) {
+                    const progressPercent = (audio.currentTime / audio.duration) * 100;
+                    mainProgress.style.width = `${progressPercent}%`;
+                    lyricsProgress.style.width = `${progressPercent}%`;
+                    mainCurrentTime.textContent = formatTime(audio.currentTime);
+                    lyricsCurrentTime.textContent = formatTime(audio.currentTime);
+                }
+            }
+            
+            function setProgress(e, progressBar) {
+                const width = progressBar.clientWidth;
+                const clickX = e.offsetX;
+                const duration = audio.duration;
+                if (duration) {
+                    audio.currentTime = (clickX / width) * duration;
+                }
+            }
+
+            // Event Listeners do Player
+            mainPlayBtn.addEventListener('click', togglePlayPause);
+            lyricsPlayBtn.addEventListener('click', togglePlayPause);
+            mainNextBtn.addEventListener('click', playNext);
+            mainPrevBtn.addEventListener('click', playPrevious);
+            audio.addEventListener('timeupdate', updateProgress);
+            audio.addEventListener('loadedmetadata', () => {
+                mainTotalTime.textContent = formatTime(audio.duration);
+                lyricsTotalTime.textContent = formatTime(audio.duration);
+                updateProgress();
+            });
+            audio.addEventListener('ended', playNext); // Toca a próxima ao terminar
+            mainProgressBar.addEventListener('click', (e) => setProgress(e, mainProgressBar));
+            lyricsProgressBar.addEventListener('click', (e) => setProgress(e, lyricsProgressBar));
+
+            // Inicia o player com a primeira música e foto da lista
+            loadTrack(currentTrackIndex);
+            pauseMusic(); // Começa pausado
+
+            // Elementos das páginas
+            const mainPage = document.getElementById('main-page');
+            const lyricsPage = document.getElementById('lyrics-page');
+            const lyricsCard = document.getElementById('lyrics-card');
+            const backToMainBtn = document.getElementById('back-to-main-btn');
+
+            // Elementos dos stories
+            const storiesContainer = document.getElementById('stories-container');
+            const storyModal = document.getElementById('story-modal');
+            const closeStoryBtn = document.getElementById('close-story-btn');
+            const retrospectiveCard = document.getElementById('retrospective-card');
+
+            // Navegação entre páginas
+            lyricsCard.addEventListener('click', () => {
+                lyricsPage.classList.remove('hidden');
+                mainPage.classList.add('hidden');
+            });
+
+            backToMainBtn.addEventListener('click', () => {
+                mainPage.classList.remove('hidden');
+                lyricsPage.classList.add('hidden');
+            });
+
+
+            // Lógica dos Stories
+            storiesData.forEach((story) => {
+                const storyElement = document.createElement('div');
+                storyElement.className = 'flex flex-col items-center flex-shrink-0 w-20';
+                storyElement.innerHTML = `
+                    <div class="w-16 h-16 rounded-full p-0.5 bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500">
+                        <img src="${story.thumbnail}" class="w-full h-full rounded-full object-cover border-2 border-black">
+                    </div>
+                    <span class="text-xs mt-2 text-center text-gray-300">${story.title}</span>`;
+                storyElement.addEventListener('click', () => openStory(story));
+                storiesContainer.appendChild(storyElement);
+            });
+            
+            retrospectiveCard.addEventListener('click', () => openStory(retrospectiveStoryData));
+
+            function openStory(storyData) {
+                document.getElementById('story-modal-avatar').src = storyData.thumbnail;
+                document.getElementById('story-modal-title').innerText = storyData.title;
+                document.getElementById('story-modal-image').src = storyData.image;
+                document.getElementById('story-modal-text').innerText = storyData.text;
+                
+                const progressBar = document.getElementById('story-progress');
+                progressBar.classList.remove('story-progress-bar');
+                void progressBar.offsetWidth;
+                progressBar.classList.add('story-progress-bar');
+                
+                storyModal.style.transform = '';
+                storyModal.style.opacity = '';
+                storyModal.classList.remove('hidden');
+                storyModal.classList.add('flex');
+            }
+
+            function closeStory() {
+                storyModal.style.transform = '';
+                storyModal.style.opacity = '';
+                storyModal.classList.add('hidden');
+                storyModal.classList.remove('flex');
+            }
+
+            closeStoryBtn.addEventListener('click', closeStory);
+
+            // --- Lógica de arrastar para fechar o Story ---
+            let touchStartY = 0;
+            let currentY = 0;
+            let isDragging = false;
+
+            storyModal.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                touchStartY = e.touches[0].clientY;
+                currentY = touchStartY;
+                storyModal.style.transition = 'none';
+            });
+
+            storyModal.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                currentY = e.touches[0].clientY;
+                const diffY = currentY - touchStartY;
+
+                if (diffY > 0) { // Apenas permite arrastar para baixo
+                    storyModal.style.transform = `translateY(${diffY}px)`;
+                    storyModal.style.opacity = 1 - (diffY / (window.innerHeight / 1.5));
+                }
+            });
+
+            storyModal.addEventListener('touchend', () => {
+                if (!isDragging) return;
+                isDragging = false;
+                const diffY = currentY - touchStartY;
+                const closeThreshold = window.innerHeight / 4; // Fecha se arrastar 25% da tela
+
+                storyModal.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+
+                if (diffY > closeThreshold) {
+                    // Anima para fora da tela e depois fecha
+                    storyModal.style.transform = 'translateY(100%)';
+                    storyModal.style.opacity = '0';
+                    setTimeout(() => {
+                        closeStory();
+                    }, 300); // Duração da transição
+                } else {
+                    // Anima de volta para a posição original
+                    storyModal.style.transform = 'translateY(0)';
+                    storyModal.style.opacity = '1';
+                }
+                
+                touchStartY = 0;
+                currentY = 0;
+            });
         });
     </script>
 </body>
