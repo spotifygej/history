@@ -55,6 +55,16 @@
         }
 
     </style>
+    <script>
+        // Função para lidar com erros de imagem. Colocada no <head> para garantir que esteja definida antes do <body> ser renderizado.
+        function handleImageError(image) {
+            // Se a imagem .jpg falhar, tenta carregar a .png
+            if (image.src.endsWith('.jpg')) {
+                image.onerror = null; // Evita um loop infinito se o .png também falhar
+                image.src = image.src.replace('.jpg', '.png');
+            }
+        }
+    </script>
 </head>
 <body class="bg-black text-white overflow-hidden">
     <!-- Player de áudio invisível -->
@@ -147,8 +157,8 @@
                 <div class="w-6 h-6"></div>
             </header>
 
-            <!-- Conteúdo da Letra -->
-            <div class="flex-grow overflow-y-auto px-6 py-8">
+            <!-- Conteúdo da Letra (com rolagem) -->
+            <div class="flex-grow min-h-0 overflow-y-auto px-6 pt-8 pb-24">
                 <div class="text-white text-2xl font-bold space-y-4 text-center">
                      <p>Tudo começou com um simples "oi"...</p>
                      <p>Lembro como se fosse hoje, o dia em que nossos caminhos se cruzaram. O mundo parecia diferente, mais colorido.</p>
@@ -156,6 +166,15 @@
                      <p>Passamos por tantos momentos, dos mais bobos aos mais sérios, e em todos eles, a certeza de que era pra ser.</p>
                      <p>Esta não é apenas uma letra, é o roteiro da nossa vida juntos. E o melhor de tudo... é só o começo.</p>
                      <p>Te amo.</p>
+                     <p>Esta é uma linha extra para garantir que o texto seja longo o suficiente para rolar.</p>
+                     <p>E mais uma, para ter certeza.</p>
+                     <p>A vida nos surpreende com encontros inesperados.</p>
+                     <p>E o nosso foi o mais belo de todos.</p>
+                     <p>Cada dia ao seu lado é uma nova página desta história.</p>
+                     <p>Uma história que eu amo escrever.</p>
+                     <p>Com você, cada momento se torna especial.</p>
+                     <p>Obrigado por ser a melodia da minha vida.</p>
+                     <p>Fim da nossa linda história (por enquanto).</p>
                 </div>
             </div>
 
@@ -206,9 +225,9 @@
         // --- PLAYLIST DE MÚSICAS ---
         // !!! SUBSTITUA ESTES LINKS PELOS LINKS DIRETOS DAS SUAS MÚSICAS (MP3, M4A, etc.) !!!
         const musicPlaylist = [
-            'https://dl.dropboxusercontent.com/scl/fi/p7a0nujj20v3xi6oguz0q/11-Voc-Mudou.m4a?rlkey=b4v83uh0otnbjprsiszj217i1&st=t34ypvah&dl', // Música 1 (Exemplo)
-            'https://dl.dropboxusercontent.com/scl/fi/sb0xuytpq0ubzd2os76s8/18-Teu-Cora-o-Ainda-Meu.m4a?rlkey=raivy5i9cty1crjzad0258vl0&st=lydptl6p&dl', // Música 2 (Exemplo)
-            'https://dl.dropboxusercontent.com/scl/fi/9jwaccal6tfotdt6o2xqj/21-Deixa-Eu-Te-Amar.m4a?rlkey=e5z5jxinz71nyc0qztrun21t2&st=4ussn9wz&dl', // Música 3 (Exemplo)
+            'https://storage.googleapis.com/spec-host-backup/mio-design%2Fassets%2F1S04mxhs0v_21-sound.mp3', // Música 1 (Exemplo)
+            'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', // Música 2 (Exemplo)
+            'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', // Música 3 (Exemplo)
             'COLE_SEU_LINK_AQUI_4', // Música 4
             'COLE_SEU_LINK_AQUI_5', // Música 5
             'COLE_SEU_LINK_AQUI_6', // Música 6
@@ -242,15 +261,6 @@
 
         const playIconSvg = `<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>`;
         const pauseIconSvg = `<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 011-1h1a1 1 0 110 2H8a1 1 0 01-1-1zm5 0a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>`;
-
-        // Funções do Player
-        function handleImageError(image) {
-            // Se a imagem .jpg falhar, tenta carregar a .png
-            if (image.src.endsWith('.jpg')) {
-                image.onerror = null; // Evita um loop infinito se o .png também falhar
-                image.src = image.src.replace('.jpg', '.png');
-            }
-        }
         
         function loadTrack(trackIndex) {
             // Tenta carregar a imagem .jpg primeiro. O 'onerror' no HTML cuidará do fallback para .png
@@ -259,9 +269,22 @@
 
             audio.src = musicPlaylist[trackIndex];
             audio.load();
-            audio.play();
+            // Para evitar erro de autoplay bloqueado pelo navegador, esperamos a interação do usuário.
+            // O play será chamado no togglePlayPause ou loadTrack após next/prev
+        }
+
+        function playMusic() {
+            audio.play().catch(error => {
+                console.log("Autoplay foi impedido pelo navegador. O usuário precisa interagir com a página primeiro.", error);
+            });
             mainPlayBtn.innerHTML = pauseIconSvg;
             lyricsPlayBtn.innerHTML = pauseIconSvg;
+        }
+
+        function pauseMusic() {
+            audio.pause();
+            mainPlayBtn.innerHTML = playIconSvg;
+            lyricsPlayBtn.innerHTML = playIconSvg;
         }
 
         function playNext() {
@@ -270,6 +293,7 @@
                 currentTrackIndex = 0; // Volta para a primeira música
             }
             loadTrack(currentTrackIndex);
+            playMusic();
         }
 
         function playPrevious() {
@@ -278,17 +302,14 @@
                 currentTrackIndex = musicPlaylist.length - 1; // Vai para a última música
             }
             loadTrack(currentTrackIndex);
+            playMusic();
         }
 
         function togglePlayPause() {
-            if (audio.paused) {
-                audio.play();
-                mainPlayBtn.innerHTML = pauseIconSvg;
-                lyricsPlayBtn.innerHTML = pauseIconSvg;
+            if (audio.src && audio.paused) {
+                playMusic();
             } else {
-                audio.pause();
-                mainPlayBtn.innerHTML = playIconSvg;
-                lyricsPlayBtn.innerHTML = playIconSvg;
+                pauseMusic();
             }
         }
         
@@ -312,7 +333,9 @@
             const width = progressBar.clientWidth;
             const clickX = e.offsetX;
             const duration = audio.duration;
-            audio.currentTime = (clickX / width) * duration;
+            if (duration) {
+                audio.currentTime = (clickX / width) * duration;
+            }
         }
 
         // Event Listeners do Player
@@ -331,9 +354,8 @@
         lyricsProgressBar.addEventListener('click', (e) => setProgress(e, lyricsProgressBar));
 
         // Inicia o player com a primeira música e foto da lista
-        audio.src = musicPlaylist[currentTrackIndex];
-        mainPlayBtn.innerHTML = playIconSvg;
-        lyricsPlayBtn.innerHTML = playIconSvg;
+        loadTrack(currentTrackIndex);
+        pauseMusic(); // Começa pausado
 
         // Elementos das páginas
         const mainPage = document.getElementById('main-page');
