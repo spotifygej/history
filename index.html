@@ -76,7 +76,7 @@
                 <main class="flex-grow">
                     <!-- CAPA DA MÚSICA -->
                     <div class="mb-6">
-                        <img src="https://placehold.co/600x600/1DB954/FFFFFF?text=Nossa+Foto" alt="Capa da nossa música" class="w-full rounded-lg shadow-2xl aspect-square object-cover">
+                        <img id="album-art-img" src="nossafoto1.jpg" alt="Capa da nossa música" class="w-full rounded-lg shadow-2xl aspect-square object-cover" onerror="handleImageError(this)">
                     </div>
 
                     <!-- TÍTULO E ARTISTA -->
@@ -204,25 +204,27 @@
         const retrospectiveStoryData = { thumbnail: 'https://placehold.co/150x150/1DB954/FFF?text=2024', image: 'https://placehold.co/600x800/191414/FFF?text=Nossa+Retrospectiva', title: 'Retrospectiva 2024', text: 'Relembre os melhores momentos do nosso ano.' };
         
         // --- PLAYLIST DE MÚSICAS ---
-        // !!! SUBSTITUA ESTES LINKS PELOS LINKS DIRETOS DAS SUAS MÚSICAS EM MP3 !!!
+        // !!! SUBSTITUA ESTES LINKS PELOS LINKS DIRETOS DAS SUAS MÚSICAS (MP3, M4A, etc.) !!!
         const musicPlaylist = [
-            'https://dl.dropboxusercontent.com/scl/fi/p7a0nujj20v3xi6oguz0q/11-Voc-Mudou.m4a?rlkey=b4v83uh0otnbjprsiszj217i1&st=1vpcg0ek&dl', // Música 1 (Exemplo)
-            'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', // Música 2 (Exemplo)
-            'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', // Música 3 (Exemplo)
-            'COLE_SEU_LINK_AQUI', // Música 4
-            'COLE_SEU_LINK_AQUI', // Música 5
-            'COLE_SEU_LINK_AQUI', // Música 6
-            'COLE_SEU_LINK_AQUI', // Música 7
-            'COLE_SEU_LINK_AQUI', // Música 8
-            'COLE_SEU_LINK_AQUI', // Música 9
-            'COLE_SEU_LINK_AQUI', // Música 10
+            'https://dl.dropboxusercontent.com/scl/fi/p7a0nujj20v3xi6oguz0q/11-Voc-Mudou.m4a?rlkey=b4v83uh0otnbjprsiszj217i1&st=t34ypvah&dl', // Música 1 (Exemplo)
+            'https://dl.dropboxusercontent.com/scl/fi/sb0xuytpq0ubzd2os76s8/18-Teu-Cora-o-Ainda-Meu.m4a?rlkey=raivy5i9cty1crjzad0258vl0&st=lydptl6p&dl', // Música 2 (Exemplo)
+            'https://dl.dropboxusercontent.com/scl/fi/9jwaccal6tfotdt6o2xqj/21-Deixa-Eu-Te-Amar.m4a?rlkey=e5z5jxinz71nyc0qztrun21t2&st=4ussn9wz&dl', // Música 3 (Exemplo)
+            'COLE_SEU_LINK_AQUI_4', // Música 4
+            'COLE_SEU_LINK_AQUI_5', // Música 5
+            'COLE_SEU_LINK_AQUI_6', // Música 6
+            'COLE_SEU_LINK_AQUI_7', // Música 7
+            'COLE_SEU_LINK_AQUI_8', // Música 8
+            'COLE_SEU_LINK_AQUI_9', // Música 9
+            'COLE_SEU_LINK_AQUI_10', // Música 10
         ];
+
         let currentTrackIndex = 0;
 
         // --- LÓGICA DO SITE ---
 
         // Elementos do Player de Audio
         const audio = document.getElementById('audio-player');
+        const albumArtImg = document.getElementById('album-art-img');
 
         // Elementos dos players (Principal e Letra)
         const mainPlayBtn = document.getElementById('main-play-btn');
@@ -242,7 +244,19 @@
         const pauseIconSvg = `<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 011-1h1a1 1 0 110 2H8a1 1 0 01-1-1zm5 0a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>`;
 
         // Funções do Player
+        function handleImageError(image) {
+            // Se a imagem .jpg falhar, tenta carregar a .png
+            if (image.src.endsWith('.jpg')) {
+                image.onerror = null; // Evita um loop infinito se o .png também falhar
+                image.src = image.src.replace('.jpg', '.png');
+            }
+        }
+        
         function loadTrack(trackIndex) {
+            // Tenta carregar a imagem .jpg primeiro. O 'onerror' no HTML cuidará do fallback para .png
+            const imageName = `nossafoto${trackIndex + 1}.jpg`; 
+            albumArtImg.src = imageName;
+
             audio.src = musicPlaylist[trackIndex];
             audio.load();
             audio.play();
@@ -316,7 +330,7 @@
         mainProgressBar.addEventListener('click', (e) => setProgress(e, mainProgressBar));
         lyricsProgressBar.addEventListener('click', (e) => setProgress(e, lyricsProgressBar));
 
-        // Inicia o player com a primeira música da lista
+        // Inicia o player com a primeira música e foto da lista
         audio.src = musicPlaylist[currentTrackIndex];
         mainPlayBtn.innerHTML = playIconSvg;
         lyricsPlayBtn.innerHTML = playIconSvg;
