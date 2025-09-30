@@ -75,70 +75,83 @@
     <!-- Container principal que segura as duas "páginas" -->
     <div class="relative h-screen w-full">
 
-        <!-- PÁGINA PRINCIPAL -->
-        <div id="main-page" class="absolute inset-0 page bg-[#121212] overflow-y-hidden">
-            <div class="container mx-auto max-w-lg h-full flex flex-col p-3">
+        <!-- PÁGINA PRINCIPAL (com rolagem) -->
+        <div id="main-page" class="absolute inset-0 page bg-[#121212] overflow-y-auto">
+            <div class="container mx-auto max-w-lg min-h-full flex flex-col p-4">
                 <!-- CABEÇALHO -->
-                <header class="flex justify-between items-center mb-2 flex-shrink-0">
+                <header class="flex justify-between items-center mb-6 flex-shrink-0">
                     <div class="w-6 h-6"></div>
                     <span class="text-sm font-bold">Tocando Agora</span>
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
                 </header>
 
-                <main class="flex-grow flex flex-col justify-around min-h-0">
+                <main class="flex-grow">
                     <!-- CAPA DA MÚSICA -->
-                    <div class="mb-2">
+                    <div class="mb-6">
                         <img id="album-art-img" src="nossafoto1.jpg" alt="Capa da nossa música" class="w-full rounded-lg shadow-2xl aspect-square object-cover" onerror="handleImageError(this)">
                     </div>
 
                     <!-- TÍTULO E ARTISTA -->
-                    <div class="flex justify-between items-center mb-2">
+                    <div class="flex justify-between items-center mb-4">
                         <div>
-                            <h1 class="text-xl font-bold">Nossa Trilha Sonora</h1>
-                            <p class="text-sm text-gray-400">Seu Nome & Nome Dela</p>
+                            <h1 class="text-2xl font-bold">Nossa Trilha Sonora</h1>
+                            <p class="text-gray-400">Seu Nome & Nome Dela</p>
                         </div>
                         <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
                     </div>
 
                     <!-- CONTROLES DE MÚSICA -->
-                    <div class="mb-4">
+                    <div class="mb-8">
                         <div id="main-progress-bar" class="bg-gray-700 rounded-full h-1 w-full mb-1 cursor-pointer"><div id="main-progress" class="bg-white rounded-full h-1" style="width: 0%;"></div></div>
                         <div class="flex justify-between text-xs text-gray-400"><span id="main-current-time">0:00</span><span id="main-total-time">0:00</span></div>
-                        <div class="flex justify-between items-center mt-2 px-4">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-6 6-4-4-6 6"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l6-6"></path></svg>
+                        <div class="flex justify-between items-center mt-4 px-4">
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-6 6-4-4-6 6"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l6-6"></path></svg>
                             <button id="main-prev-btn">
-                                <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.445 14.832A1 1 0 0010 14.006V5.994a1 1 0 00-1.555-.832L2.4 9.168a1 1 0 000 1.664l6.045 4.001zM11 5h2v10h-2V5z" clip-rule="evenodd"></path></svg>
+                                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.445 14.832A1 1 0 0010 14.006V5.994a1 1 0 00-1.555-.832L2.4 9.168a1 1 0 000 1.664l6.045 4.001zM11 5h2v10h-2V5z" clip-rule="evenodd"></path></svg>
                             </button>
-                            <button id="main-play-btn" class="w-10 h-10 text-white"></button>
+                            <button id="main-play-btn" class="w-12 h-12 text-white"></button>
                             <button id="main-next-btn">
-                                <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.555 5.168A1 1 0 0010 5.994v8.012a1 1 0 001.555.832l6.045-4.001a1 1 0 000-1.664l-6.045-4.001zM9 5H7v10h2V5z" clip-rule="evenodd"></path></svg>
+                                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.555 5.168A1 1 0 0010 5.994v8.012a1 1 0 001.555.832l6.045-4.001a1 1 0 000-1.664l-6.045-4.001zM9 5H7v10h2V5z" clip-rule="evenodd"></path></svg>
                             </button>
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5M20 20v-5h-5"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 9a9 9 0 0114.13-5.132M20 15a9 9 0 01-14.13 5.132"></path></svg>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5M20 20v-5h-5"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 9a9 9 0 0114.13-5.132M20 15a9 9 0 01-14.13 5.132"></path></svg>
                         </div>
                     </div>
                     
                     <!-- CARD "LETRA" -->
-                    <div id="lyrics-card" class="bg-[#191414] rounded-lg p-4 cursor-pointer mb-4 flex flex-col items-start">
-                        <h2 class="text-lg font-bold mb-1">Nossa Letra</h2>
-                        <p class="text-gray-300 text-xs mb-2 line-clamp-2">Tudo começou com um simples "oi"... Lembro como se fosse hoje, o dia em que nossos caminhos se cruzaram.</p>
-                        <button class="bg-white text-black text-xs font-bold py-1 px-3 rounded-full hover:scale-105 transition-transform">
+                    <div id="lyrics-card" class="bg-[#191414] rounded-lg p-6 cursor-pointer mb-8 flex flex-col items-start">
+                        <h2 class="text-xl font-bold mb-2">Nossa Letra</h2>
+                        <p class="text-gray-300 text-sm mb-4 line-clamp-4">Tudo começou com um simples "oi"... Lembro como se fosse hoje, o dia em que nossos caminhos se cruzaram. O mundo parecia diferente, mais colorido. Cada conversa, cada risada, foi construindo a base do que temos hoje. Um amor que é nossa música favorita.</p>
+                        <button class="bg-white text-black text-sm font-bold py-2 px-4 rounded-full hover:scale-105 transition-transform">
                             Mostrar Letra
                         </button>
                     </div>
 
                     <!-- SEÇÃO DE STORIES -->
-                    <div class="mb-2">
-                         <h2 class="text-lg font-bold mb-2">Momentos</h2>
-                         <div id="stories-container" class="flex space-x-3 overflow-x-auto pb-2"></div>
+                    <div class="mb-8">
+                         <h2 class="text-xl font-bold mb-4">Momentos Especiais</h2>
+                         <div id="stories-container" class="flex space-x-4 overflow-x-auto pb-4"></div>
+                    </div>
+
+                     <!-- SEÇÃO RETROSPECTIVA -->
+                    <div class="mb-8">
+                         <h2 class="text-xl font-bold mb-4">Retrospectiva</h2>
+                         <div id="retrospective-card" class="bg-[#191414] rounded-lg p-4 flex items-center space-x-4 cursor-pointer hover:bg-[#282828] transition-colors">
+                             <img src="https://placehold.co/100x100/1DB954/FFFFFF?text=2024" alt="Retrospectiva" class="w-24 h-24 rounded-lg object-cover flex-shrink-0">
+                             <div>
+                                 <p class="text-gray-400 text-sm">Playlist</p>
+                                 <h3 class="text-lg font-bold">Nossa Retrospectiva 2024</h3>
+                                 <p class="text-gray-400 text-sm">Os momentos que marcaram nosso ano.</p>
+                             </div>
+                         </div>
                     </div>
                 </main>
             </div>
         </div>
 
-        <!-- PÁGINA DA LETRA (inicialmente oculta) -->
-        <div id="lyrics-page" class="absolute inset-0 page bg-[#B45309] hidden flex-col">
+        <!-- PÁGINA DA LETRA (com layout fixo) -->
+        <div id="lyrics-page" class="relative inset-0 page bg-[#B45309] hidden flex flex-col">
             <!-- Cabeçalho da página de letra -->
-            <header class="flex justify-between items-center p-4 flex-shrink-0">
+            <header class="flex justify-between items-center p-4 flex-shrink-0 z-10">
                 <button id="back-to-main-btn">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                 </button>
@@ -147,7 +160,7 @@
             </header>
 
             <!-- Conteúdo da Letra (com rolagem) -->
-            <div class="flex-grow min-h-0 overflow-y-auto px-6 pt-8 pb-24">
+            <div class="flex-grow min-h-0 overflow-y-auto px-6 pt-8 pb-40">
                 <div class="text-white text-2xl font-bold space-y-4 text-center">
                      <p>Tudo começou com um simples "oi"...</p>
                      <p>Lembro como se fosse hoje, o dia em que nossos caminhos se cruzaram. O mundo parecia diferente, mais colorido.</p>
@@ -168,7 +181,7 @@
             </div>
 
             <!-- Mini Player Fixo -->
-            <footer class="p-4 flex-shrink-0">
+            <footer class="absolute bottom-0 left-0 right-0 p-4 bg-[#B45309]">
                 <div id="lyrics-progress-bar" class="bg-white/30 rounded-full h-1 w-full mb-1 cursor-pointer"><div id="lyrics-progress" class="bg-white rounded-full h-1" style="width: 0%;"></div></div>
                 <div class="flex justify-between text-xs text-white/80"><span id="lyrics-current-time">0:00</span><span id="lyrics-total-time">0:00</span></div>
                 <div class="flex justify-center items-center mt-4">
