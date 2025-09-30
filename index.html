@@ -57,6 +57,8 @@
     </style>
 </head>
 <body class="bg-black text-white overflow-hidden">
+    <!-- Player de áudio invisível -->
+    <audio id="audio-player"></audio>
 
     <!-- Container principal que segura as duas "páginas" -->
     <div class="relative h-screen w-full">
@@ -88,13 +90,17 @@
 
                     <!-- CONTROLES DE MÚSICA -->
                     <div class="mb-8">
-                        <div class="bg-gray-700 rounded-full h-1 w-full mb-1"><div class="bg-white rounded-full h-1" style="width: 25%;"></div></div>
-                        <div class="flex justify-between text-xs text-gray-400"><span>0:52</span><span>3:28</span></div>
+                        <div id="main-progress-bar" class="bg-gray-700 rounded-full h-1 w-full mb-1 cursor-pointer"><div id="main-progress" class="bg-white rounded-full h-1" style="width: 0%;"></div></div>
+                        <div class="flex justify-between text-xs text-gray-400"><span id="main-current-time">0:00</span><span id="main-total-time">0:00</span></div>
                         <div class="flex justify-between items-center mt-4 px-4">
                             <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-6 6-4-4-6 6"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l6-6"></path></svg>
-                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.445 14.832A1 1 0 0010 14.006V5.994a1 1 0 00-1.555-.832L2.4 9.168a1 1 0 000 1.664l6.045 4.001zM11 5h2v10h-2V5z" clip-rule="evenodd"></path></svg>
-                            <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.555 5.168A1 1 0 0010 5.994v8.012a1 1 0 001.555.832l6.045-4.001a1 1 0 000-1.664l-6.045-4.001zM9 5H7v10h2V5z" clip-rule="evenodd"></path></svg>
+                            <button id="main-prev-btn">
+                                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.445 14.832A1 1 0 0010 14.006V5.994a1 1 0 00-1.555-.832L2.4 9.168a1 1 0 000 1.664l6.045 4.001zM11 5h2v10h-2V5z" clip-rule="evenodd"></path></svg>
+                            </button>
+                            <button id="main-play-btn" class="w-12 h-12 text-white"></button>
+                            <button id="main-next-btn">
+                                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.555 5.168A1 1 0 0010 5.994v8.012a1 1 0 001.555.832l6.045-4.001a1 1 0 000-1.664l-6.045-4.001zM9 5H7v10h2V5z" clip-rule="evenodd"></path></svg>
+                            </button>
                             <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5M20 20v-5h-5"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 9a9 9 0 0114.13-5.132M20 15a9 9 0 01-14.13 5.132"></path></svg>
                         </div>
                     </div>
@@ -155,10 +161,10 @@
 
             <!-- Mini Player Fixo -->
             <footer class="p-4 flex-shrink-0">
-                <div class="bg-white/30 rounded-full h-1 w-full mb-1"><div class="bg-white rounded-full h-1" style="width: 25%;"></div></div>
-                <div class="flex justify-between text-xs text-white/80"><span>0:52</span><span>3:28</span></div>
+                <div id="lyrics-progress-bar" class="bg-white/30 rounded-full h-1 w-full mb-1 cursor-pointer"><div id="lyrics-progress" class="bg-white rounded-full h-1" style="width: 0%;"></div></div>
+                <div class="flex justify-between text-xs text-white/80"><span id="lyrics-current-time">0:00</span><span id="lyrics-total-time">0:00</span></div>
                 <div class="flex justify-center items-center mt-4">
-                    <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                     <button id="lyrics-play-btn" class="w-12 h-12 text-white"></button>
                 </div>
             </footer>
         </div>
@@ -196,8 +202,124 @@
             { thumbnail: 'https://placehold.co/150x150/777/FFF?text=Bobeira', image: 'https://placehold.co/600x800/444/FFF?text=Nossas+Bobeiras', title: 'Risadas', text: 'Os momentos mais simples são os melhores.' },
         ];
         const retrospectiveStoryData = { thumbnail: 'https://placehold.co/150x150/1DB954/FFF?text=2024', image: 'https://placehold.co/600x800/191414/FFF?text=Nossa+Retrospectiva', title: 'Retrospectiva 2024', text: 'Relembre os melhores momentos do nosso ano.' };
+        
+        // --- PLAYLIST DE MÚSICAS ---
+        // !!! SUBSTITUA ESTES LINKS PELOS LINKS DIRETOS DAS SUAS MÚSICAS EM MP3 !!!
+        const musicPlaylist = [
+            'https://dl.dropboxusercontent.com/scl/fi/p7a0nujj20v3xi6oguz0q/11-Voc-Mudou.m4a?rlkey=b4v83uh0otnbjprsiszj217i1&st=1vpcg0ek&dl', // Música 1 (Exemplo)
+            'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', // Música 2 (Exemplo)
+            'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', // Música 3 (Exemplo)
+            'COLE_SEU_LINK_AQUI', // Música 4
+            'COLE_SEU_LINK_AQUI', // Música 5
+            'COLE_SEU_LINK_AQUI', // Música 6
+            'COLE_SEU_LINK_AQUI', // Música 7
+            'COLE_SEU_LINK_AQUI', // Música 8
+            'COLE_SEU_LINK_AQUI', // Música 9
+            'COLE_SEU_LINK_AQUI', // Música 10
+        ];
+        let currentTrackIndex = 0;
 
         // --- LÓGICA DO SITE ---
+
+        // Elementos do Player de Audio
+        const audio = document.getElementById('audio-player');
+
+        // Elementos dos players (Principal e Letra)
+        const mainPlayBtn = document.getElementById('main-play-btn');
+        const lyricsPlayBtn = document.getElementById('lyrics-play-btn');
+        const mainNextBtn = document.getElementById('main-next-btn');
+        const mainPrevBtn = document.getElementById('main-prev-btn');
+        const mainProgressBar = document.getElementById('main-progress-bar');
+        const lyricsProgressBar = document.getElementById('lyrics-progress-bar');
+        const mainProgress = document.getElementById('main-progress');
+        const lyricsProgress = document.getElementById('lyrics-progress');
+        const mainCurrentTime = document.getElementById('main-current-time');
+        const lyricsCurrentTime = document.getElementById('lyrics-current-time');
+        const mainTotalTime = document.getElementById('main-total-time');
+        const lyricsTotalTime = document.getElementById('lyrics-total-time');
+
+        const playIconSvg = `<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>`;
+        const pauseIconSvg = `<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 011-1h1a1 1 0 110 2H8a1 1 0 01-1-1zm5 0a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>`;
+
+        // Funções do Player
+        function loadTrack(trackIndex) {
+            audio.src = musicPlaylist[trackIndex];
+            audio.load();
+            audio.play();
+            mainPlayBtn.innerHTML = pauseIconSvg;
+            lyricsPlayBtn.innerHTML = pauseIconSvg;
+        }
+
+        function playNext() {
+            currentTrackIndex++;
+            if (currentTrackIndex >= musicPlaylist.length) {
+                currentTrackIndex = 0; // Volta para a primeira música
+            }
+            loadTrack(currentTrackIndex);
+        }
+
+        function playPrevious() {
+            currentTrackIndex--;
+            if (currentTrackIndex < 0) {
+                currentTrackIndex = musicPlaylist.length - 1; // Vai para a última música
+            }
+            loadTrack(currentTrackIndex);
+        }
+
+        function togglePlayPause() {
+            if (audio.paused) {
+                audio.play();
+                mainPlayBtn.innerHTML = pauseIconSvg;
+                lyricsPlayBtn.innerHTML = pauseIconSvg;
+            } else {
+                audio.pause();
+                mainPlayBtn.innerHTML = playIconSvg;
+                lyricsPlayBtn.innerHTML = playIconSvg;
+            }
+        }
+        
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function updateProgress() {
+            if (audio.duration) {
+                const progressPercent = (audio.currentTime / audio.duration) * 100;
+                mainProgress.style.width = `${progressPercent}%`;
+                lyricsProgress.style.width = `${progressPercent}%`;
+                mainCurrentTime.textContent = formatTime(audio.currentTime);
+                lyricsCurrentTime.textContent = formatTime(audio.currentTime);
+            }
+        }
+        
+        function setProgress(e, progressBar) {
+            const width = progressBar.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            audio.currentTime = (clickX / width) * duration;
+        }
+
+        // Event Listeners do Player
+        mainPlayBtn.addEventListener('click', togglePlayPause);
+        lyricsPlayBtn.addEventListener('click', togglePlayPause);
+        mainNextBtn.addEventListener('click', playNext);
+        mainPrevBtn.addEventListener('click', playPrevious);
+        audio.addEventListener('timeupdate', updateProgress);
+        audio.addEventListener('loadedmetadata', () => {
+            mainTotalTime.textContent = formatTime(audio.duration);
+            lyricsTotalTime.textContent = formatTime(audio.duration);
+            updateProgress();
+        });
+        audio.addEventListener('ended', playNext); // Toca a próxima ao terminar
+        mainProgressBar.addEventListener('click', (e) => setProgress(e, mainProgressBar));
+        lyricsProgressBar.addEventListener('click', (e) => setProgress(e, lyricsProgressBar));
+
+        // Inicia o player com a primeira música da lista
+        audio.src = musicPlaylist[currentTrackIndex];
+        mainPlayBtn.innerHTML = playIconSvg;
+        lyricsPlayBtn.innerHTML = playIconSvg;
 
         // Elementos das páginas
         const mainPage = document.getElementById('main-page');
@@ -223,7 +345,7 @@
         });
 
 
-        // Lógica dos Stories (continua a mesma)
+        // Lógica dos Stories
         storiesData.forEach((story) => {
             const storyElement = document.createElement('div');
             storyElement.className = 'flex flex-col items-center flex-shrink-0 w-20';
