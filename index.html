@@ -149,7 +149,7 @@
         </div>
 
         <!-- PÁGINA DA LETRA (com layout fixo) -->
-        <div id="lyrics-page" class="relative inset-0 page bg-[#B45309] hidden flex flex-col">
+        <div id="lyrics-page" class="absolute inset-0 page bg-[#B45309] hidden flex flex-col">
             <!-- Cabeçalho da página de letra -->
             <header class="flex justify-between items-center p-4 flex-shrink-0 z-10">
                 <button id="back-to-main-btn">
@@ -160,7 +160,7 @@
             </header>
 
             <!-- Conteúdo da Letra (com rolagem) -->
-            <div class="flex-grow min-h-0 overflow-y-auto px-6 pt-8 pb-40">
+            <div id="lyrics-content" class="flex-grow min-h-0 overflow-y-auto px-6 pt-8 pb-8">
                 <div class="text-white text-2xl font-bold space-y-4 text-center">
                      <p>Tudo começou com um simples "oi"...</p>
                      <p>Lembro como se fosse hoje, o dia em que nossos caminhos se cruzaram. O mundo parecia diferente, mais colorido.</p>
@@ -181,7 +181,7 @@
             </div>
 
             <!-- Mini Player Fixo -->
-            <footer class="absolute bottom-0 left-0 right-0 p-4 bg-[#B45309]">
+            <footer class="p-4 bg-[#B45309] flex-shrink-0">
                 <div id="lyrics-progress-bar" class="bg-white/30 rounded-full h-1 w-full mb-1 cursor-pointer"><div id="lyrics-progress" class="bg-white rounded-full h-1" style="width: 0%;"></div></div>
                 <div class="flex justify-between text-xs text-white/80"><span id="lyrics-current-time">0:00</span><span id="lyrics-total-time">0:00</span></div>
                 <div class="flex justify-center items-center mt-4">
@@ -369,6 +369,7 @@
             const storiesContainer = document.getElementById('stories-container');
             const storyModal = document.getElementById('story-modal');
             const closeStoryBtn = document.getElementById('close-story-btn');
+            const lyricsContent = document.getElementById('lyrics-content');
 
             lyricsCard.addEventListener('click', () => {
                 lyricsPage.classList.remove('hidden');
@@ -418,21 +419,22 @@
 
             closeStoryBtn.addEventListener('click', closeStory);
 
-            let touchStartY = 0;
-            let currentY = 0;
-            let isDragging = false;
+            // --- Lógica de arrastar para fechar Story ---
+            let storyTouchStartY = 0;
+            let storyCurrentY = 0;
+            let isStoryDragging = false;
 
             storyModal.addEventListener('touchstart', (e) => {
-                isDragging = true;
-                touchStartY = e.touches[0].clientY;
-                currentY = touchStartY;
+                isStoryDragging = true;
+                storyTouchStartY = e.touches[0].clientY;
+                storyCurrentY = storyTouchStartY;
                 storyModal.style.transition = 'none';
             });
 
             storyModal.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-                currentY = e.touches[0].clientY;
-                const diffY = currentY - touchStartY;
+                if (!isStoryDragging) return;
+                storyCurrentY = e.touches[0].clientY;
+                const diffY = storyCurrentY - storyTouchStartY;
                 if (diffY > 0) {
                     storyModal.style.transform = `translateY(${diffY}px)`;
                     storyModal.style.opacity = 1 - (diffY / (window.innerHeight / 1.5));
@@ -440,9 +442,9 @@
             });
 
             storyModal.addEventListener('touchend', () => {
-                if (!isDragging) return;
-                isDragging = false;
-                const diffY = currentY - touchStartY;
+                if (!isStoryDragging) return;
+                isStoryDragging = false;
+                const diffY = storyCurrentY - storyTouchStartY;
                 const closeThreshold = window.innerHeight / 4;
                 storyModal.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
                 if (diffY > closeThreshold) {
@@ -453,8 +455,48 @@
                     storyModal.style.transform = 'translateY(0)';
                     storyModal.style.opacity = '1';
                 }
-                touchStartY = 0;
-                currentY = 0;
+                storyTouchStartY = 0;
+                storyCurrentY = 0;
+            });
+
+            // --- Lógica de arrastar para fechar Letra ---
+            let lyricsTouchStartY = 0;
+            let lyricsCurrentY = 0;
+            let isLyricsDragging = false;
+
+            lyricsPage.addEventListener('touchstart', (e) => {
+                if (lyricsContent.scrollTop === 0) {
+                    isLyricsDragging = true;
+                    lyricsTouchStartY = e.touches[0].clientY;
+                    lyricsCurrentY = lyricsTouchStartY;
+                    lyricsPage.style.transition = 'none';
+                } else {
+                    isLyricsDragging = false;
+                }
+            });
+
+            lyricsPage.addEventListener('touchmove', (e) => {
+                if (!isLyricsDragging) return;
+                lyricsCurrentY = e.touches[0].clientY;
+                const diffY = lyricsCurrentY - lyricsTouchStartY;
+                if (diffY > 0) {
+                    lyricsPage.style.transform = `translateY(${diffY}px)`;
+                }
+            });
+
+            lyricsPage.addEventListener('touchend', () => {
+                if (!isLyricsDragging) return;
+                isLyricsDragging = false;
+                const diffY = lyricsCurrentY - lyricsTouchStartY;
+                const closeThreshold = window.innerHeight / 4;
+                lyricsPage.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                if (diffY > closeThreshold) {
+                    backToMainBtn.click(); // Dispara a animação de volta
+                } else {
+                    lyricsPage.style.transform = ''; // Volta à posição original
+                }
+                lyricsTouchStartY = 0;
+                lyricsCurrentY = 0;
             });
         });
     </script>
