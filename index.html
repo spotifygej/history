@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa Trilha Sonora</title>
+    <!-- Tailwind CSS para estilização rápida e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Poppins para uma aparência moderna -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos personalizados para complementar o Tailwind */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212; /* Cor de fundo escura padrão do Spotify */
+        }
+
+        /* Estilizando a barra de rolagem para um visual mais limpo */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #535353;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7a7a7a;
+        }
+
+        /* Animação da barra de progresso do Story */
+        .story-progress-bar {
+            animation: progressBar 5s linear forwards;
+        }
+
+        @keyframes progressBar {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+        
+        /* Efeito de gradiente no fundo da "letra" */
+        .lyrics-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, #191414, transparent);
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        /* ESTILOS PARA EXPANDIR A LETRA */
+        .lyrics-container {
+            transition: max-height 0.5s ease-in-out;
+        }
+        #lyrics-card.expanded .lyrics-container {
+            max-height: 1000px; /* Valor alto para garantir que todo o texto apareça */
+        }
+        #lyrics-card.expanded .lyrics-container::after {
+            opacity: 0; /* Esconde o gradiente quando expandido */
+        }
+        #lyrics-card.expanded #lyrics-chevron {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+
+    <div class="container mx-auto max-w-lg min-h-screen bg-[#121212] flex flex-col p-4">
+
+        <!-- CABEÇALHO -->
+        <header class="flex justify-between items-center mb-6">
+            <!-- Espaço vazio para manter o título centralizado -->
+            <div class="w-6 h-6"></div>
+            <span class="text-sm font-bold">Tocando Agora</span>
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
+        </header>
+
+        <main class="flex-grow">
+            <!-- CAPA DA MÚSICA -->
+            <div class="mb-6">
+                <!--
+                  EDITÁVEL: Troque a URL da imagem abaixo pela foto de capa de vocês.
+                  Pode ser uma foto especial, um desenho, o que preferir!
+                  Use uma imagem quadrada para um melhor resultado (ex: 1080x1080 pixels).
+                -->
+                <img src="https://placehold.co/600x600/1DB954/FFFFFF?text=Nossa+Foto" alt="Capa da nossa música" class="w-full rounded-lg shadow-2xl aspect-square object-cover">
+            </div>
+
+            <!-- TÍTULO E ARTISTA -->
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <!-- EDITÁVEL: Altere o título da música e os nomes -->
+                    <h1 class="text-2xl font-bold">Nossa Trilha Sonora</h1>
+                    <p class="text-gray-400">Seu Nome & Nome Dela</p>
+                </div>
+                <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            </div>
+
+            <!-- CONTROLES DE MÚSICA -->
+            <div class="mb-8">
+                <!-- Barra de progresso -->
+                <div class="bg-gray-700 rounded-full h-1 w-full mb-1">
+                    <div class="bg-white rounded-full h-1" style="width: 25%;"></div>
+                </div>
+                <div class="flex justify-between text-xs text-gray-400">
+                    <span>0:52</span>
+                    <span>3:28</span>
+                </div>
+
+                <!-- Botões de controle -->
+                <div class="flex justify-between items-center mt-4 px-4">
+                    <!-- Aleatório (Shuffle) -->
+                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-6 6-4-4-6 6"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l6-6"></path></svg>
+                    <!-- Voltar -->
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.445 14.832A1 1 0 0010 14.006V5.994a1 1 0 00-1.555-.832L2.4 9.168a1 1 0 000 1.664l6.045 4.001zM11 5h2v10h-2V5z" clip-rule="evenodd"></path></svg>
+                    <!-- Play -->
+                    <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                    <!-- Avançar -->
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.555 5.168A1 1 0 0010 5.994v8.012a1 1 0 001.555.832l6.045-4.001a1 1 0 000-1.664l-6.045-4.001zM9 5H7v10h2V5z" clip-rule="evenodd"></path></svg>
+                    <!-- Repetir -->
+                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5M20 20v-5h-5"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 9a9 9 0 0114.13-5.132M20 15a9 9 0 01-14.13 5.132"></path></svg>
+                </div>
+            </div>
+
+            <!-- SEÇÃO "LETRA" / NOSSA HISTÓRIA -->
+            <div id="lyrics-card" class="bg-[#191414] rounded-lg p-6 relative mb-8 cursor-pointer">
+                 <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold">Nossa Letra</h2>
+                    <svg id="lyrics-chevron" class="w-6 h-6 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                 </div>
+                 <div class="lyrics-container max-h-48 overflow-hidden text-gray-300 space-y-4">
+                    <!--
+                        EDITÁVEL: Escreva a história de vocês aqui.
+                        Use as tags <p> para cada parágrafo.
+                    -->
+                    <p class="text-lg font-semibold">Tudo começou com um simples "oi"...</p>
+                    <p>Lembro como se fosse hoje, o dia em que nossos caminhos se cruzaram. O mundo parecia diferente, mais colorido.</p>
+                    <p>Cada conversa, cada risada, foi construindo a base do que temos hoje. Um amor que é nossa música favorita.</p>
+                    <p>Passamos por tantos momentos, dos mais bobos aos mais sérios, e em todos eles, a certeza de que era pra ser.</p>
+                    <p>Esta não é apenas uma letra, é o roteiro da nossa vida juntos. E o melhor de tudo... é só o começo.</p>
+                    <p>Te amo.</p>
+                 </div>
+            </div>
+
+            <!-- SEÇÃO DE STORIES -->
+            <div class="mb-8">
+                 <h2 class="text-xl font-bold mb-4">Momentos Especiais</h2>
+                 <div id="stories-container" class="flex space-x-4 overflow-x-auto pb-4">
+                     <!-- Os stories serão adicionados aqui pelo JavaScript -->
+                 </div>
+            </div>
+
+            <!-- SEÇÃO RETROSPECTIVA -->
+            <div class="mb-8">
+                 <h2 class="text-xl font-bold mb-4">Retrospectiva</h2>
+                 <div id="retrospective-card" class="bg-[#191414] rounded-lg p-4 flex items-center space-x-4 cursor-pointer hover:bg-[#282828] transition-colors">
+                     <!-- EDITÁVEL: Troque a imagem da retrospectiva -->
+                     <img src="https://placehold.co/100x100/1DB954/FFFFFF?text=2024" alt="Retrospectiva" class="w-24 h-24 rounded-lg object-cover flex-shrink-0">
+                     <div>
+                         <p class="text-gray-400 text-sm">Playlist</p>
+                         <h3 class="text-lg font-bold">Nossa Retrospectiva 2024</h3>
+                         <p class="text-gray-400 text-sm">Os momentos que marcaram nosso ano.</p>
+                     </div>
+                 </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- MODAL DO STORY (inicialmente oculto) -->
+    <div id="story-modal" class="fixed inset-0 bg-black bg-opacity-95 flex-col p-4 z-50 hidden">
+        <div class="w-full bg-gray-600 rounded-full h-1 mb-2">
+            <div id="story-progress" class="bg-white h-1 rounded-full"></div>
+        </div>
+        <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center space-x-2">
+                 <img id="story-modal-avatar" src="https://placehold.co/40x40" class="w-8 h-8 rounded-full object-cover">
+                 <span id="story-modal-title" class="font-semibold text-sm"></span>
+            </div>
+            <button id="close-story-btn" class="text-white text-2xl">&times;</button>
+        </div>
+        <div class="relative flex-grow w-full h-full rounded-lg overflow-hidden">
+            <img id="story-modal-image" src="" class="absolute top-0 left-0 w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                 <p id="story-modal-text" class="text-white text-center text-lg"></p>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // --- CONFIGURAÇÃO DOS DADOS ---
+
+        // EDITÁVEL: Adicione ou altere os stories aqui.
+        const storiesData = [
+            {
+                thumbnail: 'https://placehold.co/150x150/777/FFF?text=In%C3%ADcio',
+                image: 'https://placehold.co/600x800/111/FFF?text=Onde+Tudo+Come%C3%A7ou',
+                title: 'O Início',
+                text: 'O dia em que nossas vidas mudaram para sempre.'
+            },
+            {
+                thumbnail: 'https://placehold.co/150x150/777/FFF?text=Viagem',
+                image: 'https://placehold.co/600x800/222/FFF?text=Nossa+Primeira+Viagem',
+                title: '1ª Viagem',
+                text: 'Descobrindo o mundo, e um ao outro.'
+            },
+            {
+                thumbnail: 'https://placehold.co/150x150/777/FFF?text=Data',
+                image: 'https://placehold.co/600x800/333/FFF?text=Uma+Data+Especial',
+                title: 'Data Especial',
+                text: 'Celebrando um momento só nosso.'
+            },
+            {
+                thumbnail: 'https://placehold.co/150x150/777/FFF?text=Bobeira',
+                image: 'https://placehold.co/600x800/444/FFF?text=Nossas+Bobeiras',
+                title: 'Risadas',
+                text: 'Os momentos mais simples são os melhores.'
+            },
+            // Adicione mais stories aqui no mesmo formato
+        ];
+
+        // EDITÁVEL: Configure os dados para o story da retrospectiva.
+        const retrospectiveStoryData = {
+            thumbnail: 'https://placehold.co/150x150/1DB954/FFF?text=2024',
+            image: 'https://placehold.co/600x800/191414/FFF?text=Nossa+Retrospectiva',
+            title: 'Retrospectiva 2024',
+            text: 'Relembre os melhores momentos do nosso ano.'
+        };
+
+
+        // --- LÓGICA DO SITE (não precisa editar abaixo disso) ---
+
+        const storiesContainer = document.getElementById('stories-container');
+        const storyModal = document.getElementById('story-modal');
+        const closeStoryBtn = document.getElementById('close-story-btn');
+        const retrospectiveCard = document.getElementById('retrospective-card');
+
+        // Carrega os stories na página
+        storiesData.forEach((story) => {
+            const storyElement = document.createElement('div');
+            storyElement.className = 'flex flex-col items-center flex-shrink-0 w-20';
+            storyElement.innerHTML = `
+                <div class="w-16 h-16 rounded-full p-0.5 bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500">
+                    <img src="${story.thumbnail}" class="w-full h-full rounded-full object-cover border-2 border-black">
+                </div>
+                <span class="text-xs mt-2 text-center text-gray-300">${story.title}</span>
+            `;
+            storyElement.addEventListener('click', () => openStory(story));
+            storiesContainer.appendChild(storyElement);
+        });
+        
+        // Adiciona o evento de clique para o card de retrospectiva
+        retrospectiveCard.addEventListener('click', () => openStory(retrospectiveStoryData));
+
+        // Função para abrir o modal de um story
+        function openStory(storyData) {
+            document.getElementById('story-modal-avatar').src = storyData.thumbnail;
+            document.getElementById('story-modal-title').innerText = storyData.title;
+            document.getElementById('story-modal-image').src = storyData.image;
+            document.getElementById('story-modal-text').innerText = storyData.text;
+            
+            const progressBar = document.getElementById('story-progress');
+            // Reinicia a animação da barra de progresso
+            progressBar.classList.remove('story-progress-bar');
+            void progressBar.offsetWidth; // Truque para forçar o reinício da animação
+            progressBar.classList.add('story-progress-bar');
+
+            storyModal.classList.remove('hidden');
+            storyModal.classList.add('flex');
+        }
+
+        // Função para fechar o modal
+        function closeStory() {
+            storyModal.classList.add('hidden');
+            storyModal.classList.remove('flex');
+        }
+
+        closeStoryBtn.addEventListener('click', closeStory);
+
+        // Lógica para expandir a letra da música
+        const lyricsCard = document.getElementById('lyrics-card');
+        lyricsCard.addEventListener('click', () => {
+            lyricsCard.classList.toggle('expanded');
+        });
+
+    </script>
+</body>
+</html>
+
