@@ -159,6 +159,12 @@
                          </div>
                     </div>
 
+                    <!-- SEÇÃO EVENTOS -->
+                    <div class="mb-8">
+                         <h2 class="text-xl font-bold mb-4">Eventos</h2>
+                         <div id="events-container" class="flex space-x-4 overflow-x-auto pb-4"></div>
+                    </div>
+
                     <!-- SEÇÃO ARTISTA -->
                     <div class="mb-8">
                          <h2 class="text-xl font-bold mb-4">Sobre o Artista</h2>
@@ -265,6 +271,15 @@
                 { title: 'Data Especial', text: 'Celebrando um momento só nosso.', imageCount: 3 },     // Terá 3 fotos (30.jpg a 32.jpg)
                 { title: 'Risadas', text: 'Os momentos mais simples são os melhores.', imageCount: 10 },      // Terá 10 fotos (40.jpg a 49.jpg)
                 { title: 'Outro Momento', text: 'Só mais um dos nossos momentos.', imageCount: 1 },         // Terá 1 foto (50.jpg)
+            ];
+
+            const eventsData = [
+                // !!! EDITE AQUI: Defina o título de cada evento !!!
+                { title: 'Beto Carrero' },
+                { title: 'Lugar 2' },
+                { title: 'Lugar 3' },
+                { title: 'Lugar 4' },
+                { title: 'Lugar 5' }
             ];
             
             // --- PLAYLIST DE MÚSICAS ---
@@ -429,6 +444,7 @@
             const lyricsCard = document.getElementById('lyrics-card');
             const backToMainBtn = document.getElementById('back-to-main-btn');
             const storiesContainer = document.getElementById('stories-container');
+            const eventsContainer = document.getElementById('events-container');
             const storyModal = document.getElementById('story-modal');
             const closeStoryBtn = document.getElementById('close-story-btn');
             const lyricsContent = document.getElementById('lyrics-content');
@@ -462,6 +478,19 @@
                     <span class="text-xs mt-1 text-center text-gray-300">${story.title}</span>`;
                 storyElement.addEventListener('click', () => openStory(index));
                 storiesContainer.appendChild(storyElement);
+            });
+
+            // --- LÓGICA DOS EVENTOS ---
+            eventsData.forEach((event, index) => {
+                const eventElement = document.createElement('div');
+                const imageSrc = `E${index + 1}.jpg`;
+                eventElement.className = 'flex flex-col items-center flex-shrink-0 w-16 text-center';
+                eventElement.innerHTML = `
+                    <div class="w-14 h-14 rounded-full">
+                        <img src="${imageSrc}" class="w-full h-full rounded-full object-cover border-2 border-gray-600" onerror="handleImageError(this)">
+                    </div>
+                    <span class="text-xs mt-1 text-gray-300">${event.title}</span>`;
+                eventsContainer.appendChild(eventElement);
             });
             
             const storyProgressContainer = document.getElementById('story-progress-container');
