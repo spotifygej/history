@@ -85,8 +85,13 @@
     </script>
 </head>
 <body class="bg-black text-white overflow-hidden">
+    <!-- NOTIFICAÇÃO DE MÚSICA -->
+    <div id="notification" class="fixed top-10 left-1/2 -translate-x-1/2 bg-[#1DB954] text-white px-6 py-3 rounded-full shadow-lg text-sm font-semibold z-[100] opacity-0 transition-all duration-500 ease-in-out pointer-events-none transform -translate-y-10">
+        Tocando: <span id="notification-song-name"></span>
+    </div>
+
     <!-- Player de áudio invisível -->
-    <audio id="audio-player"></audio>
+    <audio id="audio-player" crossorigin="anonymous"></audio>
 
     <!-- Container principal que segura as duas "páginas" -->
     <div class="relative h-screen w-full">
@@ -147,7 +152,7 @@
                     <!-- CARD "LETRA" -->
                     <div id="lyrics-card" class="bg-[#191414] rounded-lg p-6 cursor-pointer mb-8 flex flex-col items-start">
                         <h2 class="text-xl font-bold mb-2">Nossa Letra</h2>
-                        <p class="text-gray-300 text-sm mb-4 line-clamp-4">Tudo começou com um simples "oi"... Lembro como se fosse hoje, o dia em que nossos caminhos se cruzaram. O mundo parecia diferente, mais colorido. Cada conversa, cada risada, foi construindo a base do que temos hoje. Um amor que é nossa música favorita.</p>
+                        <p class="text-gray-300 text-sm mb-4 line-clamp-4">Você me disse no ônibus que você era a minha última opção. Mas, sabe de uma coisa? Você sempre foi a minha primeira opção, a minha paixão de anos e anos...</p>
                         <button class="bg-white text-black text-sm font-bold py-2 px-4 rounded-full hover:scale-105 transition-transform">
                             Mostrar Letra
                         </button>
@@ -184,8 +189,8 @@
                          <div class="bg-[#191414] rounded-lg p-4 flex items-center space-x-4">
                              <img src="minhafoto.jpg" alt="Foto do Artista" class="w-24 h-24 rounded-full object-cover flex-shrink-0" onerror="handleImageError(this)">
                              <div>
-                                 <h3 class="text-lg font-bold">Seu Nome</h3>
-                                 <p class="text-gray-400 text-sm">O compositor de todas as músicas que tocam o coração dela. Um cara de sorte por ter a melhor inspiração do mundo.</p>
+                                 <h3 class="text-lg font-bold">Guilherme Almeida</h3>
+                                 <p class="text-gray-400 text-sm">Apenas um garoto apaixonado por musica que sempre dividiu playlist com sua melhor amiga, e que hoje quer dividir a sua vida com ela, Que Sorte a Dele!</p>
                              </div>
                          </div>
                     </div>
@@ -207,21 +212,19 @@
             <!-- Conteúdo da Letra (com rolagem) -->
             <div id="lyrics-content" class="overflow-y-auto px-6 pt-8 pb-8">
                 <div class="text-white text-2xl font-bold space-y-4 text-center">
-                     <p>Tudo começou com um simples "oi"...</p>
-                     <p>Lembro como se fosse hoje, o dia em que nossos caminhos se cruzaram. O mundo parecia diferente, mais colorido.</p>
-                     <p>Cada conversa, cada risada, foi construindo a base do que temos hoje. Um amor que é nossa música favorita.</p>
-                     <p>Passamos por tantos momentos, dos mais bobos aos mais sérios, e em todos eles, a certeza de que era pra ser.</p>
-                     <p>Esta não é apenas uma letra, é o roteiro da nossa vida juntos. E o melhor de tudo... é só o começo.</p>
-                     <p>Te amo.</p>
-                     <p>Esta é uma linha extra para garantir que o texto seja longo o suficiente para rolar.</p>
-                     <p>E mais uma, para ter certeza.</p>
-                     <p>A vida nos surpreende com encontros inesperados.</p>
-                     <p>E o nosso foi o mais belo de todos.</p>
-                     <p>Cada dia ao seu lado é uma nova página desta história.</p>
-                     <p>Uma história que eu amo escrever.</p>
-                     <p>Com você, cada momento se torna especial.</p>
-                     <p>Obrigado por ser a melodia da minha vida.</p>
-                     <p>Fim da nossa linda história (por enquanto).</p>
+                    <p>Você me disse no ônibus que você era a minha última opção.</p>
+                    <p>Mas, sabe de uma coisa? Você sempre foi a minha primeira opção, a minha paixão de anos e anos. Eu lembro que sempre que conhecia uma menina, eu não deixava passar demais porque eu gostava de você. Isso lá na época que tinha 17 anos, mais ou menos, e você 14.</p>
+                    <p>Eu não lembro exatamente quando eu comecei a gostar de você, se foi exatamente nessa época ou se foi quando eu era mais novo ainda. Mas enfim, estava na minha mente: "quando ela fizer 18 anos, eu converso com ela". Eu era fissurado que você, a minha melhor amiga, fosse a minha esposa. E você era quem eu queria me casar. Eu gostava muito, muito de você, tanto que eu esperei anos até você fazer 18 anos.</p>
+                    <p>Mas eu, como a pessoa mais imatura da face da terra, em fevereiro de 2020, combinei de sair com a Mari no carrinho pra conversar com ela sobre isso, porque tu ia fazer 18 dali a 9 meses e eu queria me preparar melhor pra esse evento KKK.</p>
+                    <p>Mas a Mari foi, conversou com você e voltou e me deu um banho de água fria, que eu ia estragar a amizade e afins. Então, com medo disso acontecer, eu simplesmente deixei esse meu sonho de lado por não querer me afastar de você.</p>
+                    <p>E as coisas foram acontecendo (namorei, terminei - detalhe: traumatizado). Dei um tempo pra mim de alguns meses pra me recuperar e teve um dia que me senti pronto para outro relacionamento. E não vou mentir, pensava em você, mas a trava que minha ex instalou ainda estava forte, que com o tempo foi ficando mais fraca, e mais fraca.</p>
+                    <p>Tivemos o caso de você vir me procurar num momento inoportuno. E tudo isso, tudo isso, tanta história para no final a gente ter um final de semana só nosso no Rio de Janeiro e termos muito tempo para se reaproximar e reconectar. E horas e horas conversando no ônibus, e isso foi bom demais, deu para colocarmos em jogo isso, darmos uma chance ao nosso “gostava de você naquela época”.</p>
+                    <p>Darmos uma chance ao sonho que tinha de namorar minha melhor amiga. Hoje eu vejo isso muito mais claro, percebo que também vacilei com você ao não ter tomado uma atitude antes. Já era pra gente estar casados há muito tempo, com 5 filhos (brincadeira kkkk), mas era para estarmos vivendo nossas vidas juntos há muito tempo. Me desculpa por demorar tanto para isso, a vida brincou demais com a gente.</p>
+                    <p>Mas chegou a hora de revivermos isso, de darmos início à nossa história de amor.</p>
+                    <p>Óbvio que não irei te pedir em namoro digitalmente, sou incapaz disso. Mas posso reafirmar meu amor por você aqui. Que daqui em diante, se você me permitir, você será a minha menina, quem eu irei cuidar e apoiar eternamente.</p>
+                    <p>Quando a gente estava conversando no ônibus, eu não consigo descrever o sorriso que você deu depois que a gente conversou. Foi tão lindo, me quebrou na hora. E eu quero ver esse sorriso sempre, quero te fazer feliz e estar nos momentos bons e ruins da sua vida, como sempre estive. Só que agora não como seu melhor amigo, mas como namorado, noivo e futuro esposo.</p>
+                    <p>Estava olhando a galeria de fotos, a gente tem tanta, mas tanta história juntos. Crescemos juntos. Foi muito legal criar esse mini Spotify de história para você, relembrei tanta coisa que passamos juntos, o quanto foi bom estar ao seu lado todos esses anos.</p>
+                    <p>E espero que, a partir desse ano, a gente não adie mais, que possamos ser mais felizes ainda juntos. Que a nossa história nunca tenha um final feliz, porque nossa história nunca vai ter fim!</p>
                 </div>
             </div>
 
@@ -362,17 +365,20 @@
             ];
             
             // --- PLAYLIST DE MÚSICAS ---
+            // IMPORTANTE: Cole seus links diretos do Dropbox aqui.
+            // Para obter o link direto, compartilhe o arquivo no Dropbox, copie o link
+            // e troque o final "?dl=0" por "?raw=1".
             const musicPlaylist = [
-                { url: 'https://storage.googleapis.com/spec-host-backup/mio-design%2Fassets%2F1S04mxhs0v_21-sound.mp3', title: 'Nossa Primeira Música', artist: 'Seu Nome & Nome Dela' },
-                { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', title: 'Música da Viagem', artist: 'Seu Nome & Nome Dela' },
-                { url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', title: 'Aquela Canção', artist: 'Seu Nome & Nome Dela' },
-                { url: 'COLE_URL_AQUI_4', title: 'Nome da Música 4', artist: 'Artista 4' },
-                { url: 'COLE_URL_AQUI_5', title: 'Nome da Música 5', artist: 'Artista 5' },
-                { url: 'COLE_URL_AQUI_6', title: 'Nome da Música 6', artist: 'Artista 6' },
-                { url: 'COLE_URL_AQUI_7', title: 'Nome da Música 7', artist: 'Artista 7' },
-                { url: 'COLE_URL_AQUI_8', title: 'Nome da Música 8', artist: 'Artista 8' },
-                { url: 'COLE_URL_AQUI_9', title: 'Nome da Música 9', artist: 'Artista 9' },
-                { url: 'COLE_URL_AQUI_10', title: 'Nome da Música 10', artist: 'Artista 10' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/yb8hj0ahfz7myyqd8dnp9/Indians-Oblivion.mp3?rlkey=1o7owturcr6o28h0zp4z35cok&st=9q3lbzex&dl', title: 'Nossa Musica', artist: 'Gui & Ju' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/8o8s2sypttxe8mf61mos0/Jorge-e-Mateus-Pra-que-Entender.mp3?rlkey=bnybyh5k6ga8zzcpta4jfugtq&st=fjzahl14&dl', title: 'Nossos Momentos', artist: 'Gui & Ju' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=sl0n10al&dl', title: 'Para Sempre', artist: 'Gui & Ju' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=sl0n10al&dl', title: 'Para Sempre', artist: 'Gui & Ju' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=sl0n10al&dl', title: 'Para Sempre', artist: 'Gui & Ju' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=sl0n10al&dl', title: 'Para Sempre', artist: 'Gui & Ju' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=sl0n10al&dl', title: 'Para Sempre', artist: 'Gui & Ju' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=sl0n10al&dl', title: 'Para Sempre', artist: 'Gui & Ju' },
+                // Adicione mais músicas aqui, seguindo o mesmo padrão.
+                // Ex: { url: 'SEU_LINK_DROPBOX?raw=1', title: 'Nome da Música', artist: 'Artista' },
             ];
 
             let currentTrackIndex = 0;
@@ -399,12 +405,30 @@
             const lyricsTotalTime = document.getElementById('lyrics-total-time');
             const playIconSvg = `<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>`;
             const pauseIconSvg = `<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1zm4 0a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>`;
-            
+            const notification = document.getElementById('notification');
+            const notificationSongName = document.getElementById('notification-song-name');
+            let notificationTimeout;
+
+            function showNotification(songName) {
+                if (notificationTimeout) {
+                    clearTimeout(notificationTimeout);
+                }
+                notificationSongName.textContent = songName;
+                notification.classList.remove('opacity-0', '-translate-y-10'); // Anima para dentro
+
+                notificationTimeout = setTimeout(() => {
+                    notification.classList.add('opacity-0', '-translate-y-10'); // Anima para fora
+                }, 3000); // A notificação some após 3 segundos
+            }
+
             function loadTrack(trackIndex, direction = 'none') {
                 const track = musicPlaylist[trackIndex];
+
+                // Usa o título e artista definidos na playlist para a interface
                 songTitleElement.textContent = track.title;
                 songArtistElement.textContent = track.artist;
                 lyricsSongTitleElement.textContent = track.title;
+
                 const newImageSrcJpg = `nossafoto${trackIndex + 1}.jpg`;
                 const newImg = document.createElement('img');
                 newImg.src = newImageSrcJpg;
@@ -442,6 +466,15 @@
                 mainPlayBtn.innerHTML = pauseIconSvg;
                 mainPlayBtn.classList.remove('pulse-play');
                 lyricsPlayBtn.innerHTML = pauseIconSvg;
+
+                // Extrai o nome do arquivo da URL APENAS para a notificação
+                const currentTrack = musicPlaylist[currentTrackIndex];
+                const url = currentTrack.url;
+                const fileNameWithQuery = url.substring(url.lastIndexOf('/') + 1);
+                const fileName = fileNameWithQuery.split('?')[0];
+                const decodedFileName = decodeURIComponent(fileName);
+
+                showNotification(decodedFileName);
             }
 
             function pauseMusic() {
