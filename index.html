@@ -568,7 +568,7 @@
                 if (touchStartX - touchEndX > swipeThreshold) {
                     // Swipe para a esquerda (próxima música)
                     playNext();
-                } else if (touchEndX - touchStartX > swipeThreshold) {
+                } else if (touchEndX - startX > swipeThreshold) {
                     // Swipe para a direita (música anterior)
                     playPrevious();
                 }
@@ -671,17 +671,35 @@
 
             function nextStoryImage() {
                 const story = storiesData[currentStoryIndex];
+                // Se houver mais imagens na história atual, avança para a próxima
                 if (currentStoryImageSubIndex < story.imageCount - 1) {
                     currentStoryImageSubIndex++;
                     loadStoryImage();
-                } else {
-                    closeStory(); 
+                } 
+                // Se for a última imagem, verifica se há uma próxima história
+                else if (currentStoryIndex < storiesData.length - 1) {
+                    currentStoryIndex++;
+                    openStory(currentStoryIndex); // Abre o próximo conjunto de histórias
+                } 
+                // Se for a última imagem da última história, fecha o modal
+                else {
+                    closeStory();
                 }
             }
 
             function prevStoryImage() {
+                // Se não for a primeira imagem da história atual, volta uma imagem
                 if (currentStoryImageSubIndex > 0) {
                     currentStoryImageSubIndex--;
+                    loadStoryImage();
+                } 
+                // Se for a primeira imagem, mas não a primeira história, volta para a história anterior
+                else if (currentStoryIndex > 0) {
+                    currentStoryIndex--;
+                    openStory(currentStoryIndex); // Abre o conjunto de histórias anterior
+                } 
+                // Se for a primeira imagem da primeira história, apenas reinicia o timer dela
+                else {
                     loadStoryImage();
                 }
             }
