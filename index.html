@@ -34,16 +34,6 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #7a7a7a;
         }
-
-        /* Animação da barra de progresso do Story */
-        .story-progress-bar-segment {
-            animation: progressBar 5s linear forwards;
-        }
-
-        @keyframes progressBar {
-            from { width: 0%; }
-            to { width: 100%; }
-        }
         
         /* Transição suave entre as páginas */
         .page {
@@ -249,10 +239,7 @@
 
     <!-- MODAL DO STORY (inicialmente oculto) -->
     <div id="story-modal" class="fixed inset-0 bg-black bg-opacity-95 flex-col p-4 z-50 hidden">
-        <div id="story-progress-container" class="w-full flex space-x-1 h-1 mb-2">
-            <!-- As barras de progresso serão geradas aqui -->
-        </div>
-        <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center justify-between mb-4 pt-4">
             <div class="flex items-center space-x-2">
                  <img id="story-modal-avatar" src="" class="w-8 h-8 rounded-full object-cover" onerror="handleImageError(this)">
                  <span id="story-modal-title" class="font-semibold text-sm"></span>
@@ -349,7 +336,7 @@
 
             // --- CONFIGURAÇÃO DOS DADOS ---
             const storiesData = [
-                { title: 'O Início', text: 'Eramos crianças, nem sequer imaginavamos que estavamos crescendo que um dia ficariamos juntos', imageCount: 4 },
+                { title: 'O Início', text: 'Nem sequer imaginavamos que nossa historia estava apenas começando ', imageCount: 4 },
                 { title: 'Pregação', text: 'Sempre servindo a jeová juntos', imageCount: 6 },
                 { title: 'Cinemas', text: 'Maratonando de velozes a vingadores no cinema, e o melhor lilolilo', imageCount: 10 },
                 { title: 'Pais', text: 'Um dia como pais da Sarah', imageCount: 4 },
@@ -615,7 +602,6 @@
                 storiesContainer.appendChild(storyElement);
             });
             
-            const storyProgressContainer = document.getElementById('story-progress-container');
             const storyModalAvatar = document.getElementById('story-modal-avatar');
             const storyModalTitle = document.getElementById('story-modal-title');
             const storyModalImage = document.getElementById('story-modal-image');
@@ -630,27 +616,16 @@
                 storyModal.classList.remove('hidden');
                 storyModal.classList.add('flex');
                 
-                // Prepara a visualização do story antes de carregar a primeira imagem
                 updateStoryView();
             }
             
             function updateStoryView() {
                 const story = storiesData[currentStoryIndex];
                 
-                storyProgressContainer.innerHTML = '';
-                for (let i = 0; i < story.imageCount; i++) {
-                    const barSegment = document.createElement('div');
-                    barSegment.className = 'bg-gray-600 rounded-full h-full flex-1';
-                    barSegment.innerHTML = `<div class="bg-white h-full rounded-full" style="width: ${i < currentStoryImageSubIndex ? '100%' : '0%'};"></div>`;
-                    storyProgressContainer.appendChild(barSegment);
-                }
-
                 storyModalTitle.innerText = story.title;
                 storyModalText.innerText = story.text;
                 storyModalAvatar.src = `${(currentStoryIndex + 1) * 10}.jpg`;
                 
-                // Use a short timeout to ensure the DOM is fully rendered and visible before starting animations.
-                // This fixes the issue where the first progress bar wouldn't animate when opening the story modal.
                 setTimeout(() => {
                     loadStoryImage();
                 }, 50);
@@ -661,15 +636,6 @@
 
                 const imageNumber = (currentStoryIndex + 1) * 10 + currentStoryImageSubIndex;
                 storyModalImage.src = `${imageNumber}.jpg`;
-
-                const progressBars = storyProgressContainer.querySelectorAll('div > div');
-                const currentProgressBar = progressBars[currentStoryImageSubIndex];
-
-                if (currentProgressBar) {
-                    currentProgressBar.classList.remove('story-progress-bar-segment');
-                    void currentProgressBar.offsetWidth; // Força reflow
-                    currentProgressBar.classList.add('story-progress-bar-segment');
-                }
 
                 storyTimer = setTimeout(nextStoryImage, 5000);
             }
@@ -698,7 +664,6 @@
                     currentStoryImageSubIndex = prevStory.imageCount - 1;
                     updateStoryView();
                 } else {
-                    // Reinicia a primeira imagem da primeira história
                      updateStoryView();
                 }
             }
