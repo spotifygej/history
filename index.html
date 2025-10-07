@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nossa Trilha Sonora</title>
+    <title>Nossa Musica</title>
     <!-- Favicon (ícone da aba) -->
     <link id="favicon" rel="icon" href="#">
     <!-- Tailwind CSS para estilização rápida e responsiva -->
@@ -260,7 +260,7 @@
             <button id="close-story-btn" class="text-white text-2xl">&times;</button>
         </div>
         <div class="relative flex-grow w-full h-full rounded-lg overflow-hidden">
-            <img id="story-modal-image" src="" class="absolute top-0 left-0 w-full h-full object-cover" onerror="handleImageError(this)">
+            <img id="story-modal-image" src="" class="absolute top-0 left-0 w-full h-full object-contain" onerror="handleImageError(this)">
             <!-- Camadas de navegação -->
             <div id="story-prev-zone" class="absolute left-0 top-0 h-full w-1/3"></div>
             <div id="story-next-zone" class="absolute right-0 top-0 h-full w-1/3"></div>
@@ -624,13 +624,6 @@
             const storyNextZone = document.getElementById('story-next-zone');
 
             function openStory(storyIndex) {
-                if (!audio.paused) {
-                    pauseMusic();
-                    storyModal.dataset.wasPlaying = "true";
-                } else {
-                    storyModal.dataset.wasPlaying = "false";
-                }
-
                 currentStoryIndex = storyIndex;
                 currentStoryImageSubIndex = 0;
                 const story = storiesData[storyIndex];
@@ -716,10 +709,6 @@
                 if (storyTimer) clearTimeout(storyTimer);
                 storyModal.classList.add('hidden');
                 storyModal.classList.remove('flex');
-                 if (storyModal.dataset.wasPlaying === "true") {
-                    // Adiciona um pequeno delay para a transição de fechamento não ser interrompida pelo play
-                    setTimeout(() => playMusic(), 300);
-                }
             }
 
             closeStoryBtn.addEventListener('click', closeStory);
