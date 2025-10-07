@@ -626,82 +626,79 @@
             function openStory(storyIndex) {
                 currentStoryIndex = storyIndex;
                 currentStoryImageSubIndex = 0;
-                const story = storiesData[storyIndex];
-
+                
+                storyModal.classList.remove('hidden');
+                storyModal.classList.add('flex');
+                
+                // Prepara a visualização do story antes de carregar a primeira imagem
+                updateStoryView();
+            }
+            
+            function updateStoryView() {
+                const story = storiesData[currentStoryIndex];
+                
                 storyProgressContainer.innerHTML = '';
                 for (let i = 0; i < story.imageCount; i++) {
                     const barSegment = document.createElement('div');
                     barSegment.className = 'bg-gray-600 rounded-full h-full flex-1';
-                    barSegment.innerHTML = `<div class="bg-white h-full rounded-full" style="width: 0%;"></div>`;
+                    barSegment.innerHTML = `<div class="bg-white h-full rounded-full" style="width: ${i < currentStoryImageSubIndex ? '100%' : '0%'};"></div>`;
                     storyProgressContainer.appendChild(barSegment);
                 }
 
                 storyModalTitle.innerText = story.title;
                 storyModalText.innerText = story.text;
-                storyModalAvatar.src = `${(storyIndex + 1) * 10}.jpg`;
+                storyModalAvatar.src = `${(currentStoryIndex + 1) * 10}.jpg`;
                 
-                storyModal.classList.remove('hidden');
-                storyModal.classList.add('flex');
-
-                // Adiciona um pequeno delay para garantir que o modal seja renderizado antes de iniciar a animação
-                setTimeout(() => loadStoryImage(), 50);
+                // Garante que o navegador está pronto para a animação
+                requestAnimationFrame(() => {
+                    loadStoryImage();
+                });
             }
 
             function loadStoryImage() {
                 if (storyTimer) clearTimeout(storyTimer);
 
-                const progressBars = storyProgressContainer.querySelectorAll('div > div');
-                progressBars.forEach((bar, index) => {
-                    bar.classList.remove('story-progress-bar-segment');
-                    if (index < currentStoryImageSubIndex) {
-                        bar.style.width = '100%';
-                    } else if (index === currentStoryImageSubIndex) {
-                        bar.style.width = '0%';
-                        void bar.offsetWidth; 
-                        bar.classList.add('story-progress-bar-segment');
-                    } else {
-                        bar.style.width = '0%';
-                    }
-                });
-
                 const imageNumber = (currentStoryIndex + 1) * 10 + currentStoryImageSubIndex;
                 storyModalImage.src = `${imageNumber}.jpg`;
+
+                const progressBars = storyProgressContainer.querySelectorAll('div > div');
+                const currentProgressBar = progressBars[currentStoryImageSubIndex];
+
+                if (currentProgressBar) {
+                    currentProgressBar.classList.remove('story-progress-bar-segment');
+                    void currentProgressBar.offsetWidth; // Força reflow
+                    currentProgressBar.classList.add('story-progress-bar-segment');
+                }
 
                 storyTimer = setTimeout(nextStoryImage, 5000);
             }
 
             function nextStoryImage() {
                 const story = storiesData[currentStoryIndex];
-                // Se houver mais imagens na história atual, avança para a próxima
                 if (currentStoryImageSubIndex < story.imageCount - 1) {
                     currentStoryImageSubIndex++;
                     loadStoryImage();
-                } 
-                // Se for a última imagem, verifica se há uma próxima história
-                else if (currentStoryIndex < storiesData.length - 1) {
+                } else if (currentStoryIndex < storiesData.length - 1) {
                     currentStoryIndex++;
-                    openStory(currentStoryIndex); // Abre o próximo conjunto de histórias
-                } 
-                // Se for a última imagem da última história, fecha o modal
-                else {
+                    currentStoryImageSubIndex = 0;
+                    updateStoryView();
+                } else {
                     closeStory();
                 }
             }
 
             function prevStoryImage() {
-                // Se não for a primeira imagem da história atual, volta uma imagem
                 if (currentStoryImageSubIndex > 0) {
                     currentStoryImageSubIndex--;
-                    loadStoryImage();
-                } 
-                // Se for a primeira imagem, mas não a primeira história, volta para a história anterior
-                else if (currentStoryIndex > 0) {
+                    updateStoryView();
+                } else if (currentStoryIndex > 0) {
                     currentStoryIndex--;
-                    openStory(currentStoryIndex); // Abre o conjunto de histórias anterior
-                } 
-                // Se for a primeira imagem da primeira história, apenas reinicia o timer dela
-                else {
-                    loadStoryImage();
+                    const prevStory = storiesData[currentStoryIndex];
+                    currentStoryImageSubIndex = prevStory.imageCount - 1;
+                    updateStoryView();
+                } else {
+                    // Reinicia a primeira imagem da primeira história
+                     updateStoryView();
                 }
             }
 
