@@ -369,14 +369,9 @@
             // Para obter o link direto, compartilhe o arquivo no Dropbox, copie o link
             // e troque o final "?dl=0" por "?raw=1".
             const musicPlaylist = [
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/yb8hj0ahfz7myyqd8dnp9/Indians-Oblivion.mp3?rlkey=1o7owturcr6o28h0zp4z35cok&st=9q3lbzex&dl', title: 'Nossa Musica', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/8o8s2sypttxe8mf61mos0/Jorge-e-Mateus-Pra-que-Entender.mp3?rlkey=bnybyh5k6ga8zzcpta4jfugtq&st=fjzahl14&dl', title: 'Nossos Momentos', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=sl0n10al&dl', title: 'Para Sempre', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=sl0n10al&dl', title: 'Para Sempre', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=sl0n10al&dl', title: 'Para Sempre', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=sl0n10al&dl', title: 'Para Sempre', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=sl0n10al&dl', title: 'Para Sempre', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=sl0n10al&dl', title: 'Para Sempre', artist: 'Gui & Ju' },
+                { url: 'https://www.dropbox.com/scl/fi/g18m3xxwkrg982kna8c1t/Nossa%20Trilha%20Sonora.mp3?rlkey=abcdefgh&raw=1', title: 'Nossa Trilha Sonora', artist: 'Gui & Ju' },
+                { url: 'https://www.dropbox.com/scl/fi/vakywjw1n8k8j7d1s5e4c/Nossos%20Momentos.mp3?rlkey=hijklmno&raw=1', title: 'Nossos Momentos', artist: 'Gui & Ju' },
+                { url: 'https://www.dropbox.com/scl/fi/pqrstuvwxyz/Para%20Sempre.mp3?rlkey=pqrstuvw&raw=1', title: 'Para Sempre', artist: 'Gui & Ju' },
                 // Adicione mais músicas aqui, seguindo o mesmo padrão.
                 // Ex: { url: 'SEU_LINK_DROPBOX?raw=1', title: 'Nome da Música', artist: 'Artista' },
             ];
@@ -547,6 +542,30 @@
 
             loadTrack(currentTrackIndex);
             pauseMusic();
+            
+            // --- Lógica de Swipe na Capa do Álbum ---
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            albumArtContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            albumArtContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleAlbumSwipe();
+            }, { passive: true });
+
+            function handleAlbumSwipe() {
+                const swipeThreshold = 50; // Mínimo de pixels para considerar um swipe
+                if (touchStartX - touchEndX > swipeThreshold) {
+                    // Swipe para a esquerda (próxima música)
+                    playNext();
+                } else if (touchEndX - touchStartX > swipeThreshold) {
+                    // Swipe para a direita (música anterior)
+                    playPrevious();
+                }
+            }
 
             const mainPage = document.getElementById('main-page');
             const lyricsPage = document.getElementById('lyrics-page');
