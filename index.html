@@ -649,10 +649,11 @@
                 storyModalText.innerText = story.text;
                 storyModalAvatar.src = `${(currentStoryIndex + 1) * 10}.jpg`;
                 
-                // Garante que o navegador está pronto para a animação
-                requestAnimationFrame(() => {
+                // Use a short timeout to ensure the DOM is fully rendered and visible before starting animations.
+                // This fixes the issue where the first progress bar wouldn't animate when opening the story modal.
+                setTimeout(() => {
                     loadStoryImage();
-                });
+                }, 50);
             }
 
             function loadStoryImage() {
