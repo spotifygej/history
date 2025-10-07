@@ -568,7 +568,7 @@
                 if (touchStartX - touchEndX > swipeThreshold) {
                     // Swipe para a esquerda (próxima música)
                     playNext();
-                } else if (touchEndX - startX > swipeThreshold) {
+                } else if (touchEndX - touchStartX > swipeThreshold) {
                     // Swipe para a direita (música anterior)
                     playPrevious();
                 }
@@ -624,6 +624,13 @@
             const storyNextZone = document.getElementById('story-next-zone');
 
             function openStory(storyIndex) {
+                if (!audio.paused) {
+                    pauseMusic();
+                    storyModal.dataset.wasPlaying = "true";
+                } else {
+                    storyModal.dataset.wasPlaying = "false";
+                }
+
                 currentStoryIndex = storyIndex;
                 currentStoryImageSubIndex = 0;
                 const story = storiesData[storyIndex];
@@ -643,7 +650,8 @@
                 storyModal.classList.remove('hidden');
                 storyModal.classList.add('flex');
 
-                loadStoryImage();
+                // Adiciona um pequeno delay para garantir que o modal seja renderizado antes de iniciar a animação
+                setTimeout(() => loadStoryImage(), 50);
             }
 
             function loadStoryImage() {
@@ -708,6 +716,10 @@
                 if (storyTimer) clearTimeout(storyTimer);
                 storyModal.classList.add('hidden');
                 storyModal.classList.remove('flex');
+                 if (storyModal.dataset.wasPlaying === "true") {
+                    // Adiciona um pequeno delay para a transição de fechamento não ser interrompida pelo play
+                    setTimeout(() => playMusic(), 300);
+                }
             }
 
             closeStoryBtn.addEventListener('click', closeStory);
@@ -878,3 +890,4 @@
     </script>
 </body>
 </html>
+
