@@ -169,7 +169,7 @@
                         <!-- CARD "LETRA" -->
                         <div id="lyrics-card" class="bg-[#191414] rounded-lg p-6 cursor-pointer mb-8 flex flex-col items-start">
                             <h2 class="text-xl font-bold mb-2">Nossa Letra</h2>
-                            <p class="text-gray-300 text-sm mb-4 line-clamp-4">Sabe de uma coisa? Você sempre foi a minha primeira opção, a minha paixão de anos e anos...</p>
+                            <p class="text-gray-300 text-sm mb-4">Sabe de uma coisa? Você sempre foi a minha primeira opção, a minha paixão de anos e anos. Eu lembro que sempre que começava a conhecer uma menina, eu não deixava passar demais porque eu era apaixonado por você...</p>
                             <button class="bg-white text-black text-sm font-bold py-2 px-4 rounded-full hover:scale-105 transition-transform">
                                 Mostrar Letra
                             </button>
@@ -377,6 +377,7 @@
 
             passwordForm.addEventListener('submit', function(event) {
                 event.preventDefault();
+                passwordInput.blur(); // Remove o foco do campo de senha
                 if (passwordInput.value.toLowerCase() === correctPassword) {
                     // Animação de fade out para a página de senha
                     passwordPage.classList.add('transition-opacity', 'duration-500', 'opacity-0');
@@ -920,4 +921,3 @@
     </script>
 </body>
 </html>
-
