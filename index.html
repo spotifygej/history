@@ -60,6 +60,16 @@
         .active-icon {
             color: #1DB954; /* Verde Spotify */
         }
+        
+        /* Animação para senha incorreta */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+        .animate-shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
 
     </style>
     <script>
@@ -75,246 +85,263 @@
     </script>
 </head>
 <body class="bg-black text-white overflow-hidden">
-    <!-- NOTIFICAÇÃO DE MÚSICA -->
-    <div id="notification" class="fixed top-10 left-1/2 -translate-x-1/2 bg-[#1DB954] text-white px-6 py-3 rounded-full shadow-lg text-sm font-semibold z-[100] opacity-0 transition-all duration-500 ease-in-out pointer-events-none transform -translate-y-10">
-        Tocando: <span id="notification-song-name"></span>
+    <!-- PÁGINA DE SENHA -->
+    <div id="password-page" class="fixed inset-0 bg-[#121212] flex flex-col items-center justify-center z-[200]">
+        <div class="text-center p-4">
+            <h1 class="text-3xl font-bold mb-2 text-white">Nossa Música</h1>
+            <p class="text-gray-400 mb-8">Por favor, insira a senha para continuar.</p>
+            <form id="password-form" class="flex flex-col items-center">
+                <input type="password" id="password-input" class="bg-[#282828] border-2 border-transparent focus:border-[#1DB954] text-white text-center text-sm rounded-lg focus:ring-0 block w-64 p-2.5 mb-4 transition-all duration-300" placeholder="********" required>
+                <button type="submit" class="bg-[#1DB954] hover:bg-green-600 text-white font-bold py-2 px-8 rounded-full transition-transform hover:scale-105">
+                    Entrar
+                </button>
+                <p id="error-message" class="text-red-500 text-sm mt-4 hidden">Senha incorreta. Tente novamente.</p>
+            </form>
+        </div>
     </div>
+    
+    <!-- Conteúdo principal da aplicação (inicialmente oculto) -->
+    <div id="app-container" class="hidden">
+        <!-- NOTIFICAÇÃO DE MÚSICA -->
+        <div id="notification" class="fixed top-10 left-1/2 -translate-x-1/2 bg-[#1DB954] text-white px-6 py-3 rounded-full shadow-lg text-sm font-semibold z-[100] opacity-0 transition-all duration-500 ease-in-out pointer-events-none transform -translate-y-10">
+            Tocando: <span id="notification-song-name"></span>
+        </div>
 
-    <!-- Player de áudio invisível -->
-    <audio id="audio-player" crossorigin="anonymous"></audio>
+        <!-- Player de áudio invisível -->
+        <audio id="audio-player" crossorigin="anonymous"></audio>
 
-    <!-- Container principal que segura as duas "páginas" -->
-    <div class="relative h-screen w-full">
+        <!-- Container principal que segura as duas "páginas" -->
+        <div class="relative h-screen w-full">
 
-        <!-- PÁGINA PRINCIPAL (com rolagem) -->
-        <div id="main-page" class="absolute inset-0 page bg-[#121212] overflow-y-auto">
-            <div class="container mx-auto max-w-lg min-h-full flex flex-col px-4 pt-10 pb-4">
-                <!-- CABEÇALHO -->
-                <header class="flex justify-between items-center mb-6 flex-shrink-0">
-                    <div class="w-6 h-6"></div>
-                    <span class="text-sm font-bold">Tocando Agora</span>
-                    <div class="relative">
-                        <button id="menu-btn" class="focus:outline-none">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
-                        </button>
-                        <div id="header-menu" class="hidden absolute right-0 mt-2 w-48 bg-[#282828] rounded-md shadow-lg z-50">
-                            <a href="https://wa.me/5515981072147" target="_blank" class="flex items-center space-x-3 px-4 py-3 text-sm text-white hover:bg-[#3e3e3e] rounded-md">
-                                <!-- WhatsApp Icon SVG -->
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.487 5.235 3.487 8.413 0 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 4.315 1.731 6.086l.001.004l.351.568l-1.251 4.605l4.672-1.225l.531.315z"></path></svg>
-                                <span>Enviar no WhatsApp</span>
-                            </a>
+            <!-- PÁGINA PRINCIPAL (com rolagem) -->
+            <div id="main-page" class="absolute inset-0 page bg-[#121212] overflow-y-auto">
+                <div class="container mx-auto max-w-lg min-h-full flex flex-col px-4 pt-10 pb-4">
+                    <!-- CABEÇALHO -->
+                    <header class="flex justify-between items-center mb-6 flex-shrink-0">
+                        <div class="w-6 h-6"></div>
+                        <span class="text-sm font-bold">Tocando Agora</span>
+                        <div class="relative">
+                            <button id="menu-btn" class="focus:outline-none">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
+                            </button>
+                            <div id="header-menu" class="hidden absolute right-0 mt-2 w-48 bg-[#282828] rounded-md shadow-lg z-50">
+                                <a href="https://wa.me/5515981072147" target="_blank" class="flex items-center space-x-3 px-4 py-3 text-sm text-white hover:bg-[#3e3e3e] rounded-md">
+                                    <!-- WhatsApp Icon SVG -->
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.487 5.235 3.487 8.413 0 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 4.315 1.731 6.086l.001.004l.351.568l-1.251 4.605l4.672-1.225l.531.315z"></path></svg>
+                                    <span>Enviar no WhatsApp</span>
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    </header>
+
+                    <main class="flex-grow">
+                        <!-- CAPA DA MÚSICA -->
+                        <div class="mb-6">
+                            <div id="album-art-container" class="relative w-full rounded-lg shadow-2xl aspect-square overflow-hidden">
+                                <!-- Imagens serão inseridas aqui via JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- TÍTULO E ARTISTA -->
+                        <div class="flex justify-between items-center mb-4">
+                            <div>
+                                <h1 id="song-title" class="text-2xl font-bold"></h1>
+                                <p id="song-artist" class="text-gray-400"></p>
+                            </div>
+                            <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        </div>
+
+                        <!-- CONTROLES DE MÚSICA -->
+                        <div class="mb-8">
+                            <div id="main-progress-bar" class="bg-gray-700 rounded-full h-1 w-full mb-1 cursor-pointer"><div id="main-progress" class="bg-white rounded-full h-1" style="width: 0%;"></div></div>
+                            <div class="flex justify-between text-xs text-gray-400"><span id="main-current-time">0:00</span><span id="main-total-time">0:00</span></div>
+                            <div class="flex justify-center items-center space-x-8 mt-4 px-4">
+                                <button id="main-prev-btn">
+                                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.445 14.832A1 1 0 0010 14.006V5.994a1 1 0 00-1.555-.832L2.4 9.168a1 1 0 000 1.664l6.045 4.001zM11 5h2v10h-2V5z" clip-rule="evenodd"></path></svg>
+                                </button>
+                                <button id="main-play-btn" class="w-12 h-12 text-white rounded-full"></button>
+                                <button id="main-next-btn">
+                                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.555 5.168A1 1 0 0010 5.994v8.012a1 1 0 001.555.832l6.045-4.001a1 1 0 000-1.664l-6.045-4.001zM9 5H7v10h2V5z" clip-rule="evenodd"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- CARD "LETRA" -->
+                        <div id="lyrics-card" class="bg-[#191414] rounded-lg p-6 cursor-pointer mb-8 flex flex-col items-start">
+                            <h2 class="text-xl font-bold mb-2">Nossa Letra</h2>
+                            <p class="text-gray-300 text-sm mb-4 line-clamp-4">Sabe de uma coisa? Você sempre foi a minha primeira opção, a minha paixão de anos e anos...</p>
+                            <button class="bg-white text-black text-sm font-bold py-2 px-4 rounded-full hover:scale-105 transition-transform">
+                                Mostrar Letra
+                            </button>
+                        </div>
+
+                        <!-- SEÇÃO DE STORIES -->
+                        <div class="mb-8">
+                             <h2 class="text-xl font-bold mb-4">Momentos Especiais</h2>
+                             <div id="stories-container" class="flex space-x-4 overflow-x-auto pb-4"></div>
+                        </div>
+
+                         <!-- SEÇÃO RETROSPECTIVA -->
+                        <div class="mb-8">
+                             <h2 class="text-xl font-bold mb-4">Retrospectiva</h2>
+                             <div id="retrospective-card" class="bg-[#191414] rounded-lg p-4 flex items-center space-x-4 cursor-pointer hover:bg-[#282828] transition-colors">
+                                 <img src="https://placehold.co/100x100/1DB954/FFFFFF?text=2024" alt="Retrospectiva" class="w-24 h-24 rounded-lg object-cover flex-shrink-0">
+                                 <div>
+                                     <p class="text-gray-400 text-sm">Playlist</p>
+                                     <h3 class="text-lg font-bold">Nossa Retrospectiva 2024</h3>
+                                     <p class="text-gray-400 text-sm">Os momentos que marcaram nosso ano.</p>
+                                 </div>
+                             </div>
+                        </div>
+
+                        <!-- SEÇÃO EVENTOS -->
+                        <div class="mb-8">
+                             <h2 class="text-xl font-bold mb-4">Eventos</h2>
+                             <div id="events-container" class="flex space-x-4 overflow-x-auto pb-4"></div>
+                        </div>
+
+                        <!-- SEÇÃO ARTISTA -->
+                        <div class="mb-8">
+                             <h2 class="text-xl font-bold mb-4">Sobre o Artista</h2>
+                             <div class="bg-[#191414] rounded-lg p-4 flex items-center space-x-4">
+                                 <img src="minhafoto.jpg" alt="Foto do Artista" class="w-24 h-24 rounded-full object-cover flex-shrink-0" onerror="handleImageError(this)">
+                                 <div>
+                                     <h3 class="text-lg font-bold">Guilherme Almeida</h3>
+                                     <p class="text-gray-400 text-sm">Apenas um garoto apaixonado por musica que sempre dividiu playlist com sua melhor amiga, e que hoje quer dividir a sua vida com ela, Que Sorte a Dele!</p>
+                                 </div>
+                             </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+
+            <!-- PÁGINA DA LETRA (com layout fixo) -->
+            <div id="lyrics-page" class="absolute inset-0 page bg-[#B45309] hidden grid grid-rows-[auto_1fr_auto]">
+                <!-- Cabeçalho da página de letra -->
+                <header class="flex justify-between items-center p-4 z-10 pt-10">
+                    <button id="back-to-main-btn">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <span id="lyrics-song-title" class="text-sm font-bold text-white"></span>
+                    <div class="w-6 h-6"></div>
                 </header>
 
-                <main class="flex-grow">
-                    <!-- CAPA DA MÚSICA -->
-                    <div class="mb-6">
-                        <div id="album-art-container" class="relative w-full rounded-lg shadow-2xl aspect-square overflow-hidden">
-                            <!-- Imagens serão inseridas aqui via JavaScript -->
-                        </div>
+                <!-- Conteúdo da Letra (com rolagem) -->
+                <div id="lyrics-content" class="overflow-y-auto px-6 pt-8 pb-8">
+                    <div class="text-white text-xl font-bold space-y-4 text-center">
+                        <p>Sabe de uma coisa? Você sempre foi a minha primeira opção, a minha paixão de anos e anos. Eu lembro que sempre que começava a conhecer uma menina, eu não deixava passar demais porque eu era apaixonado por você. Isso na época que tinha 17 anos, mais ou menos, e você 14.</p>
+                        <p>Eu não lembro exatamente quando eu comecei a gostar de você, se foi exatamente nessa época ou se foi quando eu era mais novo ainda. Mas enfim, estava na minha mente: "quando ela fizer 18 anos, eu converso com ela". Eu era fissurado que você, a minha melhor amiga, fosse a minha esposa. Era com você que eu queria me casar. Eu gostava muito, muito de você, tanto que eu esperei anos até você fazer 18 anos.</p>
+                        <p>Mas eu, como a pessoa mais imatura da face da terra, em fevereiro de 2020, combinei de sair com a Mari no carrinho pra conversar com ela sobre isso, porque tu ia fazer 18 dali a 9 meses e eu queria me preparar melhor pra esse evento KKK.</p>
+                        <p>Mas a Mari foi, conversou com você e voltou e me deu um banho de água fria, que eu ia estragar a amizade e afins. Então, com medo disso acontecer, eu simplesmente deixei esse meu sonho de lado por não querer me afastar de você.</p>
+                        <p>E as coisas foram acontecendo (namorei, terminei - detalhe: traumatizado). Dei um tempo pra mim de alguns meses pra me recuperar e teve um dia que me senti pronto para outro relacionamento e, não vou mentir, pensava em você, mas ainda me sentia travado. Com o tempo, [essa trava] foi ficando mais fraca, e mais fraca. Tivemos o caso de você vir me procurar num momento inoportuno. E tudo isso, tudo isso, tanta história, todo esse vai e vem, para no final a gente ter um final de semana só nosso no Rio de Janeiro e termos muito tempo para se reaproximar e reconectar. Além de horas e horas conversando no ônibus, e isso foi bom demais. Deu para colocarmos em jogo isso, darmos uma chance ao nosso “gostava de você naquela época”.</p>
+                        <p>Darmos uma chance ao sonho que tinha de namorar minha melhor amiga. Hoje eu vejo isso muito mais claro, percebo que também vacilei com você ao não ter tomado uma atitude antes. Já era pra gente estar casados há muito tempo, com 5 filhos (brincadeira kkkk), mas era para estarmos vivendo nossas vidas juntos há muito tempo. Me desculpa por demorar tanto para isso, a vida brincou demais com a gente. Seria muito injusto com nós mesmos se ao menos não déssemos uma chance pra nós dois!</p>
+                        <p>Mas sinto que chegou o momento certo, que estamos mais maduros para lidar com tudo isso, preparados para reviver isso e darmos início à nossa história de amor.</p>
+                        <p>Óbvio que não irei te pedir em namoro digitalmente, sou incapaz disso. Mas posso reafirmar meu amor por você aqui. Que daqui em diante, se você me permitir, você será a minha menina, quem eu irei cuidar e apoiar eternamente.</p>
+                        <p>Quando a gente estava conversando no ônibus, eu não consigo descrever o sorriso que você deu depois que a gente conversou. Foi tão lindo, me quebrou na hora. E eu quero ver esse sorriso sempre. Quero te fazer feliz e estar nos momentos bons e ruins da sua vida, como sempre estive, só que agora não apenas como seu melhor amigo, mas como namorado, noivo e futuro esposo.</p>
+                        <p>Estava olhando a galeria de fotos, a gente tem tanta, mas tanta história juntos, praticamente crescemos juntos. Foi muito legal criar esse mini Spotify de história para você, relembrei tanta coisa que passamos juntos e o quanto foi bom estar ao seu lado todos esses anos. Incrível que com você nada é complicado.</p>
+                        <p>E espero que, a partir de hoje, a gente não adie mais, que possamos ser mais felizes ainda juntos. E que a nossa história nunca tenha um final feliz, porque nossa história é eterna, nunca vai ter fim.</p>
+                        <p>Porque eu amo você, minha menina. Eu sempre amei!</p>
                     </div>
+                </div>
 
-                    <!-- TÍTULO E ARTISTA -->
-                    <div class="flex justify-between items-center mb-4">
-                        <div>
-                            <h1 id="song-title" class="text-2xl font-bold"></h1>
-                            <p id="song-artist" class="text-gray-400"></p>
-                        </div>
-                        <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <!-- Mini Player Fixo -->
+                <footer class="p-4 bg-[#B45309]">
+                    <div id="lyrics-progress-bar" class="bg-white/30 rounded-full h-1 w-full mb-1 cursor-pointer"><div id="lyrics-progress" class="bg-white rounded-full h-1" style="width: 0%;"></div></div>
+                    <div class="flex justify-between text-xs text-white/80"><span id="lyrics-current-time">0:00</span><span id="lyrics-total-time">0:00</span></div>
+                    <div class="flex justify-center items-center space-x-8 mt-4">
+                         <button id="lyrics-prev-btn">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.445 14.832A1 1 0 0010 14.006V5.994a1 1 0 00-1.555-.832L2.4 9.168a1 1 0 000 1.664l6.045 4.001zM11 5h2v10h-2V5z" clip-rule="evenodd"></path></svg>
+                         </button>
+                         <button id="lyrics-play-btn" class="w-12 h-12 text-white"></button>
+                         <button id="lyrics-next-btn">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.555 5.168A1 1 0 0010 5.994v8.012a1 1 0 001.555.832l6.045-4.001a1 1 0 000-1.664l-6.045-4.001zM9 5H7v10h2V5z" clip-rule="evenodd"></path></svg>
+                         </button>
                     </div>
+                </footer>
+            </div>
 
-                    <!-- CONTROLES DE MÚSICA -->
-                    <div class="mb-8">
-                        <div id="main-progress-bar" class="bg-gray-700 rounded-full h-1 w-full mb-1 cursor-pointer"><div id="main-progress" class="bg-white rounded-full h-1" style="width: 0%;"></div></div>
-                        <div class="flex justify-between text-xs text-gray-400"><span id="main-current-time">0:00</span><span id="main-total-time">0:00</span></div>
-                        <div class="flex justify-center items-center space-x-8 mt-4 px-4">
-                            <button id="main-prev-btn">
-                                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.445 14.832A1 1 0 0010 14.006V5.994a1 1 0 00-1.555-.832L2.4 9.168a1 1 0 000 1.664l6.045 4.001zM11 5h2v10h-2V5z" clip-rule="evenodd"></path></svg>
-                            </button>
-                            <button id="main-play-btn" class="w-12 h-12 text-white rounded-full"></button>
-                            <button id="main-next-btn">
-                                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.555 5.168A1 1 0 0010 5.994v8.012a1 1 0 001.555.832l6.045-4.001a1 1 0 000-1.664l-6.045-4.001zM9 5H7v10h2V5z" clip-rule="evenodd"></path></svg>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- CARD "LETRA" -->
-                    <div id="lyrics-card" class="bg-[#191414] rounded-lg p-6 cursor-pointer mb-8 flex flex-col items-start">
-                        <h2 class="text-xl font-bold mb-2">Nossa Letra</h2>
-                        <p class="text-gray-300 text-sm mb-4 line-clamp-4">Você me disse no ônibus que você era a minha última opção. Mas, sabe de uma coisa? Você sempre foi a minha primeira opção, a minha paixão de anos e anos...</p>
-                        <button class="bg-white text-black text-sm font-bold py-2 px-4 rounded-full hover:scale-105 transition-transform">
-                            Mostrar Letra
-                        </button>
-                    </div>
+        </div>
 
-                    <!-- SEÇÃO DE STORIES -->
-                    <div class="mb-8">
-                         <h2 class="text-xl font-bold mb-4">Momentos Especiais</h2>
-                         <div id="stories-container" class="flex space-x-4 overflow-x-auto pb-4"></div>
-                    </div>
 
-                     <!-- SEÇÃO RETROSPECTIVA -->
-                    <div class="mb-8">
-                         <h2 class="text-xl font-bold mb-4">Retrospectiva</h2>
-                         <div id="retrospective-card" class="bg-[#191414] rounded-lg p-4 flex items-center space-x-4 cursor-pointer hover:bg-[#282828] transition-colors">
-                             <img src="https://placehold.co/100x100/1DB954/FFFFFF?text=2024" alt="Retrospectiva" class="w-24 h-24 rounded-lg object-cover flex-shrink-0">
-                             <div>
-                                 <p class="text-gray-400 text-sm">Playlist</p>
-                                 <h3 class="text-lg font-bold">Nossa Retrospectiva 2024</h3>
-                                 <p class="text-gray-400 text-sm">Os momentos que marcaram nosso ano.</p>
-                             </div>
-                         </div>
+        <!-- MODAL DO STORY (inicialmente oculto) -->
+        <div id="story-modal" class="fixed inset-0 bg-black bg-opacity-95 flex-col p-4 z-50 hidden">
+            <div class="flex items-center justify-between mb-4 pt-4">
+                <div class="flex items-center space-x-2">
+                     <img id="story-modal-avatar" src="" class="w-8 h-8 rounded-full object-cover" onerror="handleImageError(this)">
+                     <span id="story-modal-title" class="font-semibold text-sm"></span>
+                </div>
+                <button id="close-story-btn" class="text-white text-2xl">&times;</button>
+            </div>
+            <div class="relative flex-grow w-full h-full rounded-lg overflow-hidden">
+                <img id="story-modal-image" src="" class="absolute top-0 left-0 w-full h-full object-contain" onerror="handleImageError(this)">
+                <!-- Camadas de navegação -->
+                <div id="story-prev-zone" class="absolute left-0 top-0 h-full w-1/3"></div>
+                <div id="story-next-zone" class="absolute right-0 top-0 h-full w-1/3"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                     <p id="story-modal-text" class="text-white text-center text-lg"></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MODAL DO EVENTO PADRÃO (inicialmente oculto) -->
+        <div id="ticket-event-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden cursor-pointer">
+            <div class="bg-gradient-to-br from-amber-600 to-orange-700 rounded-2xl shadow-2xl w-full max-w-sm text-white p-6 relative cursor-default transform transition-transform duration-300 scale-95 opacity-0">
+                <div class="text-center mb-4">
+                    <h3 class="text-sm font-bold uppercase text-amber-200">Você ganhou um vale-presente!</h3>
+                    <h2 id="ticket-event-modal-title" class="text-3xl font-bold mt-1"></h2>
+                </div>
+                <div class="flex items-center justify-center my-8">
+                    <div class="w-24 h-24 bg-white/20 rounded-lg flex flex-col items-center justify-center shadow-inner">
+                        <div class="text-xs font-bold text-white uppercase">Data</div>
+                        <div id="calendar-animation" class="text-5xl font-bold">??</div>
+                        <div class="text-xs font-bold text-amber-200">EM BREVE</div>
                     </div>
-
-                    <!-- SEÇÃO EVENTOS -->
-                    <div class="mb-8">
-                         <h2 class="text-xl font-bold mb-4">Eventos</h2>
-                         <div id="events-container" class="flex space-x-4 overflow-x-auto pb-4"></div>
+                </div>
+                <div class="bg-white/80 rounded-lg p-3 text-center">
+                    <p id="ticket-main-text" class="font-bold text-xl text-amber-800"></p>
+                    <p id="ticket-sub-text" class="text-xs text-gray-600"></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MODAL DO EVENTO CINEMA (inicialmente oculto) -->
+        <div id="cinema-event-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden cursor-pointer">
+             <div class="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-2xl shadow-2xl w-full max-w-sm text-white p-6 relative cursor-default transform transition-transform duration-300 scale-95 opacity-0">
+                <div class="text-center mb-4">
+                    <h3 class="text-sm font-bold uppercase text-indigo-200">Um presente especial para nós!</h3>
+                    <h2 id="cinema-event-modal-title" class="text-3xl font-bold mt-1"></h2>
+                </div>
+                <div class="flex items-center justify-center space-x-4 my-8">
+                    <div class="w-24 h-24 bg-white/20 rounded-lg flex flex-col items-center justify-center shadow-inner">
+                         <div class="text-7xl font-bold text-white">∞</div>
                     </div>
-
-                    <!-- SEÇÃO ARTISTA -->
-                    <div class="mb-8">
-                         <h2 class="text-xl font-bold mb-4">Sobre o Artista</h2>
-                         <div class="bg-[#191414] rounded-lg p-4 flex items-center space-x-4">
-                             <img src="minhafoto.jpg" alt="Foto do Artista" class="w-24 h-24 rounded-full object-cover flex-shrink-0" onerror="handleImageError(this)">
-                             <div>
-                                 <h3 class="text-lg font-bold">Guilherme Almeida</h3>
-                                 <p class="text-gray-400 text-sm">Apenas um garoto apaixonado por musica que sempre dividiu playlist com sua melhor amiga, e que hoje quer dividir a sua vida com ela, Que Sorte a Dele!</p>
-                             </div>
-                         </div>
+                    <div class="text-center">
+                       <svg class="w-16 h-16 text-purple-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 3v2h-2V3H8v2H6V3H4v18h2v-2h2v2h8v-2h2v2h2V3h-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"></path></svg>
                     </div>
-                </main>
+                </div>
+                <div class="bg-white/80 rounded-lg p-3 text-center">
+                    <p class="font-bold text-xl text-indigo-800">Vale Sessões Infinitas</p>
+                    <p class="text-xs text-gray-600">Para todas as vezes que quisermos.</p>
+                </div>
             </div>
         </div>
 
-        <!-- PÁGINA DA LETRA (com layout fixo) -->
-        <div id="lyrics-page" class="absolute inset-0 page bg-[#B45309] hidden grid grid-rows-[auto_1fr_auto]">
-            <!-- Cabeçalho da página de letra -->
-            <header class="flex justify-between items-center p-4 z-10 pt-10">
-                <button id="back-to-main-btn">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                </button>
-                <span id="lyrics-song-title" class="text-sm font-bold text-white"></span>
-                <div class="w-6 h-6"></div>
-            </header>
-
-            <!-- Conteúdo da Letra (com rolagem) -->
-            <div id="lyrics-content" class="overflow-y-auto px-6 pt-8 pb-8">
-                <div class="text-white text-2xl font-bold space-y-4 text-center">
-                    <p>Você me disse no ônibus que você era a minha última opção.</p>
-                    <p>Mas, sabe de uma coisa? Você sempre foi a minha primeira opção, a minha paixão de anos e anos. Eu lembro que sempre que conhecia uma menina, eu não deixava passar demais porque eu gostava de você. Isso lá na época que tinha 17 anos, mais ou menos, e você 14.</p>
-                    <p>Eu não lembro exatamente quando eu comecei a gostar de você, se foi exatamente nessa época ou se foi quando eu era mais novo ainda. Mas enfim, estava na minha mente: "quando ela fizer 18 anos, eu converso com ela". Eu era fissurado que você, a minha melhor amiga, fosse a minha esposa. E você era quem eu queria me casar. Eu gostava muito, muito de você, tanto que eu esperei anos até você fazer 18 anos.</p>
-                    <p>Mas eu, como a pessoa mais imatura da face da terra, em fevereiro de 2020, combinei de sair com a Mari no carrinho pra conversar com ela sobre isso, porque tu ia fazer 18 dali a 9 meses e eu queria me preparar melhor pra esse evento KKK.</p>
-                    <p>Mas a Mari foi, conversou com você e voltou e me deu um banho de água fria, que eu ia estragar a amizade e afins. Então, com medo disso acontecer, eu simplesmente deixei esse meu sonho de lado por não querer me afastar de você.</p>
-                    <p>E as coisas foram acontecendo (namorei, terminei - detalhe: traumatizado). Dei um tempo pra mim de alguns meses pra me recuperar e teve um dia que me senti pronto para outro relacionamento. E não vou mentir, pensava em você, mas a trava que minha ex instalou ainda estava forte, que com o tempo foi ficando mais fraca, e mais fraca.</p>
-                    <p>Tivemos o caso de você vir me procurar num momento inoportuno. E tudo isso, tudo isso, tanta história para no final a gente ter um final de semana só nosso no Rio de Janeiro e termos muito tempo para se reaproximar e reconectar. E horas e horas conversando no ônibus, e isso foi bom demais, deu para colocarmos em jogo isso, darmos uma chance ao nosso “gostava de você naquela época”.</p>
-                    <p>Darmos uma chance ao sonho que tinha de namorar minha melhor amiga. Hoje eu vejo isso muito mais claro, percebo que também vacilei com você ao não ter tomado uma atitude antes. Já era pra gente estar casados há muito tempo, com 5 filhos (brincadeira kkkk), mas era para estarmos vivendo nossas vidas juntos há muito tempo. Me desculpa por demorar tanto para isso, a vida brincou demais com a gente.</p>
-                    <p>Mas chegou a hora de revivermos isso, de darmos início à nossa história de amor.</p>
-                    <p>Óbvio que não irei te pedir em namoro digitalmente, sou incapaz disso. Mas posso reafirmar meu amor por você aqui. Que daqui em diante, se você me permitir, você será a minha menina, quem eu irei cuidar e apoiar eternamente.</p>
-                    <p>Quando a gente estava conversando no ônibus, eu não consigo descrever o sorriso que você deu depois que a gente conversou. Foi tão lindo, me quebrou na hora. E eu quero ver esse sorriso sempre, quero te fazer feliz e estar nos momentos bons e ruins da sua vida, como sempre estive. Só que agora não como seu melhor amigo, mas como namorado, noivo e futuro esposo.</p>
-                    <p>Estava olhando a galeria de fotos, a gente tem tanta, mas tanta história juntos. Crescemos juntos. Foi muito legal criar esse mini Spotify de história para você, relembrei tanta coisa que passamos juntos, o quanto foi bom estar ao seu lado todos esses anos.</p>
-                    <p>E espero que, a partir desse ano, a gente não adie mais, que possamos ser mais felizes ainda juntos. Que a nossa história nunca tenha um final feliz, porque nossa história nunca vai ter fim, porque eu te amo e você será a menina que eu sempre amarei! </p>
+         <!-- MODAL DO EVENTO ALEATORIO (inicialmente oculto) -->
+        <div id="random-event-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden cursor-pointer">
+             <div class="bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl shadow-2xl w-full max-w-sm text-white p-6 relative cursor-default transform transition-transform duration-300 scale-95 opacity-0">
+                <div class="text-center mb-4">
+                    <h3 class="text-sm font-bold uppercase text-cyan-200">Um presente surpresa!</h3>
+                    <h2 id="random-event-modal-title" class="text-3xl font-bold mt-1"></h2>
                 </div>
-            </div>
-
-            <!-- Mini Player Fixo -->
-            <footer class="p-4 bg-[#B45309]">
-                <div id="lyrics-progress-bar" class="bg-white/30 rounded-full h-1 w-full mb-1 cursor-pointer"><div id="lyrics-progress" class="bg-white rounded-full h-1" style="width: 0%;"></div></div>
-                <div class="flex justify-between text-xs text-white/80"><span id="lyrics-current-time">0:00</span><span id="lyrics-total-time">0:00</span></div>
-                <div class="flex justify-center items-center space-x-8 mt-4">
-                     <button id="lyrics-prev-btn">
-                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.445 14.832A1 1 0 0010 14.006V5.994a1 1 0 00-1.555-.832L2.4 9.168a1 1 0 000 1.664l6.045 4.001zM11 5h2v10h-2V5z" clip-rule="evenodd"></path></svg>
-                     </button>
-                     <button id="lyrics-play-btn" class="w-12 h-12 text-white"></button>
-                     <button id="lyrics-next-btn">
-                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.555 5.168A1 1 0 0010 5.994v8.012a1 1 0 001.555.832l6.045-4.001a1 1 0 000-1.664l-6.045-4.001zM9 5H7v10h2V5z" clip-rule="evenodd"></path></svg>
-                     </button>
+                <div class="flex items-center justify-center my-8">
+                    <div class="w-24 h-24 bg-white/20 rounded-lg flex flex-col items-center justify-center shadow-inner">
+                         <div class="text-7xl font-bold text-white">∞</div>
+                    </div>
                 </div>
-            </footer>
-        </div>
-
-    </div>
-
-
-    <!-- MODAL DO STORY (inicialmente oculto) -->
-    <div id="story-modal" class="fixed inset-0 bg-black bg-opacity-95 flex-col p-4 z-50 hidden">
-        <div class="flex items-center justify-between mb-4 pt-4">
-            <div class="flex items-center space-x-2">
-                 <img id="story-modal-avatar" src="" class="w-8 h-8 rounded-full object-cover" onerror="handleImageError(this)">
-                 <span id="story-modal-title" class="font-semibold text-sm"></span>
-            </div>
-            <button id="close-story-btn" class="text-white text-2xl">&times;</button>
-        </div>
-        <div class="relative flex-grow w-full h-full rounded-lg overflow-hidden">
-            <img id="story-modal-image" src="" class="absolute top-0 left-0 w-full h-full object-contain" onerror="handleImageError(this)">
-            <!-- Camadas de navegação -->
-            <div id="story-prev-zone" class="absolute left-0 top-0 h-full w-1/3"></div>
-            <div id="story-next-zone" class="absolute right-0 top-0 h-full w-1/3"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
-                 <p id="story-modal-text" class="text-white text-center text-lg"></p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- MODAL DO EVENTO PADRÃO (inicialmente oculto) -->
-    <div id="ticket-event-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden cursor-pointer">
-        <div class="bg-gradient-to-br from-amber-600 to-orange-700 rounded-2xl shadow-2xl w-full max-w-sm text-white p-6 relative cursor-default transform transition-transform duration-300 scale-95 opacity-0">
-            <div class="text-center mb-4">
-                <h3 class="text-sm font-bold uppercase text-amber-200">Você ganhou um vale-presente!</h3>
-                <h2 id="ticket-event-modal-title" class="text-3xl font-bold mt-1"></h2>
-            </div>
-            <div class="flex items-center justify-center my-8">
-                <div class="w-24 h-24 bg-white/20 rounded-lg flex flex-col items-center justify-center shadow-inner">
-                    <div class="text-xs font-bold text-white uppercase">Data</div>
-                    <div id="calendar-animation" class="text-5xl font-bold">??</div>
-                    <div class="text-xs font-bold text-amber-200">EM BREVE</div>
+                <div class="bg-white/80 rounded-lg p-3 text-center">
+                    <p class="font-bold text-xl text-teal-800">Vales Infinitos</p>
+                    <p class="text-xs text-gray-600">Da praia ao circo, a escolha é sua!</p>
                 </div>
-            </div>
-            <div class="bg-white/80 rounded-lg p-3 text-center">
-                <p id="ticket-main-text" class="font-bold text-xl text-amber-800"></p>
-                <p id="ticket-sub-text" class="text-xs text-gray-600"></p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- MODAL DO EVENTO CINEMA (inicialmente oculto) -->
-    <div id="cinema-event-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden cursor-pointer">
-         <div class="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-2xl shadow-2xl w-full max-w-sm text-white p-6 relative cursor-default transform transition-transform duration-300 scale-95 opacity-0">
-            <div class="text-center mb-4">
-                <h3 class="text-sm font-bold uppercase text-indigo-200">Um presente especial para nós!</h3>
-                <h2 id="cinema-event-modal-title" class="text-3xl font-bold mt-1"></h2>
-            </div>
-            <div class="flex items-center justify-center space-x-4 my-8">
-                <div class="w-24 h-24 bg-white/20 rounded-lg flex flex-col items-center justify-center shadow-inner">
-                     <div class="text-7xl font-bold text-white">∞</div>
-                </div>
-                <div class="text-center">
-                   <svg class="w-16 h-16 text-purple-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 3v2h-2V3H8v2H6V3H4v18h2v-2h2v2h8v-2h2v2h2V3h-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"></path></svg>
-                </div>
-            </div>
-            <div class="bg-white/80 rounded-lg p-3 text-center">
-                <p class="font-bold text-xl text-indigo-800">Vale Sessões Infinitas</p>
-                <p class="text-xs text-gray-600">Para todas as vezes que quisermos.</p>
-            </div>
-        </div>
-    </div>
-
-     <!-- MODAL DO EVENTO ALEATORIO (inicialmente oculto) -->
-    <div id="random-event-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden cursor-pointer">
-         <div class="bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl shadow-2xl w-full max-w-sm text-white p-6 relative cursor-default transform transition-transform duration-300 scale-95 opacity-0">
-            <div class="text-center mb-4">
-                <h3 class="text-sm font-bold uppercase text-cyan-200">Um presente surpresa!</h3>
-                <h2 id="random-event-modal-title" class="text-3xl font-bold mt-1"></h2>
-            </div>
-            <div class="flex items-center justify-center my-8">
-                <div class="w-24 h-24 bg-white/20 rounded-lg flex flex-col items-center justify-center shadow-inner">
-                     <div class="text-7xl font-bold text-white">∞</div>
-                </div>
-            </div>
-            <div class="bg-white/80 rounded-lg p-3 text-center">
-                <p class="font-bold text-xl text-teal-800">Vales Infinitos</p>
-                <p class="text-xs text-gray-600">Da praia ao circo, a escolha é sua!</p>
             </div>
         </div>
     </div>
@@ -322,6 +349,39 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // --- LÓGICA DA SENHA ---
+            const passwordPage = document.getElementById('password-page');
+            const appContainer = document.getElementById('app-container');
+            const passwordForm = document.getElementById('password-form');
+            const passwordInput = document.getElementById('password-input');
+            const errorMessage = document.getElementById('error-message');
+            const correctPassword = "guieju";
+
+            passwordForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                if (passwordInput.value.toLowerCase() === correctPassword) {
+                    // Animação de fade out para a página de senha
+                    passwordPage.classList.add('transition-opacity', 'duration-500', 'opacity-0');
+                    setTimeout(() => {
+                        passwordPage.classList.add('hidden');
+                        // Mostra o conteúdo principal
+                        appContainer.classList.remove('hidden');
+                    }, 500); // Corresponde à duração da transição
+                } else {
+                    // Mostra a mensagem de erro e treme o input
+                    errorMessage.classList.remove('hidden');
+                    passwordInput.classList.add('border-red-500');
+                    passwordPage.classList.add('animate-shake');
+                    passwordInput.value = ""; 
+
+                    setTimeout(() => {
+                        errorMessage.classList.add('hidden');
+                        passwordInput.classList.remove('border-red-500');
+                        passwordPage.classList.remove('animate-shake');
+                    }, 1500);
+                }
+            });
+            
             // Lógica para definir o favicon dinamicamente
             const faviconLink = document.getElementById('favicon');
             const imgPng = new Image();
