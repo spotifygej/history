@@ -71,31 +71,6 @@
             animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
         }
 
-        /* Estilos da Barra de Progresso do Story */
-        .progress-bar-segment {
-            flex-grow: 1;
-            height: 2px;
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 1px;
-            overflow: hidden;
-        }
-        .progress-bar-fill {
-            height: 100%;
-            background-color: white;
-            width: 0;
-            border-radius: 1px;
-            transform: scaleX(0);
-            transform-origin: left;
-        }
-        .progress-bar-fill.active {
-            transition: transform 5s linear;
-            transform: scaleX(1);
-        }
-        .progress-bar-fill.paused {
-            animation-play-state: paused;
-            transition-duration: 0s;
-        }
-
     </style>
     <script>
         // Função para lidar com erros de imagem. Colocada no <head> para garantir que esteja definida antes do <body> ser renderizado.
@@ -308,8 +283,7 @@
 
         <!-- MODAL DO STORY (inicialmente oculto) -->
         <div id="story-modal" class="fixed inset-0 bg-black flex-col p-4 z-50 hidden">
-            <div id="story-progress-bar-container" class="w-full flex space-x-1 p-2 absolute top-0 left-0 right-0 pt-6"></div>
-            <div class="flex items-center justify-between mb-2 pt-8 z-10">
+            <div class="flex items-center justify-between mb-2 pt-6 z-10">
                 <div class="flex items-center space-x-2">
                      <img id="story-modal-avatar" src="" class="w-8 h-8 rounded-full object-cover" onerror="handleImageError(this)">
                      <span id="story-modal-title" class="font-semibold text-sm"></span>
@@ -448,43 +422,81 @@
                     title: 'O Início',
                     images: [
                         { caption: 'Nem sequer imaginavamos que nossa historia estava apenas começando.' },
-                        { caption: 'Sua legenda para a foto A2 aqui.' },
-                        { caption: 'Sua legenda para a foto A3 aqui.' },
-                        { caption: 'Sua legenda para a foto A4 aqui.' },
+                        { caption: 'Nem sequer imaginavamos que nossa historia estava apenas começando.' },
+                        { caption: 'Nem sequer imaginavamos que nossa historia estava apenas começando.' },
+                        { caption: 'Nem sequer imaginavamos que nossa historia estava apenas começando.' },
                     ]
                 },
                 {
                     title: 'Pregação',
                     images: [
                         { caption: 'Sempre servindo a jeová juntos.' },
-                        { caption: 'Sua legenda para a foto B2 aqui.' },
-                        { caption: 'Sua legenda para a foto B3 aqui.' },
-                        { caption: 'Sua legenda para a foto B4 aqui.' },
-                        { caption: 'Sua legenda para a foto B5 aqui.' },
-                        { caption: 'Sua legenda para a foto B6 aqui.' },
+                        { caption: 'Sempre servindo a jeová juntos.' },
+                        { caption: 'Sempre servindo a jeová juntos.' },
+                        { caption: 'Sempre servindo a jeová juntos.' },
+                        { caption: 'Sempre servindo a jeová juntos.' },
+                        { caption: 'Sempre servindo a jeová juntos.' },
+                        { caption: 'Sempre servindo a jeová juntos.' },
+                        { caption: 'Sempre servindo a jeová juntos.' },
+                        { caption: 'Sempre servindo a jeová juntos.' },
+                        { caption: 'Sempre servindo a jeová juntos.' },
+                        { caption: 'Sempre servindo a jeová juntos.' },
+                        { caption: 'Sempre servindo a jeová juntos.' },
+                        { caption: 'Sempre servindo a jeová juntos.' },
                     ]
                 },
                 {
                     title: 'Cinemas',
                     images: [
-                        { caption: 'Maratonando de velozes a vingadores no cinema, e o melhor lilolilo.' },
-                        { caption: 'Sua legenda para a foto C2 aqui.' }, { caption: 'Sua legenda para a foto C3 aqui.' }, { caption: 'Sua legenda para a foto C4 aqui.' }, { caption: 'Sua legenda para a foto C5 aqui.' },
-                        { caption: 'Sua legenda para a foto C6 aqui.' }, { caption: 'Sua legenda para a foto C7 aqui.' }, { caption: 'Sua legenda para a foto C8 aqui.' }, { caption: 'Sua legenda para a foto C9 aqui.' }, { caption: 'Sua legenda para a foto C10 aqui.' }
+                        { caption: 'Maratonando filmes e filmes no cinema.' },
+                        { caption: 'Maratonando filmes e filmes no cinema.' }, 
+                        { caption: 'Maratonando filmes e filmes no cinema.' }, 
+                        { caption: 'Maratonando filmes e filmes no cinema.' }, 
+                        { caption: 'Maratonando filmes e filmes no cinema.' },
+                        { caption: 'Maratonando filmes e filmes no cinema.' }, 
+                        { caption: 'Maratonando filmes e filmes no cinema.' }, 
+                        { caption: 'Maratonando filmes e filmes no cinema.' }, 
+                        { caption: 'Maratonando filmes e filmes no cinema.' }, 
+                        { caption: 'Maratonando filmes e filmes no cinema.' },
+                        { caption: 'Maratonando filmes e filmes no cinema.' },
+                        { caption: 'Maratonando filmes e filmes no cinema.' },
+                        { caption: 'Maratonando filmes e filmes no cinema.' },
+                        { caption: 'Maratonando filmes e filmes no cinema.' },
+                        { caption: 'Maratonando filmes e filmes no cinema.' },
                     ]
                 },
                 {
                     title: 'Pais',
                     images: [
                         { caption: 'Um dia como pais da Sarah.' },
-                        { caption: 'Sua legenda para a foto D2 aqui.' }, { caption: 'Sua legenda para a foto D3 aqui.' }, { caption: 'Sua legenda para a foto D4 aqui.' }
+                        { caption: 'Um dia como pais da Sarah.' }, 
+                        { caption: 'Um dia como pais da Sarah.' }, 
+                        { caption: 'Um dia como pais da Sarah.' },
                     ]
                 },
                 {
                     title: 'Risadas',
                     images: [
-                        { caption: 'Os momentos mais simples são os melhores.' },
-                        { caption: 'Sua legenda para a foto E2 aqui.' }, { caption: 'Sua legenda para a foto E3 aqui.' }, { caption: 'Sua legenda para a foto E4 aqui.' }, { caption: 'Sua legenda para a foto E5 aqui.' },
-                        { caption: 'Sua legenda para a foto E6 aqui.' }, { caption: 'Sua legenda para a foto E7 aqui.' }, { caption: 'Sua legenda para a foto E8 aqui.' }, { caption: 'Sua legenda para a foto E9 aqui.' }, { caption: 'Sua legenda para a foto E10 aqui.' }
+                        { caption: 'Risadas em C Maior.' },
+                        { caption: 'Risadas em C Maior.' }, 
+                        { caption: 'Risadas em C Maior.' }, 
+                        { caption: 'Risadas em C Maior.' }, 
+                        { caption: 'Risadas em C Maior.' },
+                        { caption: 'Risadas em C Maior.' }, 
+                        { caption: 'Risadas em C Maior.' }, 
+                        { caption: 'Risadas em C Maior.' }, 
+                        { caption: 'Risadas em C Maior.' }, 
+                        { caption: 'Risadas em C Maior.' },
+                        { caption: 'Risadas em C Maior.' },
+                        { caption: 'Risadas em C Maior.' },
+                        { caption: 'Risadas em C Maior.' },
+                        { caption: 'Risadas em C Maior.' },
+                        { caption: 'Risadas em C Maior.' },
+                        { caption: 'Risadas em C Maior.' },
+                        { caption: 'Risadas em C Maior.' },
+                        { caption: 'Risadas em C Maior.' },
+                        { caption: 'Risadas em C Maior.' },
+                        { caption: 'Risadas em C Maior.' },
                     ]
                 },
                 {
@@ -492,8 +504,52 @@
                     // Para adicionar mais fotos, basta adicionar mais linhas como: { caption: 'Sua legenda aqui.' }
                     // O código contará o número de fotos automaticamente.
                     images: [
-                        { caption: 'Sua legenda para a foto G1 aqui.' },
-                        { caption: 'Sua legenda para a foto G2 aqui.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
+                        { caption: 'Momentos Unicos.' },
                     ]
                 }
             ];
@@ -756,7 +812,6 @@
             const storyPrevZone = document.getElementById('story-prev-zone');
             const storyNextZone = document.getElementById('story-next-zone');
             const storyPauseBtn = document.getElementById('story-pause-btn');
-            const storyProgressBarContainer = document.getElementById('story-progress-bar-container');
             const storyPauseIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" /></svg>`;
             const storyPlayIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" /></svg>`;
 
@@ -792,33 +847,8 @@
                 const prefix = storyPrefixes[currentStoryIndex];
                 storyModalTitle.innerText = story.title;
                 storyModalAvatar.src = `${prefix}/${prefix}1.jpg`;
-
-                // Criar barras de progresso
-                storyProgressBarContainer.innerHTML = '';
-                story.images.forEach(() => {
-                    const segment = document.createElement('div');
-                    segment.className = 'progress-bar-segment';
-                    segment.innerHTML = `<div class="progress-bar-fill"></div>`;
-                    storyProgressBarContainer.appendChild(segment);
-                });
                 
                 loadStoryImage();
-            }
-
-            function startProgressBar() {
-                const segments = storyProgressBarContainer.querySelectorAll('.progress-bar-segment .progress-bar-fill');
-                // Preenche as barras anteriores
-                for (let i = 0; i < currentStoryImageSubIndex; i++) {
-                     if (segments[i]) segments[i].style.transform = 'scaleX(1)';
-                }
-                // Anima a barra atual
-                if (segments[currentStoryImageSubIndex]) {
-                    const currentFill = segments[currentStoryImageSubIndex];
-                    // Força o reinício da animação
-                    currentFill.classList.remove('active');
-                    void currentFill.offsetWidth; // Trigger reflow
-                    currentFill.classList.add('active');
-                }
             }
             
             function preloadImage(url) {
@@ -849,8 +879,6 @@
                     storyModalImage.src = imageName;
                     storyModalImage.classList.remove('opacity-0');
                     storyModalText.innerText = imageInfo.caption;
-                    
-                    startProgressBar();
                     
                     if (!isStoryPaused) {
                          storyStartTime = Date.now();
@@ -898,18 +926,15 @@
             
             function toggleStoryPause() {
                 isStoryPaused = !isStoryPaused;
-                const fillBars = storyProgressBarContainer.querySelectorAll('.progress-bar-fill');
 
                 if (isStoryPaused) {
                     storyPauseBtn.innerHTML = storyPlayIcon;
                     clearTimeout(storyTimer);
                     storyTimeLeft = STORY_DURATION - (Date.now() - storyStartTime);
-                    fillBars.forEach(bar => bar.style.animationPlayState = 'paused');
                 } else {
                     storyPauseBtn.innerHTML = storyPauseIcon;
                     storyStartTime = Date.now(); // Reinicia o tempo para o restante
                     storyTimer = setTimeout(nextStoryImage, storyTimeLeft);
-                     fillBars.forEach(bar => bar.style.animationPlayState = 'running');
                 }
             }
 
