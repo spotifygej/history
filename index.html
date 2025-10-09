@@ -415,11 +415,58 @@
 
             // --- CONFIGURAÇÃO DOS DADOS ---
             const storiesData = [
-                { title: 'O Início', text: 'Nem sequer imaginavamos que nossa historia estava apenas começando ', imageCount: 4 },
-                { title: 'Pregação', text: 'Sempre servindo a jeová juntos', imageCount: 6 },
-                { title: 'Cinemas', text: 'Maratonando de velozes a vingadores no cinema, e o melhor lilolilo', imageCount: 10 },
-                { title: 'Pais', text: 'Um dia como pais da Sarah', imageCount: 4 },
-                { title: 'Risadas', text: 'Os momentos mais simples são os melhores', imageCount: 10 },
+                {
+                    title: 'O Início',
+                    images: [
+                        { caption: 'Nem sequer imaginavamos que nossa historia estava apenas começando.' },
+                        { caption: 'Sua legenda para a foto A2 aqui.' },
+                        { caption: 'Sua legenda para a foto A3 aqui.' },
+                        { caption: 'Sua legenda para a foto A4 aqui.' },
+                    ]
+                },
+                {
+                    title: 'Pregação',
+                    images: [
+                        { caption: 'Sempre servindo a jeová juntos.' },
+                        { caption: 'Sua legenda para a foto B2 aqui.' },
+                        { caption: 'Sua legenda para a foto B3 aqui.' },
+                        { caption: 'Sua legenda para a foto B4 aqui.' },
+                        { caption: 'Sua legenda para a foto B5 aqui.' },
+                        { caption: 'Sua legenda para a foto B6 aqui.' },
+                    ]
+                },
+                {
+                    title: 'Cinemas',
+                    images: [
+                        { caption: 'Maratonando de velozes a vingadores no cinema, e o melhor lilolilo.' },
+                        { caption: 'Sua legenda para a foto C2 aqui.' }, { caption: 'Sua legenda para a foto C3 aqui.' }, { caption: 'Sua legenda para a foto C4 aqui.' }, { caption: 'Sua legenda para a foto C5 aqui.' },
+                        { caption: 'Sua legenda para a foto C6 aqui.' }, { caption: 'Sua legenda para a foto C7 aqui.' }, { caption: 'Sua legenda para a foto C8 aqui.' }, { caption: 'Sua legenda para a foto C9 aqui.' }, { caption: 'Sua legenda para a foto C10 aqui.' }
+                    ]
+                },
+                {
+                    title: 'Pais',
+                    images: [
+                        { caption: 'Um dia como pais da Sarah.' },
+                        { caption: 'Sua legenda para a foto D2 aqui.' }, { caption: 'Sua legenda para a foto D3 aqui.' }, { caption: 'Sua legenda para a foto D4 aqui.' }
+                    ]
+                },
+                {
+                    title: 'Risadas',
+                    images: [
+                        { caption: 'Os momentos mais simples são os melhores.' },
+                        { caption: 'Sua legenda para a foto E2 aqui.' }, { caption: 'Sua legenda para a foto E3 aqui.' }, { caption: 'Sua legenda para a foto E4 aqui.' }, { caption: 'Sua legenda para a foto E5 aqui.' },
+                        { caption: 'Sua legenda para a foto E6 aqui.' }, { caption: 'Sua legenda para a foto E7 aqui.' }, { caption: 'Sua legenda para a foto E8 aqui.' }, { caption: 'Sua legenda para a foto E9 aqui.' }, { caption: 'Sua legenda para a foto E10 aqui.' }
+                    ]
+                },
+                {
+                    title: 'Momentos',
+                    // Para adicionar mais fotos, basta adicionar mais linhas como: { caption: 'Sua legenda aqui.' }
+                    // O código contará o número de fotos automaticamente.
+                    images: [
+                        { caption: 'Sua legenda para a foto G1 aqui.' },
+                        { caption: 'Sua legenda para a foto G2 aqui.' },
+                    ]
+                }
             ];
 
             const eventsData = [
@@ -634,7 +681,7 @@
                 if (touchStartX - touchEndX > swipeThreshold) {
                     // Swipe para a esquerda (próxima música)
                     playNext();
-                } else if (touchEndX - touchStartX > swipeThreshold) {
+                } else if (touchEndX - startX > swipeThreshold) {
                     // Swipe para a direita (música anterior)
                     playPrevious();
                 }
@@ -664,6 +711,7 @@
             backToMainBtn.addEventListener('click', closeLyricsPage);
 
             // --- LÓGICA DOS STORIES ---
+            const storyPrefixes = ['A', 'B', 'C', 'D', 'E', 'G'];
             let currentStoryIndex = 0;
             let currentStoryImageSubIndex = 0;
             let storyTimer;
@@ -671,7 +719,7 @@
             storiesData.forEach((story, index) => {
                 const storyElement = document.createElement('div');
                 storyElement.className = 'flex flex-col items-center flex-shrink-0 w-16';
-                const thumbnailSrc = `${(index + 1) * 10}.jpg`;
+                const thumbnailSrc = `${storyPrefixes[index]}1.jpg`;
                 storyElement.innerHTML = `
                     <div class="w-14 h-14 rounded-full p-0.5 bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500">
                         <img src="${thumbnailSrc}" class="w-full h-full rounded-full object-cover border-2 border-black" onerror="handleImageError(this)">
@@ -700,10 +748,8 @@
             
             function updateStoryView() {
                 const story = storiesData[currentStoryIndex];
-                
                 storyModalTitle.innerText = story.title;
-                storyModalText.innerText = story.text;
-                storyModalAvatar.src = `${(currentStoryIndex + 1) * 10}.jpg`;
+                storyModalAvatar.src = `${storyPrefixes[currentStoryIndex]}1.jpg`;
                 
                 setTimeout(() => {
                     loadStoryImage();
@@ -713,15 +759,24 @@
             function loadStoryImage() {
                 if (storyTimer) clearTimeout(storyTimer);
 
-                const imageNumber = (currentStoryIndex + 1) * 10 + currentStoryImageSubIndex;
-                storyModalImage.src = `${imageNumber}.jpg`;
+                const story = storiesData[currentStoryIndex];
+                if (!story || !story.images[currentStoryImageSubIndex]) {
+                    console.error("Dados do story ou da imagem não encontrados.");
+                    closeStory();
+                    return;
+                }
+                const imageInfo = story.images[currentStoryImageSubIndex];
+
+                const imageName = `${storyPrefixes[currentStoryIndex]}${currentStoryImageSubIndex + 1}.jpg`;
+                storyModalImage.src = imageName;
+                storyModalText.innerText = imageInfo.caption;
 
                 storyTimer = setTimeout(nextStoryImage, 5000);
             }
 
             function nextStoryImage() {
                 const story = storiesData[currentStoryIndex];
-                if (currentStoryImageSubIndex < story.imageCount - 1) {
+                if (currentStoryImageSubIndex < story.images.length - 1) {
                     currentStoryImageSubIndex++;
                     loadStoryImage();
                 } else if (currentStoryIndex < storiesData.length - 1) {
@@ -736,14 +791,14 @@
             function prevStoryImage() {
                 if (currentStoryImageSubIndex > 0) {
                     currentStoryImageSubIndex--;
-                    updateStoryView();
+                    loadStoryImage();
                 } else if (currentStoryIndex > 0) {
                     currentStoryIndex--;
                     const prevStory = storiesData[currentStoryIndex];
-                    currentStoryImageSubIndex = prevStory.imageCount - 1;
+                    currentStoryImageSubIndex = prevStory.images.length - 1;
                     updateStoryView();
                 } else {
-                     updateStoryView();
+                     loadStoryImage();
                 }
             }
 
@@ -766,7 +821,7 @@
 
             eventsData.forEach((event, index) => {
                 const eventElement = document.createElement('div');
-                const imageSrc = `E${index + 1}.jpg`;
+                const imageSrc = `F${index + 1}.jpg`;
                 eventElement.className = 'flex flex-col items-center flex-shrink-0 w-16 text-center cursor-pointer';
                 eventElement.innerHTML = `
                     <div class="w-14 h-14 rounded-full">
