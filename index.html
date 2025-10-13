@@ -470,7 +470,6 @@
                         { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
                         { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
                         { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
                         { caption: '...' }, { caption: '...' }
                     ]
                 }
@@ -757,6 +756,10 @@
                 currentStoryImageSubIndex = 0;
                 isStoryPaused = false;
                 storyPauseBtn.innerHTML = storyPauseIcon;
+                
+                // CORREÇÃO: Reseta os estilos inline que podem ter sido deixados pelo gesto de arrastar para fechar
+                storyModal.style.transform = '';
+                storyModal.style.opacity = '';
                 
                 storyModal.classList.remove('hidden');
                 storyModal.classList.add('flex');
