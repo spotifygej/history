@@ -71,21 +71,6 @@
             animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
         }
 
-        /* Animação para a tela de carregamento */
-        @keyframes subtle-pulse {
-            0%, 100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.6;
-                transform: scale(1.05);
-            }
-        }
-        .loader-animation {
-            animation: subtle-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
     </style>
     <script>
         // Função para lidar com erros de imagem. Colocada no <head> para garantir que esteja definida antes do <body> ser renderizado.
@@ -100,14 +85,6 @@
     </script>
 </head>
 <body class="bg-black text-white overflow-hidden">
-    <!-- TELA DE CARREGAMENTO -->
-    <div id="loading-screen" class="fixed inset-0 bg-[#121212] flex items-center justify-center z-[300] transition-opacity duration-500">
-        <div class="text-center">
-            <div class="text-6xl font-bold text-white loader-animation">GJ</div>
-            <p class="text-gray-400 mt-2">Carregando nossa história...</p>
-        </div>
-    </div>
-
     <!-- PÁGINA DE SENHA -->
     <div id="password-page" class="fixed inset-0 bg-[#121212] flex flex-col items-center justify-center z-[200]">
         <div class="text-center p-4">
@@ -392,15 +369,6 @@
 
 
     <script>
-        // Lógica da tela de carregamento
-        window.addEventListener('load', function() {
-            const loadingScreen = document.getElementById('loading-screen');
-            loadingScreen.classList.add('opacity-0');
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 500); // Corresponde à duração da transição
-        });
-        
         document.addEventListener("DOMContentLoaded", function() {
             // --- LÓGICA DA SENHA ---
             const passwordPage = document.getElementById('password-page');
@@ -417,7 +385,7 @@
                     // Animação de fade out para a página de senha
                     passwordPage.classList.add('transition-opacity', 'duration-500', 'opacity-0');
                     setTimeout(() => {
-                        passwordPage.style.display = 'none';
+                        passwordPage.classList.add('hidden');
                         // Mostra o conteúdo principal
                         appContainer.classList.remove('hidden');
                     }, 500); // Corresponde à duração da transição
@@ -453,7 +421,8 @@
                 {
                     title: 'O Início',
                     images: [
-                                    { caption: 'Se conhecemos bem antes dessa foto' }, { caption: 'Mas nessa foto a nossa idade era' }, { caption: '5 anos' }, { caption: '7 anos' }
+                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' }
+                    ]
                 },
                 {
                     title: 'Pregação',
@@ -520,19 +489,19 @@
             const musicPlaylist = [
                 { url: 'https://dl.dropboxusercontent.com/scl/fi/yb8hj0ahfz7myyqd8dnp9/Indians-Oblivion.mp3?rlkey=1o7owturcr6o28h0zp4z35cok&st=9q3lbzex&dl', title: 'Nossa Trilha Sonora', artist: 'Gui & Ju' },
                 { url: 'https://dl.dropboxusercontent.com/scl/fi/8o8s2sypttxe8mf61mos0/Jorge-e-Mateus-Pra-que-Entender.mp3?rlkey=bnybyh5k6ga8zzcpta4jfugtq&st=ooqljc8i&dl', title: 'Está apenas começando', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/g9bv7zxrg5subjyy1lmlw/TIAGO-IORC-Sorte.mp3?rlkey=8zm5iinvkdd9p6vaesrqfrm96&st=rktmkt1z&dl', title: 'Cada nota, um Beijo', artist: 'Gui & Ju' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/uct4ji08nhokl7jv5utv6/Bryan-Behr-A-Vida-Boa-Com-Voc.mp3?rlkey=217ayf7dj7mpz1771djhvm1xh&st=63kebtuc&dl', title: 'Cada nota, um Beijo', artist: 'Gui & Ju' },
                 { url: 'https://dl.dropboxusercontent.com/scl/fi/cib06xox1ki6uwtsy4lnc/Grouplove-Let-Me-In.mp3?rlkey=gdr374u4qgh7ogc533j7goqma&st=d3uixeoz&dl', title: 'Cada acorde, um abraço', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/jgrt6g5cxj68opbwm2aqu/Cristiano-Araujo-N-o-Sei-Me-Controlar.m4a?rlkey=s26z7ra5s94zdt2fggy5fobe4&st=v3cotsjs&dl', title: 'Nossas risadas em E maior', artist: 'Gui & Ju' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/jgrt6g5cxj68opbwm2aqu/Cristiano-Araujo-N-o-Sei-Me-Controlar.m4a?rlkey=s26z7ra5s94zdt2fggy5fobe4&st=v3cotsjs&dl', title: 'Nossas risadas em C maior', artist: 'Gui & Ju' },
                 { url: 'https://dl.dropboxusercontent.com/scl/fi/p4baiax7kiqe0a0yc5yi5/Armandinho-Eu-Juro.mp3?rlkey=d1b22jjixxa5xuo5puta51ad9&st=6huy0r1m&dl', title: 'Seu olhar em verso e refrão', artist: 'Gui & Ju' },
                 { url: 'https://dl.dropboxusercontent.com/scl/fi/ve92fqft44ugque6ajkhs/Shawn-Mendes-Always-Been-You.mp3?rlkey=mp9puk6t1d65df4h7b4bams50&st=y9lq0ttp&dl', title: 'Uma canção de nós dois', artist: 'Gui & Ju' },
                 { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=253iqihw&dl', title: 'Escrita a cada dia', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/bcgtzc5fqxle9q4m97wjc/Maroon-5-Sugar.mp3?rlkey=rit4mn4s423jzscg68ex89vqu&st=man60f9r&dl', title: 'Corações no mesmo ritmo', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/xe2hdiyzv7xb7p1ydr1s2/Coldplay-Sparks.mp3?rlkey=32nyxnv2wzsiez16zht9w4a1g&st=sy88t08d&dl', title: 'Em uma mesma pulsação', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/uct4ji08nhokl7jv5utv6/Bryan-Behr-A-Vida-Boa-Com-Voc.mp3?rlkey=217ayf7dj7mpz1771djhvm1xh&st=63kebtuc&dl', title: 'Uma só melodia', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/5wm3g307otbqr9edf2jrg/Onze20-Meu-Lugar.mp3?rlkey=0afmkwe3expuyvwt9wzvtwgf8&st=zohbkwiz&dl', title: 'Em perfeita harmonia', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/h93qrhbxefnq7z2eaixco/Upstate-My-Heart-Is-Home.mp3?rlkey=kaqsnot6hwtz3naxzxv8mzwul&st=5ry1j2l0&dl', title: 'Num tom que é só nosso', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/p4xmuvblwzk3ch2q5t59e/Mariana-Nolasco-All-Star.mp3?rlkey=ngsiahq5l5blkfn3aiszmzymn&st=scgajfpx&dl', title: 'Afinada em amor', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/jx9v276kfracul9si8wem/Rihanna-You-Da-One.mp3?rlkey=y3528msnu0820e1y3y9z25brf&st=5sdqzgqh&dl', title: 'E para sempre em play', artist: 'Gui & Ju' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/bcgtzc5fqxle9q4m97wjc/Maroon-5-Sugar.mp3?rlkey=rit4mn4s423jzscg68ex89vqu&st=man60f9r&dl', title: 'Afinada em amor', artist: 'Gui & Ju' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/p4xmuvblwzk3ch2q5t59e/Mariana-Nolasco-All-Star.mp3?rlkey=ngsiahq5l5blkfn3aiszmzymn&st=scgajfpx&dl', title: 'E para sempre em play', artist: 'Gui & Ju' },
+                { url: 'SEU_LINK_AQUI_11?raw=1', title: 'Sua Frase 11', artist: 'Gui & Ju' },
+                { url: 'SEU_LINK_AQUI_12?raw=1', title: 'Sua Frase 12', artist: 'Gui & Ju' },
+                { url: 'SEU_LINK_AQUI_13?raw=1', title: 'Sua Frase 13', artist: 'Gui & Ju' },
+                { url: 'SEU_LINK_AQUI_14?raw=1', title: 'Sua Frase 14', artist: 'Gui & Ju' },
+                { url: 'SEU_LINK_AQUI_15?raw=1', title: 'Sua Frase 15', artist: 'Gui & Ju' },
             ];
 
             let currentTrackIndex = 0;
@@ -1088,3 +1057,4 @@
     </script>
 </body>
 </html>
+
