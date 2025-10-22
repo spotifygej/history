@@ -166,10 +166,20 @@
                             </div>
                         </div>
                         
+                        <!-- SELEÇÃO DE LETRA (NOVO) -->
+                        <nav class="flex justify-center space-x-4 mb-4">
+                            <button id="main-our-lyrics-tab" class="py-2 px-4 font-bold text-white border-b-2 border-white">
+                                Nossa Letra
+                            </button>
+                            <button id="main-song-lyrics-tab" class="py-2 px-4 font-bold text-white/70 border-b-2 border-transparent">
+                                Música
+                            </button>
+                        </nav>
+
                         <!-- CARD "LETRA" -->
                         <div id="lyrics-card" class="bg-[#191414] rounded-lg p-6 cursor-pointer mb-8 flex flex-col items-start">
-                            <h2 class="text-xl font-bold mb-2">Nossa Letra</h2>
-                            <p class="text-gray-300 text-sm mb-4">Sabe de uma coisa? Você sempre foi a minha primeira opção, a minha paixão de anos e anos. Eu lembro que sempre que começava a conhecer uma menina, eu não deixava passar demais porque eu era apaixonado por você...</p>
+                            <h2 id="lyrics-card-title" class="text-xl font-bold mb-2">Nossa Letra</h2>
+                            <p id="lyrics-card-preview" class="text-gray-300 text-sm mb-4">Sabe de uma coisa? Você sempre foi a minha primeira opção, a minha paixão de anos e anos. Eu lembro que sempre que começava a conhecer uma menina, eu não deixava passar demais porque eu era apaixonado por você...</p>
                             <button class="bg-white text-black text-sm font-bold py-2 px-4 rounded-full hover:scale-105 transition-transform">
                                 Mostrar Letra
                             </button>
@@ -237,7 +247,7 @@
             </div>
 
             <!-- PÁGINA DA LETRA (com layout fixo) -->
-            <div id="lyrics-page" class="absolute inset-0 page bg-[#191414] hidden grid grid-rows-[auto_1fr_auto]">
+            <div id="lyrics-page" class="absolute inset-0 page bg-[#B45309] hidden grid grid-rows-[auto_1fr_auto]">
                 <!-- Cabeçalho da página de letra -->
                 <header class="flex justify-between items-center p-4 z-10 pt-10">
                     <button id="back-to-main-btn">
@@ -247,6 +257,12 @@
                     <div class="w-6 h-6"></div>
                 </header>
 
+                <!-- ABAS DE NAVEGAÇÃO (Tabs) -->
+                <!-- MOVIDO PARA A PÁGINA PRINCIPAL -->
+
+                <!-- Conteúdo da Letra (com rolagem) -->
+                <div id="lyrics-content" class="overflow-y-auto px-6 pt-8 pb-8">
+                    
                 <!-- Conteúdo da Letra (com rolagem) -->
                 <div id="lyrics-content" class="overflow-y-auto px-6 pt-8 pb-8">
                     <div class="text-white text-xl font-bold space-y-4 text-center">
@@ -262,6 +278,12 @@
                         <p>Estava olhando a galeria de fotos, a gente tem tanta, mas tanta história juntos, praticamente crescemos juntos. Foi muito legal criar esse mini Spotify de história para você, relembrei tanta coisa que passamos juntos e o quanto foi bom estar ao seu lado todos esses anos. Incrível que com você nada é complicado. Quero viver tudo com você conhecer novos lugares, viajar, servir a jeová juntos, criar um familia!</p>
                         <p>Que a partir de hoje, a gente não adie mais, que possamos ser mais felizes ainda juntos. E que a nossa história nunca tenha um final feliz, porque nossa história é uma historia sem fim.</p>
                         <p>Eu amo você, Eu sempre amei!</p>
+                    </div>
+
+                    <!-- Conteúdo "Música" (Novo) -->
+                    <!-- As letras das músicas serão inseridas aqui via JS -->
+                    <div id="song-lyrics-content" class="hidden text-white text-xl font-bold space-y-4 text-center whitespace-pre-line">
+                        <!-- O 'whitespace-pre-line' é importante para respeitar as quebras de linha (\n) da letra -->
                     </div>
                 </div>
 
@@ -382,6 +404,8 @@
             const errorMessage = document.getElementById('error-message');
             const correctPassword = "guieju";
 
+            const staticLyricsPreview = "Sabe de uma coisa? Você sempre foi a minha primeira opção, a minha paixão de anos e anos. Eu lembro que sempre que começava a conhecer uma menina, eu não deixava passar demais porque eu era apaixonado por você...";
+
             passwordForm.addEventListener('submit', function(event) {
                 event.preventDefault();
                 passwordInput.blur(); // Remove o foco do campo de senha
@@ -496,22 +520,22 @@
             
             // --- PLAYLIST DE MÚSICAS ---
             const musicPlaylist = [
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/yb8hj0ahfz7myyqd8dnp9/Indians-Oblivion.mp3?rlkey=1o7owturcr6o28h0zp4z35cok&st=9q3lbzex&dl', title: 'Nossa Trilha Sonora', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/8o8s2sypttxe8mf61mos0/Jorge-e-Mateus-Pra-que-Entender.mp3?rlkey=bnybyh5k6ga8zzcpta4jfugtq&st=ooqljc8i&dl', title: 'Está apenas começando', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/g9bv7zxrg5subjyy1lmlw/TIAGO-IORC-Sorte.mp3?rlkey=8zm5iinvkdd9p6vaesrqfrm96&st=rktmkt1z&dl', title: 'Cada nota, um Beijo', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/cib06xox1ki6uwtsy4lnc/Grouplove-Let-Me-In.mp3?rlkey=gdr374u4qgh7ogc533j7goqma&st=d3uixeoz&dl', title: 'Cada acorde, um abraço', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/jgrt6g5cxj68opbwm2aqu/Cristiano-Araujo-N-o-Sei-Me-Controlar.m4a?rlkey=s26z7ra5s94zdt2fggy5fobe4&st=v3cotsjs&dl', title: 'Nossas risadas em E maior', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/p4baiax7kiqe0a0yc5yi5/Armandinho-Eu-Juro.mp3?rlkey=d1b22jjixxa5xuo5puta51ad9&st=6huy0r1m&dl', title: 'Seu olhar em verso e refrão', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/ve92fqft44ugque6ajkhs/Shawn-Mendes-Always-Been-You.mp3?rlkey=mp9puk6t1d65df4h7b4bams50&st=y9lq0ttp&dl', title: 'Uma canção de nós dois', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=253iqihw&dl', title: 'Escrita a cada dia', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/bcgtzc5fqxle9q4m97wjc/Maroon-5-Sugar.mp3?rlkey=rit4mn4s423jzscg68ex89vqu&st=man60f9r&dl', title: 'Corações no mesmo ritmo', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/68a5kgbz7cury1l7ynq3a/Paramore-Still-into-You.mp3?rlkey=an87bpquba1640bturrcowbr8&st=wagulyt0&dl', title: 'Em uma mesma pulsação', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/uct4ji08nhokl7jv5utv6/Bryan-Behr-A-Vida-Boa-Com-Voc.mp3?rlkey=217ayf7dj7mpz1771djhvm1xh&st=63kebtuc&dl', title: 'Uma só melodia', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/5wm3g307otbqr9edf2jrg/Onze20-Meu-Lugar.mp3?rlkey=0afmkwe3expuyvwt9wzvtwgf8&st=zohbkwiz&dl', title: 'Em perfeita harmonia', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/h93qrhbxefnq7z2eaixco/Upstate-My-Heart-Is-Home.mp3?rlkey=kaqsnot6hwtz3naxzxv8mzwul&st=5ry1j2l0&dl', title: 'Num tom que é só nosso', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/p4xmuvblwzk3ch2q5t59e/Mariana-Nolasco-All-Star.mp3?rlkey=ngsiahq5l5blkfn3aiszmzymn&st=scgajfpx&dl', title: 'Afinada em amor', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/w1ljcf6xh6h0s4i55235h/John-Mayer-XO.mp3?rlkey=u7fp781e8ua329es4ieft4wi9&st=gixqyer5&dl', title: 'E para sempre em play', artist: 'Gui & Ju' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/jx9v276kfracul9si8wem/Rihanna-You-Da-One.mp3?rlkey=y3528msnu0820e1y3y9z25brf&st=5sdqzgqh&dl', title: '♡', artist: 'Gui & Ju' }
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/yb8hj0ahfz7myyqd8dnp9/Indians-Oblivion.mp3?rlkey=1o7owturcr6o28h0zp4z35cok&st=9q3lbzex&dl', title: 'Nossa Trilha Sonora', artist: 'Gui & Ju', lyrics: 'Coloque a letra da Música 1 aqui.\nVocê pode adicionar quebras de linha.' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/8o8s2sypttxe8mf61mos0/Jorge-e-Mateus-Pra-que-Entender.mp3?rlkey=bnybyh5k6ga8zzcpta4jfugtq&st=ooqljc8i&dl', title: 'Está apenas começando', artist: 'Gui & Ju', lyrics: 'Letra da música 2...' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/g9bv7zxrg5subjyy1lmlw/TIAGO-IORC-Sorte.mp3?rlkey=8zm5iinvkdd9p6vaesrqfrm96&st=rktmkt1z&dl', title: 'Cada nota, um Beijo', artist: 'Gui & Ju', lyrics: 'Letra da música 3...' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/cib06xox1ki6uwtsy4lnc/Grouplove-Let-Me-In.mp3?rlkey=gdr374u4qgh7ogc533j7goqma&st=d3uixeoz&dl', title: 'Cada acorde, um abraço', artist: 'Gui & Ju', lyrics: 'Letra da música 4...' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/jgrt6g5cxj68opbwm2aqu/Cristiano-Araujo-N-o-Sei-Me-Controlar.m4a?rlkey=s26z7ra5s94zdt2fggy5fobe4&st=v3cotsjs&dl', title: 'Nossas risadas em E maior', artist: 'Gui & Ju', lyrics: 'Letra da música 5...' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/p4baiax7kiqe0a0yc5yi5/Armandinho-Eu-Juro.mp3?rlkey=d1b22jjixxa5xuo5puta51ad9&st=6huy0r1m&dl', title: 'Seu olhar em verso e refrão', artist: 'Gui & Ju', lyrics: 'Letra da música 6...' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/ve92fqft44ugque6ajkhs/Shawn-Mendes-Always-Been-You.mp3?rlkey=mp9puk6t1d65df4h7b4bams50&st=y9lq0ttp&dl', title: 'Uma canção de nós dois', artist: 'Gui & Ju', lyrics: 'Letra da música 7...' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=253iqihw&dl', title: 'Escrita a cada dia', artist: 'Gui & Ju', lyrics: 'Letra da música 8...' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/bcgtzc5fqxle9q4m97wjc/Maroon-5-Sugar.mp3?rlkey=rit4mn4s423jzscg68ex89vqu&st=man60f9r&dl', title: 'Corações no mesmo ritmo', artist: 'Gui & Ju', lyrics: 'Letra da música 9...' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/68a5kgbz7cury1l7ynq3a/Paramore-Still-into-You.mp3?rlkey=an87bpquba1640bturrcowbr8&st=wagulyt0&dl', title: 'Em uma mesma pulsação', artist: 'Gui & Ju', lyrics: 'Letra da música 10...' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/uct4ji08nhokl7jv5utv6/Bryan-Behr-A-Vida-Boa-Com-Voc.mp3?rlkey=217ayf7dj7mpz1771djhvm1xh&st=63kebtuc&dl', title: 'Uma só melodia', artist: 'Gui & Ju', lyrics: 'Letra da música 11...' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/5wm3g307otbqr9edf2jrg/Onze20-Meu-Lugar.mp3?rlkey=0afmkwe3expuyvwt9wzvtwgf8&st=zohbkwiz&dl', title: 'Em perfeita harmonia', artist: 'Gui & Ju', lyrics: 'Letra da música 12...' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/h93qrhbxefnq7z2eaixco/Upstate-My-Heart-Is-Home.mp3?rlkey=kaqsnot6hwtz3naxzxv8mzwul&st=5ry1j2l0&dl', title: 'Num tom que é só nosso', artist: 'Gui & Ju', lyrics: 'Letra da música 13...' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/p4xmuvblwzk3ch2q5t59e/Mariana-Nolasco-All-Star.mp3?rlkey=ngsiahq5l5blkfn3aiszmzymn&st=scgajfpx&dl', title: 'Afinada em amor', artist: 'Gui & Ju', lyrics: 'Letra da música 14...' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/w1ljcf6xh6h0s4i55235h/John-Mayer-XO.mp3?rlkey=u7fp781e8ua329es4ieft4wi9&st=s0edbqe3&dl', title: 'E para sempre em play', artist: 'Gui & Ju', lyrics: 'Letra da música 15...' },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/jx9v276kfracul9si8wem/Rihanna-You-Da-One.mp3?rlkey=y3528msnu0820e1y3y9z25brf&st=5sdqzgqh&dl', title: '♡', artist: 'Gui & Ju', lyrics: 'Letra da música 16...' }
             ];
 
             let currentTrackIndex = 0;
@@ -536,11 +560,18 @@
             const lyricsCurrentTime = document.getElementById('lyrics-current-time');
             const mainTotalTime = document.getElementById('main-total-time');
             const lyricsTotalTime = document.getElementById('lyrics-total-time');
+            const lyricsCardTitle = document.getElementById('lyrics-card-title');
+            const lyricsCardPreview = document.getElementById('lyrics-card-preview');
             const playIconSvg = `<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>`;
             const pauseIconSvg = `<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1zm4 0a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>`;
             const notification = document.getElementById('notification');
             const notificationSongName = document.getElementById('notification-song-name');
             let notificationTimeout;
+
+            // --- LÓGICA DAS ABAS DE LETRAS (MOVIDO PARA CIMA) ---
+            let selectedLyricsTab = 'our'; // 'our' or 'song'
+            const ourLyricsContent = document.getElementById('our-lyrics-content');
+            const songLyricsContent = document.getElementById('song-lyrics-content');
 
             function showNotification(songName) {
                 if (notificationTimeout) {
@@ -592,6 +623,18 @@
                 }
                 audio.src = track.url;
                 audio.load();
+
+                // Atualiza o conteúdo da aba "Música"
+                if (track.lyrics) {
+                    songLyricsContent.innerText = track.lyrics; // Use innerText para respeitar quebras de linha com 'whitespace-pre-line'
+                } else {
+                    songLyricsContent.innerText = "Letra não disponível para esta música.";
+                }
+
+                // ATUALIZADO: Atualiza a prévia no card se a aba "Música" estiver selecionada
+                if (selectedLyricsTab === 'song') {
+                    lyricsCardPreview.textContent = getLyricsPreview(track.lyrics);
+                }
             }
 
             function playMusic() {
@@ -641,6 +684,16 @@
                 const minutes = Math.floor(seconds / 60);
                 const secs = Math.floor(seconds % 60);
                 return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+
+            function getLyricsPreview(lyrics) {
+                if (!lyrics || lyrics.startsWith('Letra da música')) {
+                    return "Letra não disponível para esta música.";
+                }
+                if (lyrics.length > 150) {
+                    return lyrics.substring(0, 150) + "...";
+                }
+                return lyrics;
             }
 
             function updateProgress() {
@@ -716,10 +769,23 @@
             const closeStoryBtn = document.getElementById('close-story-btn');
             const lyricsContent = document.getElementById('lyrics-content');
 
+            // --- LÓGICA DAS ABAS DE LETRAS ---
+            const mainOurLyricsTab = document.getElementById('main-our-lyrics-tab');
+            const mainSongLyricsTab = document.getElementById('main-song-lyrics-tab');
+
             lyricsCard.addEventListener('click', () => {
                 lyricsPage.style.transform = '';
                 lyricsPage.classList.remove('hidden');
                 mainPage.classList.add('hidden');
+                
+                // ATUALIZADO: Mostra o conteúdo correto com base na seleção da página principal
+                if (selectedLyricsTab === 'our') {
+                    ourLyricsContent.classList.remove('hidden');
+                    songLyricsContent.classList.add('hidden');
+                } else {
+                    songLyricsContent.classList.remove('hidden');
+                    ourLyricsContent.classList.add('hidden');
+                }
             });
 
             function closeLyricsPage() {
@@ -728,6 +794,36 @@
             }
 
             backToMainBtn.addEventListener('click', closeLyricsPage);
+
+            mainOurLyricsTab.addEventListener('click', () => {
+                selectedLyricsTab = 'our';
+                // Ativa a tab "Nossa Letra"
+                mainOurLyricsTab.classList.add('text-white', 'border-white');
+                mainOurLyricsTab.classList.remove('text-white/70', 'border-transparent');
+                // Desativa a tab "Música"
+                mainSongLyricsTab.classList.add('text-white/70', 'border-transparent');
+                mainSongLyricsTab.classList.remove('text-white', 'border-white');
+
+                // ATUALIZADO: Muda o título e a prévia do card
+                lyricsCardTitle.textContent = "Nossa Letra";
+                lyricsCardPreview.textContent = staticLyricsPreview;
+            });
+
+            mainSongLyricsTab.addEventListener('click', () => {
+                selectedLyricsTab = 'song';
+                // Ativa a tab "Música"
+                mainSongLyricsTab.classList.add('text-white', 'border-white');
+                mainSongLyricsTab.classList.remove('text-white/70', 'border-transparent');
+                // Desativa a tab "Nossa Letra"
+                mainOurLyricsTab.classList.add('text-white/70', 'border-transparent');
+                mainOurLyricsTab.classList.remove('text-white', 'border-white');
+
+                // ATUALIZADO: Muda o título e a prévia do card
+                const currentTrack = musicPlaylist[currentTrackIndex];
+                lyricsCardTitle.textContent = "Letra da Música";
+                lyricsCardPreview.textContent = getLyricsPreview(currentTrack.lyrics);
+            });
+
 
             // --- LÓGICA DOS STORIES ---
             const storyPrefixes = ['A', 'B', 'C', 'D', 'E', 'G', 'H'];
@@ -1078,5 +1174,4 @@
         });
     </script>
 </body>
-
 </html>
