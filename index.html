@@ -247,9 +247,10 @@
             </div>
 
             <!-- PÁGINA DA LETRA (com layout fixo) -->
-            <div id="lyrics-page" class="absolute inset-0 page bg-[#B45309] hidden grid grid-rows-[auto_1fr_auto]">
-                <!-- Cabeçalho da página de letra -->
-                <header class="flex justify-between items-center p-4 z-10 pt-10">
+            <!-- CORREÇÃO: Usando 'flex flex-col' para garantir o layout de rodapé fixo -->
+            <div id="lyrics-page" class="absolute inset-0 page bg-[#191414] hidden flex flex-col">
+                <!-- Cabeçalho da página de letra (Fixo) -->
+                <header class="flex justify-between items-center p-4 z-10 pt-10 flex-shrink-0">
                     <button id="back-to-main-btn">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                     </button>
@@ -257,38 +258,37 @@
                     <div class="w-6 h-6"></div>
                 </header>
 
-                <!-- ABAS DE NAVEGAÇÃO (Tabs) -->
-                <!-- MOVIDO PARA A PÁGINA PRINCIPAL -->
-
-                <!-- Conteúdo da Letra (com rolagem) -->
-                <div id="lyrics-content" class="overflow-y-auto px-6 pt-8 pb-8">
+                <!-- Conteúdo da Letra (Rolável) -->
+                <!-- CORREÇÃO: 'flex-1' faz com que este div ocupe o espaço restante e 'overflow-y-auto' o torna rolável -->
+                <div id="lyrics-content" class="flex-1 overflow-y-auto px-6 pt-8 pb-8">
                     
-                <!-- Conteúdo da Letra (com rolagem) -->
-                <div id="lyrics-content" class="overflow-y-auto px-6 pt-8 pb-8">
-                    <div class="text-white text-xl font-bold space-y-4 text-center">
-                        <p>Sabe de uma coisa? Você sempre foi a minha primeira opção, a minha paixão de anos e anos. Eu lembro que sempre que começava a conhecer uma menina eu me afastava, porque eu era apaixonado por você. Isso na época que tinha 17 anos, mais ou menos, e você 14.</p>
-                        <p>Eu não lembro exatamente quando eu comecei a gostar de você, se foi exatamente nessa época ou se foi quando eu era mais novo ainda. Mas enfim, estava na minha mente: "quando ela fizer 18 anos, eu converso com ela". Eu era fissurado que você, a minha melhor amiga, fosse a minha esposa. Era com você que eu queria me casar desde aquela época. Eu gostava muito, muito de você, tanto que eu esperei anos até você fazer 18 anos.</p>
+                    <!-- Conteúdo "Nossa Letra" (Original) -->
+                    <!-- NOTA: 'hidden' NÃO está aqui por padrão, será adicionado/removido via JS -->
+                    <div id="our-lyrics-content" class="text-white text-xl font-bold space-y-4 text-center">
+                        <p>Sabe de uma coisa? Você sempre foi a minha primeira opção, a minha paixão de anos e anos. Eu lembro que sempre que começava a conhecer uma menina, eu não deixava passar demais porque eu era apaixonado por você. Isso na época que tinha 17 anos, mais ou menos, e você 14.</p>
+                        <p>Eu não lembro exatamente quando eu comecei a gostar de você, se foi exatamente nessa época ou se foi quando eu era mais novo ainda. Mas enfim, estava na minha mente: "quando ela fizer 18 anos, eu converso com ela". Eu era fissurado que você, a minha melhor amiga, fosse a minha esposa. Era com você que eu queria me casar. Eu gostava muito, muito de você, tanto que eu esperei anos até você fazer 18 anos.</p>
                         <p>Mas eu, como a pessoa mais imatura da face da terra, em fevereiro de 2020, combinei de sair com a Mari no carrinho pra conversar com ela sobre isso, porque tu ia fazer 18 dali a 9 meses e eu queria me preparar melhor pra esse evento KKK.</p>
                         <p>Mas a Mari foi, conversou com você e voltou e me deu um banho de água fria, que eu ia estragar a amizade e afins. Então, com medo disso acontecer, eu simplesmente deixei esse meu sonho de lado por não querer me afastar de você.</p>
                         <p>E as coisas foram acontecendo (namorei, terminei - detalhe: traumatizado). Dei um tempo pra mim de alguns meses pra me recuperar e teve um dia que me senti pronto para outro relacionamento e, não vou mentir, pensava em você, mas ainda me sentia travado. Com o tempo, [essa trava] foi ficando mais fraca, e mais fraca. Tivemos o caso de você vir me procurar num momento inoportuno. E tudo isso, tudo isso, tanta história, todo esse vai e vem, para no final a gente ter um final de semana só nosso no Rio de Janeiro e termos muito tempo para se reaproximar e reconectar. Além de horas e horas conversando no ônibus, e isso foi bom demais. Deu para colocarmos em jogo isso, darmos uma chance ao nosso “gostava de você naquela época”.</p>
                         <p>Darmos uma chance ao sonho que tinha de namorar minha melhor amiga. Hoje eu vejo isso muito mais claro, percebo que também vacilei com você ao não ter tomado uma atitude antes. Já era pra gente estar casados há muito tempo, com 5 filhos (brincadeira kkkk), mas era para estarmos vivendo nossas vidas juntos há muito tempo. Me desculpa por demorar tanto para isso, a vida brincou demais com a gente. Seria muito injusto com nós mesmos se ao menos não déssemos uma chance pra nós dois!</p>
                         <p>Mas sinto que chegou o momento certo, que estamos mais maduros para lidar com tudo isso, preparados para reviver isso e darmos início à nossa história de amor.</p>
-                        <p>Óbvio que não irei te pedir em namoro digitalmente, sou incapaz disso. Mas posso reafirmar meu amor por você aqui. Que daqui em diante, se você me permitir, você será a minha garota, quem eu irei cuidar e apoiar eternamente.</p>
-                        <p>Quando a gente estava conversando no ônibus, eu não consigo descrever o sorriso que você deu depois que a gente conversou. Foi tão lindo, me quebrou na hora. E eu quero ver esse sorriso sempre. Quero te fazer feliz e estar nos momentos bons e ruins da sua vida, como sempre estive, só que agora não apenas como seu melhor amigo, mas como namorado, noivo e futuro esposo.</p>
-                        <p>Estava olhando a galeria de fotos, a gente tem tanta, mas tanta história juntos, praticamente crescemos juntos. Foi muito legal criar esse mini Spotify de história para você, relembrei tanta coisa que passamos juntos e o quanto foi bom estar ao seu lado todos esses anos. Incrível que com você nada é complicado. Quero viver tudo com você conhecer novos lugares, viajar, servir a jeová juntos, criar um familia!</p>
-                        <p>Que a partir de hoje, a gente não adie mais, que possamos ser mais felizes ainda juntos. E que a nossa história nunca tenha um final feliz, porque nossa história é uma historia sem fim.</p>
-                        <p>Eu amo você, Eu sempre amei!</p>
+                        <p>Óbvio que não irei te pedir em namoro digitalmente, sou incapaz disso. Mas posso reafirmar meu amor por você aqui. Que daqui em diante, se você me permitir, você será a minha menina, quem eu irei cuidar e apoiar eternamente.</p>
+                        <p>Quando a gente estava conversando no ônibus, eu não consigo descrever o sorriso que você deu depois que a gente conversou. Foi tão lindo, me quebrou na hora. E eu quero ver esse sorriso sempre. Quero te fazer feliz e estar nos momentos bons e ruins da sua vida, como sempre esteve, só que agora não apenas como seu melhor amigo, mas como namorado, noivo e futuro esposo.</p>
+                        <p>Estava olhando a galeria de fotos, a gente tem tanta, mas tanta história juntos, praticamente crescemos juntos. Foi muito legal criar esse mini Spotify de história para você, relembrei tanta coisa que passamos juntos e o quanto foi bom estar ao seu lado todos esses anos. Incrível que com você nada é complicado.</p>
+                        <p>E espero que, a partir de hoje, a gente não adie mais, que possamos ser mais felizes ainda juntos. E que a nossa história nunca tenha um final feliz, porque nossa história é eterna, nunca vai ter fim.</p>
+                        <p>Porque eu amo você, minha menina. Eu sempre amei!</p>
                     </div>
 
                     <!-- Conteúdo "Música" (Novo) -->
                     <!-- As letras das músicas serão inseridas aqui via JS -->
+                    <!-- NOTA: 'hidden' ESTÁ aqui por padrão, será adicionado/removido via JS -->
                     <div id="song-lyrics-content" class="hidden text-white text-xl font-bold space-y-4 text-center whitespace-pre-line">
                         <!-- O 'whitespace-pre-line' é importante para respeitar as quebras de linha (\n) da letra -->
                     </div>
                 </div>
 
-                <!-- Mini Player Fixo -->
-                <footer class="p-4 bg-[#191414]">
+                <!-- Mini Player Fixo (Fixo) -->
+                <footer class="p-4 bg-[#191414] flex-shrink-0">
                     <div id="lyrics-progress-bar" class="bg-white/30 rounded-full h-1 w-full mb-1 cursor-pointer"><div id="lyrics-progress" class="bg-white rounded-full h-1" style="width: 0%;"></div></div>
                     <div class="flex justify-between text-xs text-white/80"><span id="lyrics-current-time">0:00</span><span id="lyrics-total-time">0:00</span></div>
                     <div class="flex justify-center items-center space-x-8 mt-4">
@@ -454,64 +454,65 @@
                 {
                     title: 'Pregação',
                     images: [
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }
+                        { caption: 'Viviamos no campo' }, { caption: '...' }, { caption: 'Ó o gás' }, { caption: '...' },
+                        { caption: 'Companheiros de sempre' }, { caption: 'As crianças sempre ao seu redor' }, { caption: 'Muitos rurais' }, { caption: '...' },
+                        { caption: 'Q?' }, { caption: '...' }, { caption: '...' }, { caption: 'Impossivel colocar todas as fotos' },
+                        { caption: 'Temos muitas fotos no campo juntos' }
                     ]
                 },
                 {
                     title: 'Cinemas',
                     images: [
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }
+                        { caption: 'Doces e mais Doces' }, { caption: 'O Trio Mocotó' }, { caption: '...' }, { caption: '...' },
+                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: 'A gente junto era...' },
+                        { caption: 'Inevitável' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
+                        { caption: '...' }, { caption: 'Lilo Lilo Crocodilo' }, { caption: '...' }
                     ]
                 },
                 {
                     title: 'Pais',
                     images: [
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' }
+                        { caption: 'Prox. vez vamos a carater' }, { caption: '...' }, { caption: 'Nunca mais como pistache' }, { caption: 'Uuuuuuuh' }
                     ]
                 },
                 {
                     title: 'Risadas',
                     images: [
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' }
+                        { caption: 'As risadas' }, { caption: 'Fazem parte da gente' }, { caption: 'AU AU' }, { caption: '...' },
+                        { caption: '...' }, { caption: 'Coração até errou a batida' }, { caption: '...' }, { caption: '...' },
+                        { caption: 'E se?' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
+                        { caption: '...' }, { caption: 'A nossa Vibe' }, { caption: '...' }, { caption: '...' },
+                        { caption: 'Bagunça Garantida' }, { caption: 'Moça? Garotos?' }, { caption: '...' }, { caption: '...' }
                     ]
                 },
                 {
                     title: 'Momentos',
                     images: [
+                        { caption: '...' }, { caption: 'Viviamos' }, { caption: 'no' }, { caption: 'Boliche' },
+                        { caption: 'Te ensinando TRUCO!' }, { caption: 'Seus primeiros DRINKS' }, { caption: 'Dirigindo meu carro sem carta' }, { caption: 'A gente andando sem vela' },
                         { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
                         { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }
+                        { caption: '...' }, { caption: '...' }, { caption: 'Furando' }, { caption: 'A Pandemia' },
+                        { caption: 'Finalmente conseguiu sua CNH' }, { caption: 'Nossa 1° Viagem para o Rio' }, { caption: 'Comentou na minha joias' }, { caption: 'Bar e' },
+                        { caption: 'Mais Bar' }, { caption: 'Vendo Roupa no Paraguai' }, { caption: 'Bebendo em outro País' }, { caption: 'Argentina' },
+                        { caption: 'Pega esse Casalzão' }, { caption: '2° Viagem para o Rio' }, { caption: 'Um rolezin só nosso' }, { caption: 'Por mais dias assim' },
+                        { caption: '...' }, { caption: 'Um dia muito especial' }, { caption: 'Estavamos LINDOS' }, { caption: 'Casando seu irmão' },
+                        { caption: 'E meu melhor amigo' }, { caption: '...' }, { caption: 'Muito Fofoooos' }, { caption: '...' },
+                        { caption: 'Inimigos do Fim' }, { caption: '...' }, { caption: '...' }, { caption: 'Nem ama um gelato' }, 
+                        { caption: 'Furando' }, { caption: '2° Furo' }, { caption: 'Abdominal Temos' }
                     ]
                 },
                 {
                     title: 'Arcade',
                     images: [
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' },
-                        { caption: '...' }, { caption: '...' }, { caption: '...' }, { caption: '...' }
+                        { caption: 'Seu primeiro anel Pandora' }, { caption: 'Comendo como se nao houvesse amanhã' }, { caption: 'Passeando nos Cosméticos' }, { caption: 'No seu olhar' },
+                        { caption: 'No meu olhar' }, { caption: 'Já com o dedo Bagaçado' }, { caption: 'Cabine de fotoooos' }, { caption: '😘' }
                     ]
                 }
             ];
 
             const eventsData = [
-                { title: 'Beto Carrero', type: 'ticket', mainText: 'Vale 1 Ingresso', subText: 'Para um dia de pura adrenalina!'},
+                { title: 'Beto Carrero', type: 'ticket', mainText: 'Vale 1 Ingresso', subText: 'Para um dia de adrenalina!'},
                 { title: 'Cinema', type: 'cinema' },
                 { title: 'Holambra', type: 'ticket', mainText: 'Vale 1 Passeio', subText: 'Para um dia entre as flores.'},
                 { title: 'São Roque', type: 'ticket', mainText: 'Almoço e Passeio', subText: 'Um brinde a nós na rota do vinho.' },
@@ -520,22 +521,1580 @@
             
             // --- PLAYLIST DE MÚSICAS ---
             const musicPlaylist = [
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/yb8hj0ahfz7myyqd8dnp9/Indians-Oblivion.mp3?rlkey=1o7owturcr6o28h0zp4z35cok&st=9q3lbzex&dl', title: 'Nossa Trilha Sonora', artist: 'Gui & Ju', lyrics: 'Coloque a letra da Música 1 aqui.\nVocê pode adicionar quebras de linha.' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/8o8s2sypttxe8mf61mos0/Jorge-e-Mateus-Pra-que-Entender.mp3?rlkey=bnybyh5k6ga8zzcpta4jfugtq&st=ooqljc8i&dl', title: 'Está apenas começando', artist: 'Gui & Ju', lyrics: 'Letra da música 2...' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/g9bv7zxrg5subjyy1lmlw/TIAGO-IORC-Sorte.mp3?rlkey=8zm5iinvkdd9p6vaesrqfrm96&st=rktmkt1z&dl', title: 'Cada nota, um Beijo', artist: 'Gui & Ju', lyrics: 'Letra da música 3...' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/cib06xox1ki6uwtsy4lnc/Grouplove-Let-Me-In.mp3?rlkey=gdr374u4qgh7ogc533j7goqma&st=d3uixeoz&dl', title: 'Cada acorde, um abraço', artist: 'Gui & Ju', lyrics: 'Letra da música 4...' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/jgrt6g5cxj68opbwm2aqu/Cristiano-Araujo-N-o-Sei-Me-Controlar.m4a?rlkey=s26z7ra5s94zdt2fggy5fobe4&st=v3cotsjs&dl', title: 'Nossas risadas em E maior', artist: 'Gui & Ju', lyrics: 'Letra da música 5...' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/p4baiax7kiqe0a0yc5yi5/Armandinho-Eu-Juro.mp3?rlkey=d1b22jjixxa5xuo5puta51ad9&st=6huy0r1m&dl', title: 'Seu olhar em verso e refrão', artist: 'Gui & Ju', lyrics: 'Letra da música 6...' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/ve92fqft44ugque6ajkhs/Shawn-Mendes-Always-Been-You.mp3?rlkey=mp9puk6t1d65df4h7b4bams50&st=y9lq0ttp&dl', title: 'Uma canção de nós dois', artist: 'Gui & Ju', lyrics: 'Letra da música 7...' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=253iqihw&dl', title: 'Escrita a cada dia', artist: 'Gui & Ju', lyrics: 'Letra da música 8...' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/bcgtzc5fqxle9q4m97wjc/Maroon-5-Sugar.mp3?rlkey=rit4mn4s423jzscg68ex89vqu&st=man60f9r&dl', title: 'Corações no mesmo ritmo', artist: 'Gui & Ju', lyrics: 'Letra da música 9...' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/68a5kgbz7cury1l7ynq3a/Paramore-Still-into-You.mp3?rlkey=an87bpquba1640bturrcowbr8&st=wagulyt0&dl', title: 'Em uma mesma pulsação', artist: 'Gui & Ju', lyrics: 'Letra da música 10...' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/uct4ji08nhokl7jv5utv6/Bryan-Behr-A-Vida-Boa-Com-Voc.mp3?rlkey=217ayf7dj7mpz1771djhvm1xh&st=63kebtuc&dl', title: 'Uma só melodia', artist: 'Gui & Ju', lyrics: 'Letra da música 11...' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/5wm3g307otbqr9edf2jrg/Onze20-Meu-Lugar.mp3?rlkey=0afmkwe3expuyvwt9wzvtwgf8&st=zohbkwiz&dl', title: 'Em perfeita harmonia', artist: 'Gui & Ju', lyrics: 'Letra da música 12...' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/h93qrhbxefnq7z2eaixco/Upstate-My-Heart-Is-Home.mp3?rlkey=kaqsnot6hwtz3naxzxv8mzwul&st=5ry1j2l0&dl', title: 'Num tom que é só nosso', artist: 'Gui & Ju', lyrics: 'Letra da música 13...' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/p4xmuvblwzk3ch2q5t59e/Mariana-Nolasco-All-Star.mp3?rlkey=ngsiahq5l5blkfn3aiszmzymn&st=scgajfpx&dl', title: 'Afinada em amor', artist: 'Gui & Ju', lyrics: 'Letra da música 14...' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/w1ljcf6xh6h0s4i55235h/John-Mayer-XO.mp3?rlkey=u7fp781e8ua329es4ieft4wi9&st=s0edbqe3&dl', title: 'E para sempre em play', artist: 'Gui & Ju', lyrics: 'Letra da música 15...' },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/jx9v276kfracul9si8wem/Rihanna-You-Da-One.mp3?rlkey=y3528msnu0820e1y3y9z25brf&st=5sdqzgqh&dl', title: '♡', artist: 'Gui & Ju', lyrics: 'Letra da música 16...' }
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/yb8hj0ahfz7myyqd8dnp9/Indians-Oblivion.mp3?rlkey=1o7owturcr6o28h0zp4z35cok&st=9q3lbzex&dl', title: 'Nossa Trilha Sonora', artist: 'Gui & Ju', lyrics: `Eu acredito quando eu vejo algo
+I believe when I see something
+
+Isso pode crescer porque eu vejo nos seus olhos
+It can grow cause I see it in your eyes
+
+Pertence
+It belongs
+
+Fique
+Stay
+
+Apenas me diga
+Just tell me
+
+Porque eu sei
+Cause I know
+
+Está escrito nas estrelas
+It’s written in the stars
+
+Eu posso ver
+I can see
+
+Mesmo à distância
+Even from a distance
+
+Faz sentido
+It makes sense
+
+Quero que você seja minha
+Want you to be mine
+
+Isso vai viver
+This will live
+
+Venha, venha mais perto
+Come, come closer
+
+Deixe ir
+Let it go
+
+Viva-o através do vento
+Live it through the wind
+
+Perto de você
+Close to you
+
+Anseio por ele
+I long for it
+
+E isso vai durar
+And it will last
+
+O futuro pertence a nós
+The future to belong to us
+
+
+Começou como nada
+Started out as nothing
+
+Para em breve ser
+Soon to be
+
+A beleza de todas as estrelas
+The beauty of all stars
+
+Começou como nada
+Started out as nothing
+
+Para em breve ser
+Soon to be
+
+A beleza de todas as estrelas
+The beauty of all stars
+
+Eu estou apaixonado por você
+I'm in love with you
+
+Um grito no vazio
+A shout into the void
+
+Eu sei que você vai me ouvir em breve
+I know you’ll hear me soon
+
+Isso vai curar a ferida
+It will heal the wound
+
+Perto de você
+Close to you
+
+Anseio por isso
+I long for it
+
+E isso vai durar
+And it will last
+
+O futuro pertence a nós
+The future to belong to us
+
+Começou como nada
+Started out as nothing
+
+Para em breve ser
+Soon to be
+
+A beleza de todas as estrelas
+The beauty of all stars` },
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/8o8s2sypttxe8mf61mos0/Jorge-e-Mateus-Pra-que-Entender.mp3?rlkey=bnybyh5k6ga8zzcpta4jfugtq&st=ooqljc8i&dl', title: 'Está apenas começando', artist: 'Gui & Ju', lyrics: `O que tem por trás desse sorriso
+Que me deixa fissurado em você?
+É um misto de desejo e vício
+Já tentei, mas não consigo entender
+
+Toda vez que eu te encontro
+Sinto os pés fora do chão
+Toda vez que eu te olho
+Não consigo dizer não
+
+Por mais que eu queira
+Não consigo mais pensar em nada (nada)
+Quando eu notei, já era amor
+Eu não imaginava
+Por mais que eu queira
+Não consigo mais pensar em nada (nada)
+Quando eu notei, já era amor
+Eu não imaginava
+
+Que eu fosse querer
+Era você
+Pra que entender?
+Eu tô amando você
+
+Toda vez que eu te encontro
+Sinto os pés fora do chão
+Toda vez que eu te olho
+Não consigo dizer não
+
+Por mais que eu queira
+Não consigo mais pensar em nada (nada)
+Quando eu notei, já era amor
+Eu não imaginava
+Por mais que eu queira
+Não consigo mais pensar em nada (nada)
+Quando eu notei, já era amor
+Eu não imaginava
+
+Que eu fosse querer
+Era você
+Pra que entender?
+Eu tô amando você`},
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/g9bv7zxrg5subjyy1lmlw/TIAGO-IORC-Sorte.mp3?rlkey=8zm5iinvkdd9p6vaesrqfrm96&st=rktmkt1z&dl', title: 'Cada nota, um Beijo', artist: 'Gui & Ju', lyrics: `Tudo de bom que você me fizer
+Faz minha rima ficar mas rara
+O que você faz me ajuda a cantar
+Põe um sorriso na minha cara
+
+Meu amor, você me dá sorte meu amor
+Você me dá sorte meu amor
+Você me da sorte na vida
+
+Quando te vejo não saio do tom
+Mas meu desejo já se repara
+Me dá um beijo com tudo de bom
+E acende a noite na Guanabara
+
+Meu amor, você me dá sorte meu amor
+Você me dá sorte meu amor
+Você me da sorte de cara
+
+Meu amor, você me dá sorte
+Você me dá sorte meu amor
+Você me da sorte na vida
+
+O que você faz me ajuda a cantar
+Quando te vejo faz minha rima fica mais rara`},
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/cib06xox1ki6uwtsy4lnc/Grouplove-Let-Me-In.mp3?rlkey=gdr374u4qgh7ogc533j7goqma&st=d3uixeoz&dl', title: 'Cada acorde, um abraço', artist: 'Gui & Ju', lyrics: `Me dê, me dê aquele amor
+Gimme, gimme that love
+
+Estarei esperando por você
+I'll be waiting for ya
+
+Pegue minha mão
+Catch my hand
+
+Estarei lutando por você
+I'll be fighting for ya
+
+Me deixe entrar, sim
+Let me in, yeah
+
+Me deixe ficar mais perto
+Let me get closer
+
+Me pegou correndo descontrolado
+Got me running wild
+
+Como se sentisse tudo
+Like I feel it all over
+
+Pegue minha mão
+Catch my hand
+
+Estarei lutando por você
+I'll be fighting for ya
+
+Todo esse tempo viajando
+All this time been tripping
+
+E dormindo por aí
+And slipping around
+
+Você me pegou, agora estou nadando
+You got me, now I'm swimming
+
+Nadando em nuvens
+Swimming in clouds
+
+Me dê, me dê aquele amor
+Gimme, gimme that love
+
+Estarei esperando por você
+I'll be waiting for ya
+
+Pegue minha mão
+Catch my hand
+
+Estarei lutando por você
+I'll be fighting for ya
+
+E estou descobrindo
+And I'm finding out
+
+Que tudo o que sei está em casa
+That all I know is right at home
+
+Mas estou contando para o homem
+But I'm telling the man my plan
+
+O meu plano para nunca me sentir sozinho
+To never feel alone
+
+Me deixe entrar, sim
+Let me in, yeah
+
+Me deixe ficar mais perto
+Let me get closer
+
+Levanto minhas mãos
+Got my hands high
+
+Como se estivesse em uma montanha-russa
+Like I ride a roller coaster
+
+Não pode ser, não pode ser solitário
+Cannot be it, cannot be lonely
+
+Parecendo que está amando
+Looking like you're loving
+
+Você está vivendo o momento
+You're living the moment
+
+Você me pegou, agora estou nadando
+You got me, now I'm swimming
+
+Nadando em nuvens
+Swimming in clouds
+
+Me dê, me dê aquele amor
+Gimme, gimme that love
+
+Estarei esperando por você
+I'll be waiting for ya
+
+Pegue minha mão
+Catch my hand
+
+Estarei lutando por você
+I'll be fighting for ya
+
+Prendendo a respiração
+Holding my breath
+
+Até não restar mais nada
+Till theres nothing left
+
+Prenda sua respiração
+Hold your breath
+
+Agora não resta mais nada
+Now theres nothing left
+
+Me dê aquele amor
+Gimme that love
+
+Estarei esperando por você
+I'll be waiting for ya
+
+E estou descobrindo
+And I'm finding out
+
+Que tudo que sei está em casa
+That all I know is right at home
+
+Mas estou contando para o homem
+So I'm telling the man my plan
+
+O meu plano para nunca me sentir sozinho
+To never feel alone
+
+Me dê, me dê aquele amor
+Gimme, gimme that love
+
+Estarei esperando por você
+I'll be waiting for ya
+
+Pegue minha mão
+Catch my hand
+
+Estarei lutando por você
+I'll be fighting for ya
+
+Prendendo a respiração
+Holding my breath
+
+Até não restar mais nada
+Till theres nothing left
+
+Prenda sua respiração
+Hold your breath
+
+Agora não resta mais nada
+Now theres nothing left
+
+Me dê, me dê aquele amor
+Gimme that love
+
+Estarei esperando por você
+I'll be waiting for ya`},
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/jgrt6g5cxj68opbwm2aqu/Cristiano-Araujo-N-o-Sei-Me-Controlar.m4a?rlkey=s26z7ra5s94zdt2fggy5fobe4&st=v3cotsjs&dl', title: 'Nossas risadas em E maior', artist: 'Gui & Ju', lyrics: `Tô louco por um beijo
+E esse meu desejo
+Quer me dominar
+O tempo vai passando
+E eu cada vez te amando mais
+Não sei me controlar
+
+Me traz esse sorriso
+Me tira do castigo e vem colocar
+Na dor ponto final
+E muda o meu astral
+
+Vem trazer de volta
+A cor da minha vida que você levou
+Vem curar de vez a cicatriz
+Que no meu coração você deixou`},
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/p4baiax7kiqe0a0yc5yi5/Armandinho-Eu-Juro.mp3?rlkey=d1b22jjixxa5xuo5puta51ad9&st=6huy0r1m&dl', title: 'Seu olhar em verso e refrão', artist: 'Gui & Ju', lyrics: `Estamos tão longe, tão perto também
+E os anjos nos dizem amém
+Fiquei trabalhando até tarde
+Mas não vou dormir sem dizer
+
+Que eu juro
+Te juro amor eterno
+Eu juro
+Te juro amor eterno
+
+Sem você aqui
+Paraíso sem cor
+Sem você aqui
+Primavera sem flor
+
+Estamos tão longe, tão perto também
+E os anjos nos dizem amém
+Fiquei trabalhando até tarde
+Mas não vou dormir sem dizer
+
+Que eu juro
+Te juro amor eterno
+Eu juro
+Te juro amor eterno
+
+Estamos tão longe, tão perto, também
+E os anjos nos dizem amém
+Fiquei na função até tarde
+Mas não vou dormir sem dizer
+
+Eu juro
+Te juro amor eterno
+Eu juro
+Te juro amor eterno
+
+Sem você aqui
+Paraíso sem cor
+Sem você aqui
+Primavera sem flor
+
+Eu juro
+Te juro amor eterno
+Eu juro
+Te juro amor eterno
+
+E o teu olhar me diz tantas coisas
+Tantas coisas loucas que quando chega perto
+A minha alma não me deixa mentir
+Esse teu olhar é pouco pra mim
+É um ponto sem fim
+Esse teu olhar, numa boa
+É o tudo, dentro de mim
+
+Ei flor
+Paraíso sem cor
+Sem você aqui
+Primavera sem flor
+
+Eu juro
+Te juro amor eterno (oioi)
+Eu juro
+Te juro amor eterno`},
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/ve92fqft44ugque6ajkhs/Shawn-Mendes-Always-Been-You.mp3?rlkey=mp9puk6t1d65df4h7b4bams50&st=y9lq0ttp&dl', title: 'Uma canção de nós dois', artist: 'Gui & Ju', lyrics: `É um conto de fadas que não consigo explicar
+It's a fairytale I can't explain
+
+Cheio de palavras que não sei dizer
+Full of words I don't know how to say
+
+E sem uma pequena virada do destino
+And without a little twist of fate
+
+Eu sei que ainda estaria procurando, amor
+I know I'd still be searching, baby
+
+Eu juro que você foi enviada para me salvar
+I swear that you've been sent to save me
+
+Você é a única para quem meu coração continua voltando
+You're the only one that my heart keeps coming back to
+
+Sempre foi você, sempre foi você
+It's always been you, it's always been you
+
+Sempre foi você, sempre foi você
+It's always been you, it's always been you
+
+Aah-aah-aah
+Aah-aah-aah
+
+Sempre foi você
+It's always been you
+
+E você viu todos os meus medos mais sombrios
+And you've seen all my darkest fears
+
+Como se você me conhecesse há mil anos
+Like you've known me for a thousand years
+
+O menino que está realmente por baixo de
+The boy who's really underneath
+
+Todas as cicatrizes e inseguranças, amor
+All the scars and insecurities, baby
+
+Eu juro que você foi enviada para me salvar
+I swear that you've been sent to save me
+
+Você é a única para quem meu coração continua voltando
+You're the only one that my heart keeps coming back to
+
+Sempre foi você, sempre foi você
+It's always been you, it's always been you
+
+Sempre foi você, sempre foi você
+It's always been you, it's always been you
+
+Aah-aah-aah
+Aah-aah-aah
+
+Sempre foi você, sim
+It's always been you, yeah
+
+Você é a única para quem meu coração continua voltando
+You're the only one that my heart keeps coming back to
+
+Sempre foi você, sim
+It's always been you, yeah
+
+Sempre foi você
+It's always been you
+
+Você é a única para quem meu coração continua voltando
+You're the only one that my heart keeps coming back to`},
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=253iqihw&dl', title: 'Escrita a cada dia', artist: 'Gui & Ju', lyrics: `Meu amor era tão cruel quanto as cidades em que vivi
+My love was as cruel as the cities I lived in
+
+Todos pareciam piores à luz
+Everyone looked worse in the light
+
+Há tantas linhas que eu cruzei sem perdão
+There are so many lines that I've crossed unforgiven
+
+Eu vou te dizer a verdade, mas nunca adeus
+I'll tell you the truth, but never goodbye
+
+Eu não quero olhar para mais nada agora que te vi
+I don't wanna look at anything else now that I saw you
+
+Eu não quero pensar em mais nada agora que pensei em você
+I don't wanna think of anything else now that I thought of you
+
+Eu tenho dormido há tanto tempo numa noite escura de vinte anos
+I've been sleeping so long in a twenty-year dark night
+
+E agora, vejo a luz do dia
+And now, I see daylight
+
+Vejo apenas a luz do dia
+I only see daylight
+
+Jogos de azar só sorteiam os azarados
+Luck of the draw only draws the unlucky
+
+E então eu me tornei o alvo da piada
+And so I became the butt of the joke
+
+Eu feri os bons e confiei nos perversos
+I wounded the good and I trusted the wicked
+
+Limpando o ar, eu respirei a fumaça
+Clearing the air, I breathed in the smoke
+
+Talvez você tenha corrido com os lobos e se recusado a sossegar
+Maybe you ran with the wolves and refused to settle down
+
+Talvez eu tenha saído enfurecida de todas as salas desta cidade
+Maybe I've stormed out of every single room in this town
+
+Jogamos fora nossas capas e adagas porque agora já é manhã
+Threw out our cloaks and our daggers because it's morning now
+
+Está mais claro agora, agora
+It's brighter now, now
+
+Eu não quero olhar para mais nada agora que te vi
+I don't wanna look at anything else now that I saw you
+
+(Eu não consigo mais desviar o olhar)
+(I can never look away)
+
+Eu não quero pensar em mais nada agora que pensei em você
+I don't wanna think of anything else now that I thought of you
+
+(As coisas nunca mais serão as mesmas)
+(Things will never be the same)
+
+Eu tenho dormido há tanto tempo numa noite escura de vinte anos
+I've been sleeping so long in a twenty-year dark night
+
+(Agora, estou totalmente acordada)
+(Now, I'm wide awake)
+
+E agora, vejo a luz do dia (luz do dia), vejo apenas a luz do dia (luz do dia)
+And now, I see daylight (daylight), I only see daylight (daylight)
+
+Eu vejo apenas a luz do dia, luz do dia, luz do dia, luz do dia
+I only see daylight, daylight, daylight, daylight
+
+Eu vejo apenas a luz do dia, luz do dia, luz do dia, luz do dia
+I only see daylight, daylight, daylight, daylight
+
+E eu ainda posso ver tudo (em minha mente)
+And I can still see it all (in my mind)
+
+Você todo, eu toda (entrelaçados)
+All of you, all of me (intertwined)
+
+Eu achava que o amor seria (preto e branco)
+I once believed love would be (black and white)
+
+Mas é dourado (dourado)
+But it's golden (golden)
+
+E eu ainda posso ver tudo (em minha mente)
+And I can still see it all (in my head)
+
+Indo e vindo de Nova York (escondendo na sua cama)
+Back and forth from New York (sneaking in your bed)
+
+Eu achava que o amor seria (vermelho ardente)
+I once believed love would be (burning red)
+
+Mas é dourado
+But it's golden
+
+Como a luz do dia, como a luz do dia
+Like daylight, like daylight
+
+Como a luz do dia, luz do dia
+Like daylight, daylight
+
+Eu não quero olhar para mais nada agora que te vi
+I don't wanna look at anything else now that I saw you
+
+(Eu não consigo mais desviar o olhar)
+(I can never look away)
+
+Eu não quero pensar em mais nada agora que pensei em você
+And I don't wanna think of anything else now that I thought of you
+
+(As coisas nunca mais serão as mesmas)
+(Things will never be the same)
+
+Eu tenho dormido há tanto tempo numa noite escura de vinte anos
+I've been sleeping so long in a twenty year dark night
+
+(Agora, estou totalmente acordada)
+(Now, I'm wide awake)
+
+E agora, vejo a luz do dia (eu vejo a luz do dia), vejo apenas a luz do dia (ah)
+And now, I see daylight (I see daylight), I only see daylight (ah)
+
+Eu vejo apenas a luz do dia, luz do dia, luz do dia, luz do dia
+I only see daylight, daylight, daylight, daylight
+
+Eu vejo apenas a luz do dia, luz do dia, luz do dia, luz do dia (ah)
+I only see daylight, daylight, daylight, daylight (aah)
+
+Eu vejo apenas a luz do dia, luz do dia, luz do dia, luz do dia (e eu ainda posso ver tudo)
+I only see daylight, daylight, daylight, daylight (and I can still see it all)
+
+(Indo e vindo de Nova York)
+(Back and forth from New York)
+
+Eu vejo apenas a luz do dia, luz do dia, luz do dia, luz do dia
+I only see daylight, daylight, daylight, daylight
+
+(Eu achava que o amor seria vermelho ardente)
+(I once believed love would be burning red)
+
+Como a luz do dia
+Like daylight
+
+É dourado
+It's golden
+
+Como a luz do dia
+Like daylight
+
+Você precisa sair à luz do dia e esquecer
+You gotta step into the daylight and let it go
+
+Só esquecer, esquecer
+Just let it go, let it go
+
+Eu quero ser definida pelas coisas que eu amo
+I wanna be defined by the things that I love
+
+Não as coisas que odeio
+Not the things I hate
+
+Não as coisas da qual tenho medo, tenho medo
+Not the things that I'm afraid of, I'm afraid of
+
+Não as coisas que me assombram no meio da noite, eu
+Not the things that haunt me in the middle of the night, I
+
+Eu só acho que
+I just think that
+
+Você é o que você ama
+You are what you love`},
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/bcgtzc5fqxle9q4m97wjc/Maroon-5-Sugar.mp3?rlkey=rit4mn4s423jzscg68ex89vqu&st=man60f9r&dl', title: 'Corações no mesmo ritmo', artist: 'Gui & Ju', lyrics: `Estou sofrendo, querida, estou destruído
+I'm hurting, baby, I'm broken down
+
+Preciso do seu amor, amor
+I need your loving, loving
+
+Preciso agora
+I need it now
+
+Quando estou sem você, me sinto apenas um fraco
+When I'm without you, I'm something weak
+
+Você me faz implorar, implorar
+You got me begging, begging
+
+Estou de joelhos
+I'm on my knees
+
+Não quero ser dependente do seu amor
+I don't wanna be needing your love
+
+Só quero me afundar em seu amor
+I just wanna be deep in your love
+
+E ficar longe de você está me matando
+And it's killing me when you're away
+
+Uh, querida, pois não me importa onde você está
+Ooh, baby, 'cause I really don't care where you are
+
+Só quero estar aí com você
+I just wanna be there where you are
+
+E preciso sentir o gosto
+And I gotta get one little taste
+
+Açúcar, sim, por favor
+Sugar, yes, please
+
+Por que não vem colocar um pouco em mim?
+Won't you come and put it down on me?
+
+Estou bem aqui, pois eu preciso
+I'm right here, 'cause I need
+
+De um pouquinho de amor e compaixão
+Little love and little sympathy
+
+Sim, você me mostrou um bom amor
+Yeah, you show me good loving
+
+Faz tudo ficar bem
+Make it alright
+
+Preciso de um pouco de doçura em minha vida
+Need a little sweetness in my life
+
+Açúcar, sim, por favor
+Sugar, yes, please
+
+Por que não vem colocar um pouco em mim?
+Won't you come and put it down on me?
+
+Meus pedaços quebrados, você os recolheu
+My broken pieces, you pick them up
+
+Não me deixe esperando, esperando
+Don't leave me hanging, hanging
+
+Venha aqui e me dê um pouquinho
+Come give me some
+
+Quando estou sem você, fico tão inseguro
+When I'm without ya, I'm so insecure
+
+Você é a única coisa, única coisa
+You are the one thing, one thing
+
+Que me faz viver
+I'm living for
+
+Não quero ser dependente do seu amor
+I don't wanna be needing your love
+
+Só quero me afundar em seu amor
+I just wanna be deep in your love
+
+E ficar longe de você está me matando
+And it's killing me when you're away
+
+Uh, querida, pois não me importa onde você está
+Ooh, baby, 'cause I really don't care where you are
+
+Só quero estar aí com você
+I just wanna be there where you are
+
+E preciso sentir o gosto
+And I gotta get one little taste
+
+Açúcar, sim, por favor
+Sugar, yes, please
+
+Por que não vem colocar um pouco em mim?
+Won't you come and put it down on me?
+
+Estou bem aqui, pois eu preciso
+I'm right here, 'cause I need
+
+De um pouquinho de amor e compaixão
+Little love and little sympathy
+
+Sim, você me mostrou um bom amor
+Yeah, you show me good loving
+
+Faz tudo ficar bem
+Make it alright
+
+Preciso de um pouco de doçura em minha vida
+Need a little sweetness in my life
+
+Açúcar, sim, por favor
+Sugar, yes, please
+
+Por que não vem colocar um pouco em mim?
+Won't you come and put it down on me?
+
+Sim
+Yeah
+
+Quero esse bolo veludo vermelho
+I want that red velvet
+
+Quero a doçura desse açúcar
+I want that sugar sweet
+
+Não deixe ninguém tocar
+Don't let nobody touch it
+
+A não ser que seja eu
+Unless that somebody's me
+
+Tenho que ser o cara certo
+I gotta be a man
+
+Não há outra saída
+There ain't no other way
+
+Porque, garota, você é mais quente
+'Cause, girl, you're hotter than
+
+Que a costa sul da Califórnia
+The southern California bay
+
+Não quero joguinhos
+I don't wanna play no games
+
+Não tenho do que ter medo
+I don't gotta be afraid
+
+Não venha se fingir de tímida
+Don't give all that shy shit
+
+Sem maquiagem, esta é a minha
+No make up on, that's my
+
+Açúcar, sim, por favor
+Sugar, yes, please
+
+Por que não vem colocar um pouco em mim?
+Won't you come and put it down on me?
+
+Estou bem aqui, pois eu preciso
+I'm right here, 'cause I need
+
+De um pouquinho de amor e compaixão
+Little love and little sympathy
+
+Sim, querida, você me mostrou um bom amor
+Yeah, baby, you show me good loving
+
+Faz tudo ficar bem
+Make it alright
+
+Preciso de um pouco de doçura em minha vida
+Need a little sweetness in my life
+
+Açúcar, sim, por favor
+Sugar, yes, please
+
+Por que não vem colocar um pouco em mim?
+Won't you come and put it down on me?
+
+Açúcar, sim, por favor
+Sugar, yes, please
+
+Por que não vem colocar um pouco em mim?
+Won't you come and put it down on me?
+
+Estou bem aqui, pois eu preciso
+I'm right here, 'cause I need
+
+De um pouquinho de amor e compaixão
+Little love and little sympathy
+
+Sim, você me mostrou um bom amor
+Yeah, you show me good loving
+
+Faz tudo ficar bem
+Make it alright
+
+Preciso de um pouco de doçura em minha vida
+Need a little sweetness in my life
+
+Açúcar, sim, por favor
+Sugar, yes, please
+
+Por que não vem colocar um pouco em mim?
+Won't you come and put it down on me?
+
+Em mim, em mim, uh
+Down on me, down on me, ooh`},
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/68a5kgbz7cury1l7ynq3a/Paramore-Still-into-You.mp3?rlkey=an87bpquba1640bturrcowbr8&st=wagulyt0&dl', title: 'Em uma mesma pulsação', artist: 'Gui & Ju', lyrics: `Não posso contar em uma mão os anos que estamos juntos
+Can't count the years on one hand that we've been together
+
+Eu preciso da outra para te segurar
+I need the other one to hold you
+
+Fazer você se sentir
+Make you feel
+
+Fazer você se sentir melhor
+Make you feel better
+
+Não é fácil amarmos um ao outro
+It's not a walk in the park to love each other
+
+Mas quando nossos dedos se entrelaçam
+But when our fingers interlock
+
+Não posso negar
+Can't deny
+
+Não posso negar que você vale a pena
+Can't deny you're worth it
+
+Porque depois de todo esse tempo
+'Cause after all this time
+
+Eu ainda estou a fim de você
+I'm still into you
+
+Eu já deveria ter superado todas as borboletas
+I should be over all the butterflies
+
+Mas estou a fim de você (estou a fim de você)
+But I'm into you (I'm into you)
+
+E, amor, até mesmo nas nossas piores noites
+And, baby, even on our worst nights
+
+Estou a fim de você (estou a fim de você)
+I'm into you (I'm into you)
+
+Deixe eles se perguntarem como chegamos tão longe
+Let 'em wonder how we got this far
+
+Porque realmente não preciso me perguntar nada
+'Cause I don't really need to wonder at all
+
+Sim, depois de todo esse tempo
+Yeah, after all this time
+
+Eu ainda estou a fim de você
+I'm still into you
+
+Reconto a noite da primeira vez que conheci sua mãe
+Recount the night that I first met your mother
+
+E na volta, dirigindo para minha casa
+And on the drive back to my house
+
+Eu te disse que
+I told you that
+
+Eu te disse que te amava
+I told you that I loved ya
+
+Você sentiu o peso do mundo
+You felt the weight of the world
+
+Cair dos seus ombros
+Fall off your shoulder
+
+E cantamos sua canção favorita
+And to your favorite song
+
+Juntos, até o começo da eternidade
+We sang along to the start of forever
+
+E depois de todo esse tempo
+And after all this time
+
+Eu ainda estou a fim de você
+I'm still into you
+
+Eu já deveria ter superado todas as borboletas
+I should be over all the butterflies
+
+Mas estou a fim de você (estou a fim de você)
+But I'm into you (I'm into you)
+
+E, amor, até mesmo nas nossas piores noites
+And, baby, even on our worst nights
+
+Estou a fim de você (estou a fim de você)
+I'm into you (I'm into you)
+
+Deixe eles se perguntarem como chegamos tão longe
+Let 'em wonder how we got this far
+
+Porque realmente não preciso me perguntar nada
+'Cause I don't really need to wonder at all
+
+Sim, depois de todo esse tempo
+Yeah, after all this time
+
+Eu ainda estou a fim de você
+I'm still into you
+
+Bem, algumas coisas apenas
+Well, some things just
+
+Algumas coisas apenas fazem sentido
+Some things just make sense
+
+E uma delas é você e eu (ei)
+And one of those is you and I (hey)
+
+Algumas coisas apenas
+Some things just
+
+Algumas coisas apenas fazem sentido
+Some things just make sense
+
+E mesmo depois de todo esse tempo (ei)
+And even after all this time (hey)
+
+Estou a fim de você
+I'm into you
+
+Amor, nenhum dia se passa que eu não esteja a fim de você
+Baby, not a day goes by that I'm not into you
+
+Eu já deveria ter superado todas as borboletas
+I should be over all the butterflies
+
+Mas estou a fim de você (estou a fim de você)
+But I'm into you (I'm into you)
+
+E, amor, até mesmo nas nossas piores noites
+And, baby, even on our worst nights
+
+Estou a fim de você (estou a fim de você)
+I'm into you (I'm into you)
+
+Deixe eles se perguntarem como chegamos tão longe
+Let 'em wonder how we got this far
+
+Porque realmente não preciso me perguntar nada
+'Cause I don't really need to wonder at all
+
+Sim, depois de todo esse tempo
+Yeah, after all this time
+
+Eu ainda estou a fim de você
+I'm still into you
+
+Eu ainda estou a fim de você
+I'm still into you
+
+Eu ainda estou a fim de você
+I'm still into you`},
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/uct4ji08nhokl7jv5utv6/Bryan-Behr-A-Vida-Boa-Com-Voc.mp3?rlkey=217ayf7dj7mpz1771djhvm1xh&st=63kebtuc&dl', title: 'Uma só melodia', artist: 'Gui & Ju', lyrics: `Por um instante minha vida
+Se fez mais bonita
+Quando você chegou
+Lá onde as estrelas dormem
+A gente tem sorte
+De encontrar amor
+
+Eu só vim pra dizer
+Que a vida é boa com você
+Que a vida é boa com você
+Que a vida é boa com você
+Que a vida é boa
+
+Do lado direito da rua
+A casa que tem mais flores é dela
+Lá onde o sol morre tarde
+Enquanto desenha sombras pela janela
+
+Eu só vim pra dizer
+Que a vida é boa com você
+Que a vida é boa com você
+Que a vida é boa com você
+Que a vida é boa
+
+Por um instante minha vida
+Se fez mais bonita
+Quando você chegou
+Lá onde as estrelas dormem
+A gente tem sorte
+De encontrar amor
+
+Mas eu só vim pra dizer
+Que a vida é boa com você
+Que a vida é boa com você
+Que a vida é boa com você
+Que a vida é boa
+Que a vida é boa com você
+(Que a vida é boa)
+Que a vida é boa com você
+(Que a vida é boa)
+Que a vida é boa com você
+(Que a vida é boa)
+Que a vida é boa`},
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/5wm3g307otbqr9edf2jrg/Onze20-Meu-Lugar.mp3?rlkey=0afmkwe3expuyvwt9wzvtwgf8&st=zohbkwiz&dl', title: 'Em perfeita harmonia', artist: 'Gui & Ju', lyrics: `Você já sabe que em qualquer lugar
+Eu tô pensando em você
+Por mais distante que eu pareça estar
+Eu tô pensando em você
+
+Há tanta coisa fora do lugar
+Que eu tento arrumar por você
+Só pra poder te mostrar que ao seu lado é meu lugar
+E que não há mais ninguém
+
+Pensa em mim que eu tô chegando agora
+Não precisa mais chorar
+É que a saudade eu já deixei lá fora
+Espera, eu não demoro a voltar
+
+Pensa em mim que eu tô chegando agora
+Não precisa mais chorar
+É que a saudade eu já deixei lá fora
+Espera, eu não demoro a voltar
+
+Você já sabe que em qualquer lugar
+Eu tô pensando em você
+Por mais distante que eu pareça estar
+Eu tô pensando em você
+
+Agora eu tô tentando arrumar
+Um jeito de ficar com você
+E pra nunca mais partir
+Eu só quero é ser feliz
+Com você e mais ninguém
+
+Pensa em mim que eu tô chegando agora
+Não precisa mais chorar
+É que a saudade eu já deixei lá fora
+Espera, eu não demoro a voltar
+
+Eu não quero ser só mais um na sua vida
+Voltando pra casa eu já sei onde vou ficar
+Dormir e acordar com você todo dia
+E pra não ter mais que te deixar
+E pra nunca mais te deixar
+
+Pensa em mim que eu tô chegando agora
+Não precisa mais chorar
+É que a saudade eu já deixei lá fora
+Espera, eu não demoro a voltar`},
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/h93qrhbxefnq7z2eaixco/Upstate-My-Heart-Is-Home.mp3?rlkey=kaqsnot6hwtz3naxzxv8mzwul&st=5ry1j2l0&dl', title: 'Num tom que é só nosso', artist: 'Gui & Ju', lyrics: `Meu lar era só por uma noite
+My home was only for the night
+
+Acordando em lugares diferentes
+Waking up in different places
+
+Você me envolveu, me deixou entrar
+You wrapped me up, let me inside
+
+Você é sempre meu oásis
+You're forever my oasis
+
+Meu coração está em casa com você
+My heart is home with you
+
+Meu coração está em casa com você
+My heart in home with you
+
+Quando me perco, você fica pra trás
+When I get lost, you stay behind
+
+Quando estou caindo, você é minha força, é
+When I'm falling, you're my strength, yeah
+
+Você me levanta, acalma minha mente
+You lift me up, you ease my mind
+
+Sempre sustentando minha fé, é
+Forever holding up my faith, yeah
+
+Meu coração está em casa com você
+My heart is home with you
+
+Meu coração está em casa com você
+My heart is home with you
+
+Enquanto o céu for azul
+As long as the skies are blue
+
+Meu coração está em casa com você
+My heart is home with you
+
+Quando tudo falha, você está ao meu lado
+When all else, fails you're by my side
+
+E amanhã eu posso encarar isso
+And tomorrow I can face it
+
+Quando parei de correr pela minha vida
+When I stopped running for my life
+
+E todas as peças encontraram seus lugares
+And all the pieces found their places
+
+Meu coração está em casa com você
+My heart is home with you
+
+Meu coração está em casa com você
+My heart is home with you
+
+Enquanto o céu for azul
+As long as the skies are blue
+
+Meu coração está em casa com você
+My heart is home with you
+
+Enquanto as estrelas brilharem
+As long as the stars shine through
+
+Meu coração está em casa com você
+My heart is home with you`},
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/p4xmuvblwzk3ch2q5t59e/Mariana-Nolasco-All-Star.mp3?rlkey=ngsiahq5l5blkfn3aiszmzymn&st=scgajfpx&dl', title: 'Afinada em amor', artist: 'Gui & Ju', lyrics: `Estranho seria se eu não me apaixonasse por você
+O sal viria doce para os novos lábios
+Colombo procurou as índias, mas a terra avistou em você
+O som que eu ouço são as gírias do seu vocabulário
+
+Estranho é gostar tanto do seu All Star azul
+Estranho é pensar que o bairro das Laranjeiras
+Satisfeito sorri quando chego ali
+E entro no elevador
+Aperto o 12 que é o seu andar
+Não vejo a hora de te reencontrar
+E continuar aquela conversa
+Que não terminamos ontem
+Ficou pra hoje
+
+Estranho, mas já me sinto como um velho amigo seu
+Seu All Star azul combina com o meu preto de cano alto
+Se o homem já pisou na lua, como eu ainda não tenho seu endereço?
+O tom que eu canto as minhas músicas
+Para a tua voz parece exato
+
+Estranho é gostar tanto do seu All Star azul
+Estranho é pensar que o bairro das Laranjeiras
+Satisfeito sorri quando chego ali e entro no elevador
+Aperto o 12 que é o seu andar
+Não vejo a hora de te reencontrar
+E continuar aquela conversa
+Que não terminamos ontem ficou pra
+Laranjeiras
+
+Satisfeito sorri quando chego ali e entro no elevador
+Aperto o 12 que é o seu andar
+Não vejo a hora de te reencontrar
+E continuar aquela conversa
+Que não terminamos ontem, ficou pra hoje`},
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/w1ljcf6xh6h0s4i55235h/John-Mayer-XO.mp3?rlkey=u7fp781e8ua329es4ieft4wi9&st=s0edbqe3&dl', title: 'E para sempre em play', artist: 'Gui & Ju', lyrics: `Seu amor é brilhante como sempre
+Your love is bright as ever
+
+Mesmo nas sombras
+Even in the shadows
+
+Querida, me beije
+Baby, kiss me
+
+Antes que apaguem as luzes
+Before they turn the lights out
+
+Seu coração está brilhando
+Your heart is glowing
+
+E estou colidindo em você
+And I'm crashing into you
+
+Hmm, querida, me beije, me beije
+Hmm, baby, kiss me, kiss me
+
+Antes que apaguem as luzes
+Before they turn the lights out
+
+Antes que apaguem as luzes
+Before they turn the lights out
+
+Ooh, querida, me ame com as luzes apagadas
+Ooh, baby, love me lights out
+
+Na noite mais escura
+In the darkest night hour
+
+Eu vou procurar no meio da multidão
+I'll search through the crowd
+
+Seu rosto é tudo o que vejo
+Your face is all that I see
+
+Eu vou te dar tudo
+I'll give you everything
+
+Querida, me ame com as luzes apagadas
+Baby, love me lights out
+
+Querida, me ame com as luzes apagadas
+Baby, love me lights out
+
+Não temos a eternidade
+We don’t have forever
+
+Querida, a luz do dia está indo embora
+Baby, daylight’s wasting
+
+É melhor você me beijar
+You better kiss me
+
+Antes que nosso tempo se acabe
+Before our time is run out
+
+Ninguém vê o que vemos
+Nobody sees what we see
+
+Estão apenas olhando sem esperanças
+They’re just hopelessly gazing
+
+Oh, querida, me leve, me leve
+Oh, baby, take me, take me
+
+Antes que apaguem as luzes
+Before they turn the lights out
+
+Antes do nosso tempo acabar
+Before our time is run out
+
+Oh, querida, me ame com as luzes apagadas
+Oh, baby, love me lights out
+
+Na noite mais escura
+In the darkest night hour
+
+Eu vou procurar no meio da multidão
+I'll search through the crowd
+
+Seu rosto é tudo o que vejo
+Your face is all that I see
+
+Eu vou te dar tudo
+I'll give you everything
+
+Querida, me ame com as luzes apagadas
+Baby, love me lights out
+
+Querida, me ame com as luzes apagadas
+Baby, love me lights out
+
+Ooh, você pode apagar minhas luzes
+Ooh, you can turn my lights out
+
+Eu te amo como beijos e abraços
+I love you like XO
+
+Você me ama como beijos e abraços
+You love me like XO
+
+Você me mata, menina, beijos e abraços
+You kill me, girl, XO
+
+Você me ama como beijos e abraços
+You love me like XO
+
+É tudo o que vejo
+Is all that I see
+
+Te dou tudo
+Give you everything
+
+Querida, me ame com as luzes apagadas
+Baby, love me lights out
+
+Querida, me ame com as luzes apagadas
+Baby, love me lights out
+
+Você pode apagar minhas luzes
+You can turn my lights out
+
+Ooh, na noite mais escura
+Ooh, in the darkest night hour
+
+Eu vou procurar no meio da multidão
+I'll search through the crowd
+
+Seu rosto é tudo o que vejo
+Your face is all that I see
+
+Eu vou te dar tudo
+I'll give you everything
+
+Querida, me ame com as luzes apagadas
+Baby, love me lights out
+
+Querida, me ame com as luzes apagadas
+Baby, love me lights out
+
+Você pode apagar minhas luzes
+Ooh, you can turn my lights out`},
+                { url: 'https://dl.dropboxusercontent.com/scl/fi/jx9v276kfracul9si8wem/Rihanna-You-Da-One.mp3?rlkey=y3528msnu0820e1y3y9z25brf&st=5sdqzgqh&dl', title: '♡', artist: 'Gui & Ju', lyrics: `(Você é o único com quem eu sonho todos os dias)
+(You the one that I dream about all day)
+
+(Você é o único em quem eu sempre penso)
+(You the one that I think about always)
+
+(Você é o único, é por isso que eu me comporto)
+(You are the one, so I make sure I'll behave)
+
+(Meu amor é seu amor, seu amor é meu amor-amor-amor)
+(My love is your love, your love is my love-love-love)
+
+Querido, eu te amo
+Baby, I love you
+
+Eu preciso de você aqui comigo o tempo to-o-o-o-o-o-do
+I need you here with me all the ti-i-i-i-i-i-ime
+
+Querido, fomos destinados a ficar juntos
+Baby, we meant to be
+
+Você me faz sorrir o tempo to-o-o-o-o-o-do
+You got me smiling all the ti-i-i-i-i-i-ime
+
+Porque você sabe como me conquistar
+'Cause you know how to give me that
+
+Você sabe me trazer de volta
+You know how to pull me back
+
+Quando estou fugindo, fugindo, tentando escapar de amar você
+When I go runnin', runnin', tryna get away from lovin' ya
+
+Você sabe como me amar intensamente
+You know how to love me hard
+
+Não vou mentir, estou me apaixonando de verdade
+I won't lie, I'm fallin' hard
+
+É, estou me apaixonando, mas não há nada de errado nisso
+Yep, I'm fallin' for ya, but there's nothin' wrong with that
+
+Você é o único
+You the one
+
+Você é o único com quem eu sonho todos os dias
+You the one that I dream about all day
+
+Você é o único em quem eu sempre penso
+You the one that I think about always
+
+Você é o único, é por isso que eu me comporto
+You are the one, so I make sure I'll behave
+
+Meu amor é seu amor, seu amor é meu amor
+My love is your love, your love is my love
+
+(Você é o único) você é o único com quem eu sonho todos os dias
+(You the one) you the one that I dream about all day
+
+(Você é o único) você é o único em quem eu sempre penso
+(You the one) you the one that I think about always
+
+(Você é o único) você é o único, é por isso que eu me comporto
+(You are the one) you are the one, so I make sure I'll behave
+
+Meu amor é seu amor, seu amor é meu amor
+My love is your love, your love is mine
+
+Querido, venha, me pegue agora
+Baby, come, take me now
+
+Me abrace agora, faça eu me sentir vi-i-i-i-i-i-iva
+Hold me now, make me come ali-i-i-i-i-i-i've
+
+Você tem o toque mais gentil
+You got the sweetest touch
+
+Estou tão feliz por você ter entrado na minha vi-i-i-i-i-i-ida
+I'm so happy you came in my li-i-i-i-i-i-ife
+
+Porque você sabe como me conquistar
+'Cause you know how to give me that
+
+Você sabe me trazer de volta
+You know how to pull me back
+
+Quando estou fugindo, fugindo, tentando escapar de amar você
+When I go runnin', runnin', tryna get away from loving ya
+
+Você sabe como me amar intensamente
+You know how to love me hard
+
+Não vou mentir, estou me apaixonando de verdade
+I won't lie, I'm fallin' hard
+
+É, estou me apaixonando, mas não há nada de errado nisso
+Yep, I'm fallin' for ya, but there's nothin' wrong with that
+
+Você é o único
+You the one
+
+Você é o único com quem eu sonho todos os dias
+You the one that I dream about all day
+
+Você é o único em quem eu sempre penso
+You the one that I think about always
+
+(Você é o único) você é o único, é por isso que eu me comporto
+(You the one) you are the one, so I make sure I'll behave
+
+Meu amor é seu amor, seu amor é meu amor
+My love is your love, your love is my love
+
+(Você é o único) você é o único com quem eu sonho todos os dias
+(You the one) you the one that I dream about all day
+
+(Você é o único) você é o único em quem eu sempre penso
+(You are the one) you the one that I think about always
+
+(Oh, você é o único) você é o único, é por isso que eu me comporto
+(Oh, you the one) you are the one, so I make sure I'll behave
+
+Meu amor é seu amor, seu amor é meu amor (é meu)
+My love is your love, your love is mine (is mine)
+
+E, sim, estou meio louca
+And, yes, I'm kinda crazy
+
+É isso que acontece, querido
+That's what happens, baby
+
+Quando você faz assim, você não deveria ter me pegado gostoso assim
+When you put it down, you shouldn't give it to me good like that
+
+Não deveria ter feito assim
+Shouldn't hit it like that
+
+Me fez gritar assim
+Had me yellin' like that
+
+Não sabia que você me faria voltar
+Didn't know you would've had me comin' back
+
+Você é o único que eu gosto, você é o único que eu amo
+You the one that I'm feelin', you the one that I'm lovin'
+
+Não há outros caras como você
+Ain't no other niggas like you
+
+Não, só há um, um, u-u-um
+No, there's just one, one, one, o-o-one
+
+Não, querido, só um
+No, baby, just one
+
+Um, u-um
+One, o-one
+
+Eu aposto que você quer saber
+I bet you wanna know
+
+Você é o único com quem eu sonho todos os dias
+You the one that I dream about all day
+
+(Você é o único) você é o único em quem eu sempre penso
+(You the one) you the one that I think about always
+
+(Você é o único) você é o único, é por isso que eu me comporto
+(You are the one) you are the one, so I make sure I'll behave
+
+Meu amor é seu amor, seu amor é meu amor (seu amor é meu)
+My love is your love, your love is my love (your love is mine)
+
+Você é o único com quem eu sonho todos os dias
+You the one that I dream about all day
+
+(Você é o único) você é o único em quem eu sempre penso
+(You are the one) you the one that I think about always
+
+(Você é o único) você é o único, é por isso que eu me comporto
+(You the the one) you are the one, so I make sure I'll behave
+
+Meu amor é seu amor, seu amor é meu amor
+My love is your love, your love is mine`}
             ];
 
             let currentTrackIndex = 0;
@@ -687,13 +2246,23 @@
             }
 
             function getLyricsPreview(lyrics) {
-                if (!lyrics || lyrics.startsWith('Letra da música')) {
+                if (!lyrics || lyrics.startsWith('Letra da música') || lyrics.trim() === '') {
                     return "Letra não disponível para esta música.";
                 }
-                if (lyrics.length > 150) {
-                    return lyrics.substring(0, 150) + "...";
+
+                // Define o tamanho máximo da prévia (próximo ao da "Nossa Letra")
+                const maxLength = 200; 
+
+                // Limpa o texto: remove espaços no início/fim e substitui quebras de linha por um espaço
+                let previewText = lyrics.trim().replace(/\n/g, ' '); 
+                // Substitui múltiplos espaços (criados pela quebra de linha) por um único espaço
+                previewText = previewText.replace(/\s+/g, ' ');
+
+                if (previewText.length > maxLength) {
+                    return previewText.substring(0, maxLength) + "...";
                 }
-                return lyrics;
+                
+                return previewText; // Se for menor, retorna o texto limpo (sem "...")
             }
 
             function updateProgress() {
@@ -735,29 +2304,6 @@
             pauseMusic();
             
             // --- Lógica de Swipe na Capa do Álbum (Removida) ---
-            /* let touchStartX = 0;
-            let touchEndX = 0;
-
-            albumArtContainer.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-
-            albumArtContainer.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleAlbumSwipe();
-            }, { passive: true });
-
-            function handleAlbumSwipe() {
-                const swipeThreshold = 50; // Mínimo de pixels para considerar um swipe
-                if (touchStartX - touchEndX > swipeThreshold) {
-                    // Swipe para a esquerda (próxima música)
-                    playNext();
-                } else if (touchEndX - startX > swipeThreshold) {
-                    // Swipe para a direita (música anterior)
-                    playPrevious();
-                }
-            }
-            */
 
             const mainPage = document.getElementById('main-page');
             const lyricsPage = document.getElementById('lyrics-page');
@@ -774,15 +2320,18 @@
             const mainSongLyricsTab = document.getElementById('main-song-lyrics-tab');
 
             lyricsCard.addEventListener('click', () => {
+                console.log("Abrindo modal de letra. Aba selecionada:", selectedLyricsTab); // DEBUG
                 lyricsPage.style.transform = '';
                 lyricsPage.classList.remove('hidden');
                 mainPage.classList.add('hidden');
                 
-                // ATUALIZADO: Mostra o conteúdo correto com base na seleção da página principal
+                // CORREÇÃO: Lógica para mostrar/esconder o conteúdo correto
                 if (selectedLyricsTab === 'our') {
+                    console.log("Mostrando 'Nossa Letra', escondendo 'Música'"); // DEBUG
                     ourLyricsContent.classList.remove('hidden');
                     songLyricsContent.classList.add('hidden');
                 } else {
+                    console.log("Mostrando 'Música', escondendo 'Nossa Letra'"); // DEBUG
                     songLyricsContent.classList.remove('hidden');
                     ourLyricsContent.classList.add('hidden');
                 }
@@ -1128,6 +2677,7 @@
             // Arrastar para fechar Letra
             addDragToCloseListener(lyricsPage,
                 (e) => {
+                    // Só permite arrastar se o conteúdo da letra estiver no topo (scrollTop === 0)
                     if (lyricsContent.scrollTop === 0) {
                         isDragging = true;
                         touchStartY = e.touches[0].clientY;
@@ -1140,7 +2690,7 @@
                     if (!isDragging) return;
                     currentY = e.touches[0].clientY;
                     const diffY = currentY - touchStartY;
-                    if (diffY > 0) { 
+                    if (diffY > 0) { // Só permite arrastar para baixo
                         lyricsPage.style.transform = `translateY(${diffY}px)`;
                     }
                 },
@@ -1149,10 +2699,11 @@
                     isDragging = false;
                     const diffY = currentY - touchStartY;
                     lyricsPage.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    // Se arrastar mais que 1/4 da tela, fecha
                     if (diffY > window.innerHeight / 4) {
                         closeLyricsPage();
                     } else {
-                        lyricsPage.style.transform = ''; 
+                        lyricsPage.style.transform = ''; // Volta ao normal
                     }
                 }
             );
