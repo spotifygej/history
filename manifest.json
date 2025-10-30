@@ -1,6 +1,6 @@
 {
     "name": "Nossa Trilha Sonora",
-    "short_name": "Nossa Música",
+    "short_name": "Nossa Trilha Sonora",
     "description": "Aplicativo de letras e música",
     "start_url": "/history/",
     "display": "standalone",
@@ -18,4 +18,5 @@
             "type": "image/png"
         }
     ]
+
 }
