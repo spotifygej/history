@@ -6,7 +6,7 @@ const CACHE_NAME = 'nossa-musica-cache-v1';
 const SHELL_FILES = [
     '/',
     'index.html',
-    'tailwind.js',
+    'https://cdn.tailwindcss.com', // CORREÇÃO: Atualizado de 'tailwind.js' para o CDN
     'manifest.json',
     'icons/icon-192x192.png',
     'favicon.png',
