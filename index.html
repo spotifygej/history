@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nossa Trilha Sonora</title>
+    <title>Nossa Musica</title>
     <!-- Configurações PWA e iOS -->
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,11 +14,6 @@
     <!-- Favicon (ícone da aba) -->
     <link id="favicon" rel="icon" href="#">
     <!-- Tailwind CSS para estilização rápida e responsiva -->
-    
-    <!-- Google Fonts - Poppins para uma aparência moderna -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         /* Estilos personalizados para complementar o Tailwind */
         body {
@@ -95,7 +90,7 @@
     <!-- PÁGINA DE SENHA -->
     <div id="password-page" class="fixed inset-0 bg-[#121212] flex flex-col items-center justify-center z-[200]">
         <div class="text-center p-4">
-            <h1 class="text-3xl font-bold mb-2 text-white">Nossa Trilha Sonora</h1>
+            <h1 class="text-3xl font-bold mb-2 text-white">Nossa Música</h1>
             <p class="text-gray-400 mb-8">Por favor, insira a senha para continuar.</p>
             <form id="password-form" class="flex flex-col items-center">
                 <input type="password" id="password-input" class="bg-[#282828] border-2 border-transparent focus:border-[#1DB954] text-white text-center text-sm rounded-lg focus:ring-0 block w-64 p-2.5 mb-4 transition-all duration-300" placeholder="********" required>
@@ -109,9 +104,9 @@
     
     <!-- Conteúdo principal da aplicação (inicialmente oculto) -->
     <div id="app-container" class="hidden">
-        <!-- NOTIFICAÇÃO DE MÚSICA -->
+        <!-- NOTIFICAÇÃO DE MÚSICA (E AGORA DE STATUS DO CACHE) -->
         <div id="notification" class="fixed top-10 left-1/2 -translate-x-1/2 bg-[#1DB954] text-white px-6 py-3 rounded-full shadow-lg text-sm font-semibold z-[100] opacity-0 transition-all duration-500 ease-in-out pointer-events-none transform -translate-y-10">
-            Tocando: <span id="notification-song-name"></span>
+            <span id="notification-song-name"></span>
         </div>
 
         <!-- Player de áudio invisível -->
@@ -137,6 +132,13 @@
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.487 5.235 3.487 8.413 0 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 4.315 1.731 6.086l.001.004l.351.568l-1.251 4.605l4.672-1.225l.531.315z"></path></svg>
                                     <span>Enviar no WhatsApp</span>
                                 </a>
+                                <!-- NOVO BOTÃO DE DOWNLOAD OFFLINE -->
+                                <button id="download-offline-btn" class="flex items-center space-x-3 px-4 py-3 text-sm text-white hover:bg-[#3e3e3e] rounded-md w-full text-left">
+                                    <!-- Download Icon SVG -->
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                    <span id="download-offline-text">Salvar para Offline</span>
+                                </button>
+                                <!-- FIM DO NOVO BOTÃO -->
                             </div>
                         </div>
                     </header>
@@ -186,7 +188,7 @@
                         <!-- CARD "LETRA" -->
                         <div id="lyrics-card" class="bg-[#191414] rounded-lg p-6 cursor-pointer mb-8 flex flex-col items-start">
                             <h2 id="lyrics-card-title" class="text-xl font-bold mb-2">Nossa Letra</h2>
-                            <p id="lyrics-card-preview" class="text-gray-300 text-sm mb-4">Sabe de uma coisa? Sempre foi você, a minha paixão de anos e anos. Lembro que, na época dos meus 17 anos e dos seus 14, eu sempre me afastava de qualquer outra garota, porque no fundo, eu era apaixonado por você...</p>
+                            <p id="lyrics-card-preview" class="text-gray-300 text-sm mb-4">Sabe de uma coisa? Você sempre foi a minha primeira opção, a minha paixão de anos e anos. Eu lembro que sempre que começava a conhecer uma menina, eu não deixava passar demais porque eu era apaixonado por você...</p>
                             <button class="bg-white text-black text-sm font-bold py-2 px-4 rounded-full hover:scale-105 transition-transform">
                                 Mostrar Letra
                             </button>
@@ -272,18 +274,18 @@
                     <!-- Conteúdo "Nossa Letra" (Original) -->
                     <!-- NOTA: 'hidden' NÃO está aqui por padrão, será adicionado/removido via JS -->
                     <div id="our-lyrics-content" class="text-white text-xl font-bold space-y-4 text-center">
-                        <p>Sabe de uma coisa? Sempre foi você, a minha paixão de anos e anos. Lembro que, na época dos meus 17 anos e dos seus 14, eu sempre me afastava de qualquer outra garota, porque no fundo, eu era apaixonado por você.</p>
+                        <p>Sabe de uma coisa? Sempre foi você, a minha paixão de anos. Lembro que, na época dos meus 17 anos e dos seus 14, eu sempre me afastava de qualquer outra garota porque, no fundo, eu era apaixonado por você.</p>
                         <p>Não sei dizer exatamente quando isso começou, talvez eu fosse mais novo ainda, mas eu tinha uma unica ideia na minha mente: "Quando ela fizer 18 anos, eu converso com ela". Eu tinha essa certeza de que você, minha melhor amiga, seria minha esposa. Era com você que eu queria me casar desde aquela época. Eu gostava tanto de você que eu lembro de esperar anos por esse momento.</p>
-                        <p>Mas eu, como a pessoa mais imatura da face da terra, em fevereiro de 2020 nove meses antes de você fazer 18,combinei de sair com a Mari para conversar sobre isso, porque eu queria me preparar melhor para esse evento.</p>
-                        <p>Só que a Mari conversou com você e voltou com um banho de água fria. Ela disse que eu poderia estragar nossa amizade. O medo de que isso acontecesse, o medo de te afastar, foi tão grande que eu simplesmente deixei aquele sonho de lado por um momento.</p>
+                        <p>Mas eu, como a pessoa mais imatura da face da terra, em fevereiro de 2020 — nove meses antes de você fazer 18 — combinei de sair com a Mari para conversar sobre isso, porque eu queria me preparar melhor para esse evento.</p>
+                        <p>Só que a Mari conversou com você e voltou com um banho de água fria. Ela disse que eu poderia estragar nossa amizade. O medo de que isso acontecesse, o medo de te afastar, foi tão grande que eu simplesmente deixei aquele sonho de lado.</p>
                         <p>O tempo passou e as coisas foram acontecendo. Eu namorei, terminei. Precisei de alguns meses para me recuperar e, quando me senti pronto para outro relacionamento, não vou mentir: eu pensava em você. Mas eu ainda estava travado. Tivemos alguns momentos inoportunos...</p>
-                        <p>Mas com o tempo, essa trava foi enfraquecendo. Foi tanta história, tanto vai e vem, para no final tudo nos levar àquele fim de semana só nosso no Rio de Janeiro. Aonde, tivemos tempo para nos reaproximar e reconectar com passeios a dois e horas e horas para conversar que foram a chave para tudo isso. Finalmente, pudemos dar uma chance ao nosso antigo "gostava de você naquela época".</p>
-                        <p>Hoje, vejo tudo com muito mais clareza. Percebo que também falhei com você por não ter tomado uma atitude antes. Já era para estarmos juntos há muito tempo (talvez com cinco filhos ou mais já, brincadeira!), vivendo nossas vidas. Me desculpa por demorar tanto para isso acontecer. A vida brincou demais com a gente, mas seria muito injusto com nós mesmos se não déssemos uma chance a isso.</p>
-                        <p>Sinto que agora é o momento certo. Estamos mais maduros, mais preparados para reviver isso e dar início à nossa história de amor. E se você me permitir, daqui em diante, você será a minha garota. Aquela quem eu irei cuidar e apoiar eternamente.</p>
+                        <p>E com o tempo, essa trava foi enfraquecendo. Enfim, foi tanta história, tanto vai e vem, para no final tudo nos levar àquele fim de semana só nosso no Rio de Janeiro. Aonde, tivemos tempo para nos reaproximar e reconectar e as horas e horas de conversa no ônibus foram essenciais. Finalmente, pudemos dar uma chance ao nosso antigo "gostava de você naquela época".</p>
+                        <p>Hoje, vejo tudo com muito mais clareza. Percebo que também falhei com você por não ter tomado uma atitude antes. Já era para estarmos juntos há muito tempo (talvez com cinco filhos já, brincadeira!), vivendo nossas vidas. Me desculpa por demorar tanto para isso acontecer. A vida brincou demais com a gente, mas seria muito injusto com nós mesmos se não déssemos uma chance a isso.</p>
+                        <p>Sinto que agora é o momento certo. Estamos mais maduros, mais preparados para reviver isso e dar início à nossa história de amor. E se você me permitir, daqui em diante, você será a minha garota. Aquela que eu irei cuidar e apoiar eternamente.</p>
                         <p>Eu nunca vou esquecer o sorriso que você deu no ônibus, depois da nossa conversa. Foi tão lindo me quebrou na hora. Eu quero ver esse sorriso sempre. Quero te fazer feliz e estar ao seu lado nos momentos bons e ruins, como sempre estive; só que agora, não apenas como seu melhor amigo, mas como seu namorado, noivo e futuro esposo.</p>
-                        <p>Estava olhando nossa galeria de fotos... a gente tem tanta história juntos. Nós praticamente crescemos juntos. Foi muito legal criar esse "mini Spotify" de história para você; relembrei tanta coisa que passamos e o quanto foi bom estar ao seu lado todos esses anos. O incrível é que, com você, nada é complicado é tudo leve.</p>
-                        <p>Eu quero viver a leveza que é estar ao seu lado para sempre e conhecer novos lugares, viajar muitoooo, servir a Jeová juntos e construir nossa família.</p>
-                        <p>Que a partir de hoje, a gente não precise adiar mais nada e que possamos ser ainda mais felizes juntos. E que a trilha sonora do nosso amor nunca tenha fim, esteja sempre em play.</p>
+                        <p>Estava olhando nossa galeria de fotos... a gente tem tanta história. Nós praticamente crescemos juntos. Foi muito legal criar esse "mini Spotify" de história para você; relembrei tanta coisa que passamos e o quanto foi bom estar ao seu lado todos esses anos. O incrível é que, com você, nada é complicado é tudo leve.</p>
+                        <p>Eu quero viver a leveza que é estar ao seu lado: conhecer novos lugares, viajar, servir a Jeová juntos e construir nossa família.</p>
+                        <p>Que a partir de hoje, a gente não precise adiar mais nada e que possamos ser ainda mais felizes juntos. E que a trilha sonora do nosso amor nunca tenha fim.</p>
                         <p>Eu amo você Ju, Eu sempre amei!</p>
                     </div>
 
@@ -530,7 +532,7 @@
             
             // --- PLAYLIST DE MÚSICAS ---
             const musicPlaylist = [
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/yb8hj0ahfz7myyqd8dnp9/Indians-Oblivion.mp3?rlkey=1o7owturcr6o28h0zp4z35cok&st=9q3lbzex&dl', title: 'Nossa Trilha Sonora', artist: 'Gui & Ju', lyrics: `Eu acredito quando eu vejo algo
+                { url: 'audio/Indians-Oblivion.mp3', title: 'Nossa Trilha Sonora', artist: 'Gui & Ju', lyrics: `Eu acredito quando eu vejo algo
 I believe when I see something
 
 Isso pode crescer porque eu vejo nos seus olhos
@@ -638,7 +640,7 @@ Soon to be
 
 A beleza de todas as estrelas
 The beauty of all stars` },
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/8o8s2sypttxe8mf61mos0/Jorge-e-Mateus-Pra-que-Entender.mp3?rlkey=bnybyh5k6ga8zzcpta4jfugtq&st=ooqljc8i&dl', title: 'Está apenas começando', artist: 'Gui & Ju', lyrics: `O que tem por trás desse sorriso
+                { url: 'audio/Jorge-e-Mateus-Pra-que-Entender.mp3', title: 'Está apenas começando', artist: 'Gui & Ju', lyrics: `O que tem por trás desse sorriso
 Que me deixa fissurado em você?
 É um misto de desejo e vício
 Já tentei, mas não consigo entender
@@ -680,7 +682,7 @@ Que eu fosse querer
 Era você
 Pra que entender?
 Eu tô amando você`},
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/g9bv7zxrg5subjyy1lmlw/TIAGO-IORC-Sorte.mp3?rlkey=8zm5iinvkdd9p6vaesrqfrm96&st=rktmkt1z&dl', title: 'Cada nota, um Beijo', artist: 'Gui & Ju', lyrics: `Tudo de bom que você me fizer
+                { url: 'audio/Tiago-Iorc-Sorte.mp3', title: 'Cada nota, um Beijo', artist: 'Gui & Ju', lyrics: `Tudo de bom que você me fizer
 Faz minha rima ficar mas rara
 O que você faz me ajuda a cantar
 Põe um sorriso na minha cara
@@ -704,7 +706,7 @@ Você me da sorte na vida
 
 O que você faz me ajuda a cantar
 Quando te vejo faz minha rima fica mais rara`},
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/cib06xox1ki6uwtsy4lnc/Grouplove-Let-Me-In.mp3?rlkey=gdr374u4qgh7ogc533j7goqma&st=d3uixeoz&dl', title: 'Cada acorde, um abraço', artist: 'Gui & Ju', lyrics: `Me dê, me dê aquele amor
+                { url: 'audio/Grouplove-Let-Me-In.mp3', title: 'Cada acorde, um abraço', artist: 'Gui & Ju', lyrics: `Me dê, me dê aquele amor
 Gimme, gimme that love
 
 Estarei esperando por você
@@ -868,7 +870,7 @@ Gimme that love
 
 Estarei esperando por você
 I'll be waiting for ya`},
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/jgrt6g5cxj68opbwm2aqu/Cristiano-Araujo-N-o-Sei-Me-Controlar.m4a?rlkey=s26z7ra5s94zdt2fggy5fobe4&st=v3cotsjs&dl', title: 'Nossas risadas em E maior', artist: 'Gui & Ju', lyrics: `Tô louco por um beijo
+                { url: 'audio/Cristiano-Araujo-Não-Sei-Me-Controlar.mp3', title: 'Nossas risadas em E maior', artist: 'Gui & Ju', lyrics: `Tô louco por um beijo
 E esse meu desejo
 Quer me dominar
 O tempo vai passando
@@ -884,7 +886,7 @@ Vem trazer de volta
 A cor da minha vida que você levou
 Vem curar de vez a cicatriz
 Que no meu coração você deixou`},
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/p4baiax7kiqe0a0yc5yi5/Armandinho-Eu-Juro.mp3?rlkey=d1b22jjixxa5xuo5puta51ad9&st=6huy0r1m&dl', title: 'Seu olhar em verso e refrão', artist: 'Gui & Ju', lyrics: `Estamos tão longe, tão perto também
+                { url: 'audio/Armandinho-Eu-Juro.mp3', title: 'Seu olhar em verso e refrão', artist: 'Gui & Ju', lyrics: `Estamos tão longe, tão perto também
 E os anjos nos dizem amém
 Fiquei trabalhando até tarde
 Mas não vou dormir sem dizer
@@ -946,7 +948,7 @@ Eu juro
 Te juro amor eterno (oioi)
 Eu juro
 Te juro amor eterno`},
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/ve92fqft44ugque6ajkhs/Shawn-Mendes-Always-Been-You.mp3?rlkey=mp9puk6t1d65df4h7b4bams50&st=y9lq0ttp&dl', title: 'Uma canção de nós dois', artist: 'Gui & Ju', lyrics: `É um conto de fadas que não consigo explicar
+                { url: 'audio/Shawn-Mendes-Always-Been-You.mp3', title: 'Uma canção de nós dois', artist: 'Gui & Ju', lyrics: `É um conto de fadas que não consigo explicar
 It's a fairytale I can't explain
 
 Cheio de palavras que não sei dizer
@@ -1017,7 +1019,7 @@ It's always been you
 
 Você é a única para quem meu coração continua voltando
 You're the only one that my heart keeps coming back to`},
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/ootwtg1puatu60ucnm5kt/Taylor-Swift-Daylight.mp3?rlkey=kd8hlfztnzd3q6ifj3pa9207g&st=253iqihw&dl', title: 'Escrita a cada dia', artist: 'Gui & Ju', lyrics: `Meu amor era tão cruel quanto as cidades em que vivi
+                { url: 'audio/Taylor-Swift-Daylight.mp3', title: 'Escrita a cada dia', artist: 'Gui & Ju', lyrics: `Meu amor era tão cruel quanto as cidades em que vivi
 My love was as cruel as the cities I lived in
 
 Todos pareciam piores à luz
@@ -1196,7 +1198,7 @@ I just think that
 
 Você é o que você ama
 You are what you love`},
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/o2chnlwzkwy3s2o3phzx9/Maroon-5-Sugar.mp3?rlkey=hxhq95qy6a6vu71pstlt0e6ty&st=3kwvdx5i&dl', title: 'Corações no mesmo ritmo', artist: 'Gui & Ju', lyrics: `Estou sofrendo, querida, estou destruído
+                { url: 'audio/Maroon-5-Sugar.mp3', title: 'Corações no mesmo ritmo', artist: 'Gui & Ju', lyrics: `Estou sofrendo, querida, estou destruído
 I'm hurting, baby, I'm broken down
 
 Preciso do seu amor, amor
@@ -1417,7 +1419,7 @@ Won't you come and put it down on me?
 
 Em mim, em mim, uh
 Down on me, down on me, ooh`},
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/nktrrm4bqpcfpkq9l8u79/Jason-Mraz-I-Won-t-Give-Up.mp3?rlkey=5m1ut2uo2s4hj6qhtkr57w231&st=5hki2gfe&dl', title: 'Em uma mesma pulsação', artist: 'Gui & Ju', lyrics: `Quando olho em seus olhos
+                { url: 'audio/Jason-Mraz-I-Wont-Give-Up.mp3', title: 'Em uma mesma pulsação', artist: 'Gui & Ju', lyrics: `Quando olho em seus olhos
 When I look into your eyes
 
 É como observar o céu à noite
@@ -1551,7 +1553,7 @@ I'm giving you all my love
 
 Ainda estou melhorando
 I'm still looking up`},
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/uct4ji08nhokl7jv5utv6/Bryan-Behr-A-Vida-Boa-Com-Voc.mp3?rlkey=217ayf7dj7mpz1771djhvm1xh&st=63kebtuc&dl', title: 'Uma só melodia', artist: 'Gui & Ju', lyrics: `Por um instante minha vida
+                { url: 'audio/Bryan-Behr-A-Vida-É-Boa-Com-Você.mp3', title: 'Uma só melodia', artist: 'Gui & Ju', lyrics: `Por um instante minha vida
 Se fez mais bonita
 Quando você chegou
 Lá onde as estrelas dormem
@@ -1594,7 +1596,7 @@ Que a vida é boa com você
 Que a vida é boa com você
 (Que a vida é boa)
 Que a vida é boa`},
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/5wm3g307otbqr9edf2jrg/Onze20-Meu-Lugar.mp3?rlkey=0afmkwe3expuyvwt9wzvtwgf8&st=zohbkwiz&dl', title: 'Em perfeita harmonia', artist: 'Gui & Ju', lyrics: `Você já sabe que em qualquer lugar
+                { url: 'audio/Onze20-Meu-Lugar.mp3', title: 'Em perfeita harmonia', artist: 'Gui & Ju', lyrics: `Você já sabe que em qualquer lugar
 Eu tô pensando em você
 Por mais distante que eu pareça estar
 Eu tô pensando em você
@@ -1640,7 +1642,7 @@ Pensa em mim que eu tô chegando agora
 Não precisa mais chorar
 É que a saudade eu já deixei lá fora
 Espera, eu não demoro a voltar`},
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/h93qrhbxefnq7z2eaixco/Upstate-My-Heart-Is-Home.mp3?rlkey=kaqsnot6hwtz3naxzxv8mzwul&st=5ry1j2l0&dl', title: 'Num tom que é só nosso', artist: 'Gui & Ju', lyrics: `Meu lar era só por uma noite
+                { url: 'audio/Upstate-My-Heart-Is-Home.mp3', title: 'Num tom que é só nosso', artist: 'Gui & Ju', lyrics: `Meu lar era só por uma noite
 My home was only for the night
 
 Acordando em lugares diferentes
@@ -1711,7 +1713,7 @@ As long as the stars shine through
 
 Meu coração está em casa com você
 My heart is home with you`},
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/p4xmuvblwzk3ch2q5t59e/Mariana-Nolasco-All-Star.mp3?rlkey=ngsiahq5l5blkfn3aiszmzymn&st=scgajfpx&dl', title: 'Afinada em amor', artist: 'Gui & Ju', lyrics: `Estranho seria se eu não me apaixonasse por você
+                { url: 'audio/Mariana-Nolasco-All-Star.mp3', title: 'Afinada em amor', artist: 'Gui & Ju', lyrics: `Estranho seria se eu não me apaixonasse por você
 O sal viria doce para os novos lábios
 Colombo procurou as índias, mas a terra avistou em você
 O som que eu ouço são as gírias do seu vocabulário
@@ -1746,7 +1748,7 @@ Aperto o 12 que é o seu andar
 Não vejo a hora de te reencontrar
 E continuar aquela conversa
 Que não terminamos ontem, ficou pra hoje`},
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/w1ljcf6xh6h0s4i55235h/John-Mayer-XO.mp3?rlkey=u7fp781e8ua329es4ieft4wi9&st=s0edbqe3&dl', title: 'E para sempre em play', artist: 'Gui & Ju', lyrics: `Seu amor é brilhante como sempre
+                { url: 'audio/John-Mayer-XO.mp3', title: 'E para sempre em play', artist: 'Gui & Ju', lyrics: `Seu amor é brilhante como sempre
 Your love is bright as ever
 
 Mesmo nas sombras
@@ -1892,7 +1894,7 @@ Baby, love me lights out
 
 Você pode apagar minhas luzes
 Ooh, you can turn my lights out`},
-                { url: 'https://dl.dropboxusercontent.com/scl/fi/jx9v276kfracul9si8wem/Rihanna-You-Da-One.mp3?rlkey=y3528msnu0820e1y3y9z25brf&st=5sdqzgqh&dl', title: '♡', artist: 'Gui & Ju', lyrics: `(Você é o único com quem eu sonho todos os dias)
+                { url: 'audio/Rihanna-You-Da-One.mp3', title: '♡', artist: 'Gui & Ju', lyrics: `(Você é o único com quem eu sonho todos os dias)
 (You the one that I dream about all day)
 
 (Você é o único em quem eu sempre penso)
@@ -2114,17 +2116,48 @@ My love is your love, your love is mine`}
             const ourLyricsContent = document.getElementById('our-lyrics-content');
             const songLyricsContent = document.getElementById('song-lyrics-content');
 
-            function showNotification(songName) {
+            function showNotification(message) {
                 if (notificationTimeout) {
                     clearTimeout(notificationTimeout);
                 }
-                notificationSongName.textContent = songName;
+                notificationSongName.textContent = message; // Agora usamos para qualquer notificação
                 notification.classList.remove('opacity-0', '-translate-y-10'); // Anima para dentro
 
                 notificationTimeout = setTimeout(() => {
                     notification.classList.add('opacity-0', '-translate-y-10'); // Anima para fora
                 }, 3000); // A notificação some após 3 segundos
             }
+            
+            // --- LÓGICA DE REGISTRO DO SERVICE WORKER (NOVO) ---
+            // Colocada aqui após a definição da função showNotification
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js') // CORREÇÃO: Alterado de './sw.js' para '/sw.js' para usar um caminho absoluto
+                    .then(reg => console.log('Service Worker registrado com sucesso:', reg))
+                    .catch(err => console.error('Falha ao registrar Service Worker:', err));
+
+                // Ouvinte para mensagens do Service Worker
+                navigator.serviceWorker.addEventListener('message', event => {
+                    const downloadBtn = document.getElementById('download-offline-btn');
+                    const downloadText = document.getElementById('download-offline-text');
+
+                    if (event.data.type === 'CACHE_COMPLETE') {
+                        showNotification('Conteúdo salvo! O app agora funciona offline.');
+                        if(downloadBtn) {
+                            downloadText.textContent = 'Salvo Offline';
+                            downloadBtn.disabled = true;
+                        }
+                    } else if (event.data.type === 'CACHE_ERROR') {
+                        showNotification('Erro ao salvar. Tente novamente.');
+                         if(downloadBtn) {
+                            downloadText.textContent = 'Tentar Novamente';
+                            downloadBtn.disabled = false;
+                        }
+                        console.error('Erro no cache do SW:', event.data.error);
+                    }
+                });
+            }
+            // --- FIM DA LÓGICA DO SERVICE WORKER ---
+
 
             function loadTrack(trackIndex, direction = 'none') {
                 const track = musicPlaylist[trackIndex];
@@ -2191,7 +2224,7 @@ My love is your love, your love is mine`}
                 const fileName = fileNameWithQuery.split('?')[0];
                 const decodedFileName = decodeURIComponent(fileName);
 
-                showNotification(decodedFileName);
+                showNotification(`Tocando: ${decodedFileName}`);
             }
 
             function pauseMusic() {
@@ -2693,6 +2726,8 @@ My love is your love, your love is mine`}
              // --- Lógica do Menu do Cabeçalho ---
             const menuBtn = document.getElementById('menu-btn');
             const headerMenu = document.getElementById('header-menu');
+            const downloadBtn = document.getElementById('download-offline-btn'); // NOVO
+            const downloadText = document.getElementById('download-offline-text'); // NOVO
 
             menuBtn.addEventListener('click', (event) => {
                 event.stopPropagation(); 
@@ -2704,12 +2739,79 @@ My love is your love, your love is mine`}
                     headerMenu.classList.add('hidden');
                 }
             });
+
+            // --- LÓGICA DO BOTÃO OFFLINE (NOVO) ---
+            downloadBtn.addEventListener('click', () => {
+                console.log('Botão Salvar Offline clicado.');
+                showNotification('Iniciando download para uso offline...');
+                downloadText.textContent = 'Salvando...';
+                downloadBtn.disabled = true;
+
+                // 1. Coletar todos os assets
+                // Usamos um Set para evitar duplicatas, depois convertemos para Array
+                const assetsToCache = new Set([
+                    '/', // A raiz do site
+                    'index.html',
+                    'tailwind.js',
+                    'manifest.json',
+                    'icons/icon-192x192.png',
+                    'favicon.png',
+                    'favicon.jpg',
+                    's1.jpg', 's2.jpg', 's3.jpg',
+                    's1.png', 's2.png', 's3.png', // Fallbacks
+                    'minhafoto.jpg', 'minhafoto.png' // Fallbacks
+                ]);
+
+                // 2. Musicas
+                musicPlaylist.forEach(track => {
+                    assetsToCache.add(track.url);
+                });
+
+                // 3. Imagens da capa (nossafotoX.jpg/png)
+                musicPlaylist.forEach((track, index) => {
+                    assetsToCache.add(`nossafoto${index + 1}.jpg`);
+                    assetsToCache.add(`nossafoto${index + 1}.png`); // Adiciona fallback
+                });
+
+                // 4. Imagens dos Stories (A/A1.jpg, etc)
+                storiesData.forEach((story, index) => {
+                    const prefix = storyPrefixes[index];
+                    // Adiciona thumbnail do story
+                    assetsToCache.add(`${prefix}/${prefix}1.jpg`);
+                    assetsToCache.add(`${prefix}/${prefix}1.png`); // Fallback
+
+                    // Adiciona imagens de dentro do story
+                    story.images.forEach((img, subIndex) => {
+                        assetsToCache.add(`${prefix}/${prefix}${subIndex + 1}.jpg`);
+                        assetsToCache.add(`${prefix}/${prefix}${subIndex + 1}.png`); // Fallback
+                    });
+                });
+
+                // 5. Imagens dos Eventos (F1.jpg, etc)
+                eventsData.forEach((event, index) => {
+                    assetsToCache.add(`F${index + 1}.jpg`);
+                    assetsToCache.add(`F${index + 1}.png`); // Fallback
+                });
+                
+                // 6. Converter o Set de volta para Array
+                const uniqueAssets = Array.from(assetsToCache);
+                console.log(`[App] Total de ${uniqueAssets.length} assets únicos para cachear.`);
+
+                // 7. Enviar para o Service Worker
+                if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+                    navigator.serviceWorker.controller.postMessage({
+                        type: 'CACHE_ASSETS',
+                        urls: uniqueAssets
+                    });
+                } else {
+                    showNotification('Erro: Service Worker não está pronto.');
+                    downloadText.textContent = 'Erro. Recarregue';
+                    downloadBtn.disabled = false;
+                }
+            });
+            // --- FIM DA LÓGICA OFFLINE ---
         });
     </script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind.js"></script>
 </body>
 </html>
-
-
-
-
